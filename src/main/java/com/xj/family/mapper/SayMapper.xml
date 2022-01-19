@@ -6,5 +6,8 @@
     <insert id="addNewSay" parameterType="com.xj.family.bean.Say"> 
         INSERT INTO say SET id=#{id}, content=#{content}
     </insert>
+    <select id="getAllSays" resultType="com.xj.family.bean.Say">
+        SELECT * FROM say
+    </select>
 
 </mapper>
