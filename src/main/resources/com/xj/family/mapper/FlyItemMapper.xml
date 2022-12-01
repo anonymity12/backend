@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xj.family.mapper.FlyItemMapper">
     <select id="getAllItems" resultType="com.xj.family.bean.FlyItem" >
-        SELECT * FROM flies
+        SELECT * FROM flies order by date desc 
     </select>
     <insert id="insert" parameterType="com.xj.family.bean.FlyItem" useGeneratedKeys="true" keyProperty="id">
         insert into flies (date, name, evaluate, image)
