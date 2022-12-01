@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.xj.family.bean.Say;
 
-@Mapper
 public interface SayMapper {
     int addNewSay(Say say);
     List<Say> getAllSays();

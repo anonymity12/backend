@@ -33,9 +33,9 @@ public class SayController {
         System.out.println("tt>>>> the front end pass say param:" + say);
         int result = sayService.addNewSay(say);
         if (result == 1) {
-            return new RespBean("success", say.getId() + "");
+            return RespBean.ok("success", say.getId() + "");
         } else {
-            return new RespBean("error", "shit");
+            return RespBean.error("error", "shit");
         }
 
     }
