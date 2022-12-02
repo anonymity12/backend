@@ -11,12 +11,17 @@ import java.util.List;
 public class FlyService {
     @Autowired
     FlyItemMapper flyItemMapper;
+    @Autowired
+    UserService userService;
 
-    public List<FlyItem> getAllItems() {
-        return flyItemMapper.getAllItems();
+    public List<FlyItem> getAllItemsForUser(String username) {
+        long userId = userService.getUserIdByName(username); 
+        return flyItemMapper.getAllItemsForUser(userId); 
     }
 
-    public int addItem(FlyItem item) {
+    public int addItemForUser(FlyItem item, String username) {
+        long userId = userService.getUserIdByName(username);
+        item.setOwner(userId);
         int result = flyItemMapper.insert(item);
         return result;
     }

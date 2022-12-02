@@ -18,14 +18,14 @@ public class FlyController {
     @Autowired
     FlyService flyService;
 
-    @GetMapping("/getAll")
-    public List<FlyItem> getFlies() {
-        return flyService.getAllItems();
+    @GetMapping("/{username}/getAll")
+    public List<FlyItem> getFlies(@PathVariable("username") String name) {
+        return flyService.getAllItemsForUser(name);
     }
 
-    @PostMapping("/newItem")
-    public RespBean addItem(@RequestBody FlyItem item) {
-        if (flyService.addItem(item) == 1) {
+    @PostMapping("/{username}/newItem")
+    public RespBean addItem(@RequestBody FlyItem item, @PathVariable("username") String name) {
+        if (flyService.addItemForUser(item, name) == 1) { // todo
             return RespBean.ok("得到新蝴蝶啦！！");
         } else {
             return RespBean.error("得不到新蝴蝶:(");

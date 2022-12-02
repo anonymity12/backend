@@ -10,17 +10,29 @@ public class FlyItem {
     private String name;
     private String evaluate;
     private String image;
+    private Long owner;
 
     @Override
     public String toString() {
-        return "FlyItem{" +
-                "id=" + id +
-                ", date=" + date +
-                ", name='" + name + '\'' +
-                ", evaluate='" + evaluate + '\'' +
-                ", image='" + image + '\'' +
-                '}';
+        return "{" +
+            " id='" + getId() + "'" +
+            ", date='" + getDate() + "'" +
+            ", name='" + getName() + "'" +
+            ", evaluate='" + getEvaluate() + "'" +
+            ", image='" + getImage() + "'" +
+            ", owner='" + getOwner() + "'" +
+            "}";
     }
+
+
+    public Long getOwner() {
+        return this.owner;
+    }
+
+    public void setOwner(Long owner) {
+        this.owner = owner;
+    }
+
 
     public Long getId() {
         return id;
