@@ -11,7 +11,10 @@ import java.util.List;
 public class UserService {
     @Autowired
     UserMapper userMapper;
-    Long getUserIdByName(String name) {
+    public Long getUserIdByName(String name) {
         return userMapper.getUserIdByName(name);
+    }
+    public User getUserInfoByName(String name) {
+        return userMapper.getUserByName(name);
     }
 }
