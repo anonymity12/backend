@@ -17,4 +17,11 @@ public class UserService {
     public User getUserInfoByName(String name) {
         return userMapper.getUserByName(name);
     }
+
+    public boolean validParent(ValidParentDto item) {
+        if (item.getParentPasswd().equals("2023")) {
+            return true;
+        }
+        return false;
+    }
 }
