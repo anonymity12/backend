@@ -2,6 +2,8 @@ package com.xj.family.service;
 
 import com.xj.family.mapper.UserMapper;
 import com.xj.family.bean.User;
+import com.xj.family.bean.dto.ValidParentDto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ public class UserService {
     }
 
     public boolean validParent(ValidParentDto item) {
-        if (item.getParentPasswd().equals("2023")) {
+        if (item.getParent_passwd().equals("2023")) {
             return true;
         }
         return false;

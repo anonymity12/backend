@@ -2,17 +2,24 @@ package com.xj.family.bean.dto;
 
 
 public class ValidParentDto {
-    String parentPasswd;
+    String parent_passwd;
     ValidParentDto() {
-        this.parentPasswd = "2023"
+        
     }
 
-    public String getParentPasswd() {
-        return this.parentPasswd;
+    public String getParent_passwd() {
+        return this.parent_passwd;
     }
 
-    public void setParentPasswd(String parentPasswd) {
-        this.parentPasswd = parentPasswd;
+    public void setParent_passwd(String parent_passwd) {
+        this.parent_passwd = parent_passwd;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " parentPasswd='" + getParent_passwd() + "'" +
+            "}";
     }
 
 }

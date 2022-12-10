@@ -3,6 +3,7 @@ package com.xj.family.controller;
 import com.xj.family.bean.User;
 import com.xj.family.bean.RespBean;
 import com.xj.family.service.UserService;
+import com.xj.family.bean.dto.ValidParentDto;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class UserController {
 
     @PostMapping("/validParent")
     public RespBean validParent(@RequestBody ValidParentDto item) {
+        System.out.println("controller recieve valid parent dto: " + item);
         if (userService.validParent(item)) { 
             return RespBean.ok("验证通过");
         } else {
