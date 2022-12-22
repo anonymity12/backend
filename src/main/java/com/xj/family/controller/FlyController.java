@@ -30,5 +30,13 @@ public class FlyController {
             return RespBean.error("得不到新蝴蝶:(");
         }
     }
+    @PostMapping("/growStatus/{flyId}")
+    public RespBean growStatus(@PathVariable("flyId") Long flyId) {
+        if (flyService.growStatus(flyId) == 1) {
+            return RespBean.ok("蝴蝶进化成功");
+        } else {
+            return RespBean.error("蝴蝶进化失败");
+        }
+    }
 
 }

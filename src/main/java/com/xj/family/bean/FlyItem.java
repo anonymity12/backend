@@ -11,6 +11,7 @@ public class FlyItem {
     private String evaluate;
     private String image;
     private Long owner;
+    private int status;
 
     @Override
     public String toString() {
@@ -21,6 +22,7 @@ public class FlyItem {
             ", evaluate='" + getEvaluate() + "'" +
             ", image='" + getImage() + "'" +
             ", owner='" + getOwner() + "'" +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 
@@ -72,6 +74,13 @@ public class FlyItem {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+    public void setStatus(int status) {
+        this.status = status;
     }
 
 }

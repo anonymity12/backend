@@ -7,4 +7,5 @@ import java.util.List;
 public interface FlyItemMapper {
     int insert(FlyItem item);
     List<FlyItem> getAllItemsForUser(@Param("owner") Long userId);
+    int growStatus(Long flyId);
 }

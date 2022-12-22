@@ -25,4 +25,8 @@ public class FlyService {
         int result = flyItemMapper.insert(item);
         return result;
     }
+
+    public int growStatus(Long flyId) {
+        return flyItemMapper.growStatus(flyId);
+    }
 }

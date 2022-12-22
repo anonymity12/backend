@@ -10,4 +10,9 @@
         insert into flies (date, name, evaluate, image, owner)
         values (#{date}, #{name}, #{evaluate}, #{image}, #{owner})
     </insert>
+    <update id="growStatus">
+        update flies 
+        set status = 1
+        where id = #{flyId}
+    </update>
 </mapper>
