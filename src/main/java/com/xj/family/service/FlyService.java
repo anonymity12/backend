@@ -29,4 +29,7 @@ public class FlyService {
     public int growStatus(Long flyId) {
         return flyItemMapper.growStatus(flyId);
     }
+    public int releaseStatus(Long flyId) {
+        return flyItemMapper.releaseStatus(flyId);
+    }
 }

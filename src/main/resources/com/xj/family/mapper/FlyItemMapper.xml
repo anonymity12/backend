@@ -15,4 +15,9 @@
         set status = 1
         where id = #{flyId}
     </update>
+    <update id="releaseStatus">
+        update flies 
+        set status = -1
+        where id = #{flyId}
+    </update>
 </mapper>

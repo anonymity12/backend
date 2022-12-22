@@ -38,5 +38,12 @@ public class FlyController {
             return RespBean.error("蝴蝶进化失败");
         }
     }
-
+    @PostMapping("/releaseStatus/{flyId}")
+    public RespBean releaseStatus(@PathVariable("flyId") Long flyId) {
+        if (flyService.releaseStatus(flyId) == 1) {
+            return RespBean.ok("蝴蝶放生成功");
+        } else {
+            return RespBean.error("蝴蝶放生失败");
+        }
+    }
 }
