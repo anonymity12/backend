@@ -24,8 +24,10 @@ public class CustomUrlDecisionManager implements AccessDecisionManager{
             String needRole = configAttribute.getAttribute();
             if ("ROLE_XJTMP".equals(needRole)) {
                 if (authentication instanceof AnonymousAuthenticationToken) {
-                    System.out.println("a anonymous user");
-                    throw new AccessDeniedException("customDecide: anonymous use are not allowed exception");
+                    System.out.println("a anonymous user, but grant priviledge");
+                    // throw new AccessDeniedException("customDecide: anonymous use are not allowed exception");
+                    // now we grant ROLE_XJTMP priviledge
+                    return;
                 } else {
                     System.out.println("not anonymous, but has ROLE_XJTMP");
                     return;
