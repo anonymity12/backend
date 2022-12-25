@@ -33,6 +33,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         //在实际使用中还会:
         // 1、校验token是否能够解密出用户信息来获取访问者
+            // we may retrive use from redis by this token
+            // and then we might save use in threadLocal or somethin
         // 2、token是否已经过期
 
         return true;

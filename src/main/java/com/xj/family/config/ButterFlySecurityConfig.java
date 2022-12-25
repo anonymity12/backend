@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.ArrayList;
 import java.util.List;
 
-// @Configuration
+@Configuration
 public class ButterFlySecurityConfig implements WebMvcConfigurer {
        /**
      * 拦截器配置
@@ -22,6 +22,6 @@ public class ButterFlySecurityConfig implements WebMvcConfigurer {
         //添加拦截器
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/api/**")
                 //放行路径，可以添加多个
-                .excludePathPatterns("/api/login", "/login");
+                .excludePathPatterns("/api/login");
     }
 }
