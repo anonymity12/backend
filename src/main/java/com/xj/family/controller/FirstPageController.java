@@ -1,7 +1,6 @@
 package com.xj.family.controller;
 
-import com.xj.family.bean.FlyItem;
-import com.xj.family.bean.RespBean;
+import com.xj.family.result.Result;
 import com.xj.family.service.FlyService;
 
 
@@ -12,7 +11,10 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/firstPage")
+@RequestMapping("/api")
 public class FirstPageController {
-
+    @GetMapping(value = "/ping")
+    public Result hello(){
+        return new Result(200,"pingping","pongpong");
+    }
 }

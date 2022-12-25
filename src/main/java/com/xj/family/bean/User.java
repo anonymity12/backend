@@ -9,7 +9,15 @@ public class User {
     private String intro;
     private String userface;
     private String cname; // chinese name, used for front-end show 
+    private String password;
 
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Long getId() {
         return this.id;

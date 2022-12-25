@@ -1,17 +1,14 @@
 package com.xj.family.controller;
 
 import com.xj.family.bean.User;
-import com.xj.family.bean.Hr;
 import com.xj.family.bean.RespBean;
-import com.xj.family.service.UserService;
 import com.xj.family.bean.dto.ValidParentDto;
-import com.xj.family.utils.UserUtil;
+import com.xj.family.service.UserService;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+ 
 
 
 import java.util.List;
@@ -42,10 +39,6 @@ public class UserController {
     // public String currentUsername() {
     //     return UserUtil.getCurrentUser().getName();
     // }
-
-    @GetMapping("/currentUsername") 
-    public Hr getCurrentHr(Authentication authentication) {
-        return ((Hr) authentication.getPrincipal());
-    }
+ 
 
 }
