@@ -115,27 +115,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors(); // add this, so that /login url can be visited
         http.authorizeRequests()
-            .antMatchers("/admin/**").hasRole("admin")
-            .antMatchers("/user/**").hasRole("user")
-            .anyRequest().authenticated()
-            .and()
-            .formLogin()
-//                .loginProcessingUrl("/doLogin") // comment, so use default 'login'
-            .successHandler((req, res, authentication) -> {
-                res.setContentType("application/json;charset=utf-8");
-                PrintWriter out = res.getWriter();
-                out.write(new ObjectMapper().writeValueAsString(authentication.getPrincipal()));
-                out.flush();
-                out.close();
-            })
-            .failureHandler((req, res, ex) -> {
-                res.setContentType("application/json;charset=utf-8");
-                PrintWriter out = res.getWriter();
-                out.write(new ObjectMapper().writeValueAsString(ex.getMessage()));
-                out.flush();
-                out.close();
-            })
-            .permitAll()
             .and()
             .logout()
             //.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
@@ -147,16 +126,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 out.flush();
                 out.close();
             })
-            .invalidateHttpSession(true)
-            .clearAuthentication(true)
             .permitAll()
             .and()
             .csrf().disable().exceptionHandling()
             //  authenticationEntryPoint is used when user not logged in, here we will return a json
             .authenticationEntryPoint((req, resp, authException) -> {
                 resp.setContentType("application/json;charset=utf-8");
+                resp.setStatus(401);
                 PrintWriter out = resp.getWriter();
-                out.write("尚未登录，请先登录");
+                RespBean respBean = RespBean.error("访问失败!");
+                if (authException instanceof InsufficientAuthenticationException) {
+                    respBean.setMsg("请求失败，请联系管理员!");
+                }
+                out.write(new ObjectMapper().writeValueAsString(respBean));
                 out.flush();
                 out.close();
             });
