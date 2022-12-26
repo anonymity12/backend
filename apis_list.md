@@ -13,3 +13,10 @@ http://101.43.166.211:8081/flies/yy/newItem
 ### get user info
 
 http://101.43.166.211:8081/users/yy/getInfo
+
+
+## sixlog
+
+/api/sixlog/{size}/{page}
+
+/api/sixlog/{id}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xj.family.mapper.SixLogMapper">
+    <sql id = "insertFields">
+        id, articleTitle, articleContentHtml, articleContentMd, articleAbstract, articleCover, articleDate
+    </sql>
+
+    <select id="getLogByPage" resultType="com.xj.family.bean.SixLog" >
+        SELECT * FROM sixlog order by article_date desc limit #{offset}, #{size};
+    </select>
+    <select id="getLogById" resultType="com.xj.family.bean.SixLog" >
+        SELECT * FROM sixlog where id=#{id};
+    </select>
+
+</mapper>
