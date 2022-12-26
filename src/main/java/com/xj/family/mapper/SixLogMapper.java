@@ -7,4 +7,5 @@ import java.util.List;
 public interface SixLogMapper {
     List<SixLog> getLogByPage(int offset, int size);
     SixLog getLogById(Long id);
+    int addNewSixLog(SixLog sixLog);
 }

@@ -27,4 +27,13 @@ public class SixLogController {
     public SixLog getLogById(@PathVariable("id") Long id) {
         return sixLogService.getLogById(id);
     }
+
+    @PostMapping("/add")
+    public RespBean addNewSixLog(@RequestBody SixLog log) {
+        int ret = sixLogService.addNewSixLog(log);
+        if (ret == 1)
+            return RespBean.ok("add new six log success!");
+        else 
+            return RespBean.error("add sixlog failed");
+    }
 }

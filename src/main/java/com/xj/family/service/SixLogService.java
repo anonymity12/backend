@@ -21,4 +21,7 @@ public class SixLogService {
     public SixLog getLogById(Long id) {
         return sixLogMapper.getLogById(id);
     }
+    public int addNewSixLog(SixLog log) {
+        return sixLogMapper.addNewSixLog(log);
+    }
 }
