@@ -9,4 +9,7 @@
     <select id="getUserByName" resultType="com.xj.family.bean.User">
         SELECT * from user where name=#{name} limit 1
     </select>
+    <select id="getUserLifeIndicator" resultType="com.xj.family.bean.LifeIndicator">
+        select * from user_life_start_end_table where user_id=#{userId}
+    </select>
 </mapper>

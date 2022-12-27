@@ -38,3 +38,6 @@ http://101.43.166.211:8081/users/yy/getInfo
     "password": "123"
 }
 
+## life indicator
+
+/users/lifeIndicator

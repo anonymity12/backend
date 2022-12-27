@@ -2,6 +2,7 @@ package com.xj.family.controller;
 
 import com.xj.family.bean.User;
 import com.xj.family.bean.RespBean;
+import com.xj.family.bean.vo.LifeIndicatorVo;
 import com.xj.family.bean.dto.ValidParentDto;
 import com.xj.family.service.UserService;
 
@@ -34,11 +35,17 @@ public class UserController {
             return RespBean.error("验证不通过");
         }
     }
-    // http://101.43.166.211:8081/users/currentUsername
-    // @GetMapping("/currentUsername")
-    // public String currentUsername() {
-    //     return UserUtil.getCurrentUser().getName();
-    // }
+
+    @GetMapping("/lifeIndicator")
+    public RespBean lifeIndicator() {
+        // todo find out multi users, who make this request
+        LifeIndicatorVo vo = userService.getUserLifeIndicatorVo();
+        if (vo != null) {
+            return RespBean.ok("got user life indicator", vo);
+        } else {
+            return RespBean.error("faild to get user life indicator");
+        }
+    }
  
 
 }
