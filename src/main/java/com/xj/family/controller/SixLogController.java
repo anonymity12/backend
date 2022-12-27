@@ -36,4 +36,12 @@ public class SixLogController {
         else 
             return RespBean.error("add sixlog failed");
     }
+    @GetMapping("/getTotalAmount")
+    public RespBean getTotalAmount() {
+        int ret = sixLogService.getTotalAmount();
+        if (ret != -1) 
+            return RespBean.ok("this is the totalAmount in obj", Integer.valueOf(ret));
+        else 
+            return RespBean.error("failed to get sixlog total amount");
+    }
 }

@@ -28,6 +28,8 @@ http://101.43.166.211:8081/users/yy/getInfo
 	"articleContentMd": "postman send articleContentMd"
 }
 
+/api/sixlog/getTotalAmount; get
+
 ## login
 
 /api/login; post
@@ -35,3 +37,4 @@ http://101.43.166.211:8081/users/yy/getInfo
     "username": "tt",
     "password": "123"
 }
+

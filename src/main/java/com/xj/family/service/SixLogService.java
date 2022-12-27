@@ -24,4 +24,7 @@ public class SixLogService {
     public int addNewSixLog(SixLog log) {
         return sixLogMapper.addNewSixLog(log);
     }
+    public int getTotalAmount() {
+        return sixLogMapper.getTotalAmount();
+    }
 }
