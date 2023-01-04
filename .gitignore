@@ -35,7 +35,7 @@ build/
 .mvn/
 mvnw
 mvnw.cmd
-.img_upload/
+img_upload/
 
 # nohup
 nohup.out
