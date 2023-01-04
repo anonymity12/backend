@@ -26,20 +26,8 @@ public class ButterFlySecurityConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/api/login", "/api/sixlog/covers","/api/img/**");// append sixlog/covers at 2022-12-31 23:15:39
     }
 
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/api/img/**").addResourceLocations("file:" + "/home/tt/code/CodeForFamily/backend/img_upload/");
+        registry.addResourceHandler("/api/img/**").addResourceLocations("file:" + "/home/tt/code/CodeForFamily/backend/img_upload/"); // you must add final slash/ , 2023-01-04 14:36:58
     }
-  //   // fix element ui request bug
-  //   @Override
-  // public void addCorsMappings(CorsRegistry registry) {
-
-  //   registry.addMapping("/api/img/**")
-  //     .allowedOrigins(Constants.FRONT_URL_DEV)
-  //     .allowedMethods("GET", "POST")
-  //     .allowCredentials(true).maxAge(3600);
-
-  //   // Add more mappings...
-  // }
 }
