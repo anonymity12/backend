@@ -30,6 +30,10 @@ http://101.43.166.211:8081/users/yy/getInfo
 
 /api/sixlog/getTotalAmount; get
 
+### upload img
+
+post /api/sixlog/covers
+
 ## login
 
 /api/login; post
