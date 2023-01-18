@@ -2,7 +2,10 @@ package com.xj.family.bean;
 
 import java.util.Date;
 
-
+/*
+ * this is an not-used bean
+ * it was copy from echo prj i think
+ */
 public class Post {
 
     private Long id;
