@@ -21,6 +21,9 @@ public class SixLogController {
     @Autowired
     SixLogService sixLogService ;
 
+    /* should get by user, if frontend has specified for one user,
+     * otherwise, get all user
+     */
     @GetMapping("/{size}/{page}")
     public List<SixLog> getLogByPage(@PathVariable("size")
                                     int size,
@@ -33,8 +36,15 @@ public class SixLogController {
         return sixLogService.getLogById(id);
     }
 
+/*
+ * add sixlog for one user
+ */
     @PostMapping("/add")
     public RespBean addNewSixLog(@RequestBody SixLog log) {
+	/*
+ *	currentUser = threadLocalUser.get();
+ *	log.setOwner(currentUser);
+ */
         int ret = sixLogService.addNewSixLog(log);
         if (ret == 1)
             return RespBean.ok("add new six log success!");
