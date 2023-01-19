@@ -10,6 +10,8 @@ import com.xj.family.mapper.UserMapper;
 import com.xj.family.result.Result;
 import com.xj.family.vo.LoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -25,6 +27,8 @@ import java.util.UUID;
 public class LoginService {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private StringRedisTemplate template;
 
     public Result login(LoginDTO loginDTO) {
         if (StringUtils.isEmpty(loginDTO.getLoginName())){
@@ -41,10 +45,18 @@ public class LoginService {
             loginVO.setId(Integer.valueOf(Long.toString(user.getId())));
             //这里token直接用一个uuid
             //使用jwt的情况下，会生成一个jwt token,jwt token里会包含用户的信息
-            loginVO.setToken(UUID.randomUUID().toString());
+            String token = UUID.randomUUID().toString();
+            loginVO.setToken(token);
+            // save token into redis
             loginVO.setUser(user);
+            saveTokenIntoRedis(token, user);
             return new Result(200,"",loginVO);
         }
         return new Result(401,"登录失败","");
+    }
+    private void saveTokenIntoRedis(String token, User user) {
+        HashOperations<String, Object, Object> hashOperations =
+                template.opsForHash();
+        hashOperations.put("loggedInUser", token, user.getName());
     }
 }
