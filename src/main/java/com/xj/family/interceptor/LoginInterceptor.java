@@ -36,6 +36,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             // we may retrive use from redis by this token
             // and then we might save use in threadLocal or somethin
         // 2、token是否已经过期
+        // use redis to check user
+        /*
+ *	user = redisTemplate.opsForValue(token, 0);
+ *      threadLocalUser.set(user);
+ * */
 
         return true;
     }
