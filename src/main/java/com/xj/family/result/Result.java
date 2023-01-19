@@ -10,6 +10,7 @@ import java.io.Serializable;
  * @Author: 三分恶
  * @Date: 2021/1/17
  * @Description: 统一结果封装
+ todo 2023-01-19 20:27:58 move it to bean folder
  **/
 
 public class Result implements Serializable {
