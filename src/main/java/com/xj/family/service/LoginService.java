@@ -36,8 +36,8 @@ public class LoginService {
         String username = loginDTO.getLoginName();
         User user  = userMapper.getUserByName(username);
         //比较密码
-        if (user !=null&&user.getPassword().equals(loginDTO.getPassword())){
-            LoginVO loginVO=new LoginVO();
+        if (user !=null && user.getPassword().equals(loginDTO.getPassword())){
+            LoginVO loginVO = new LoginVO();
             loginVO.setId(Integer.valueOf(Long.toString(user.getId())));
             //这里token直接用一个uuid
             //使用jwt的情况下，会生成一个jwt token,jwt token里会包含用户的信息
