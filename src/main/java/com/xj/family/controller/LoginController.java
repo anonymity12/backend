@@ -25,6 +25,11 @@ public class LoginController {
 
     @PostMapping(value = "/api/login")
     public Result login(@RequestBody LoginDTO loginDTO) {
-        return loginService.login(loginDTO);
+        Result ret = loginService.login(loginDTO);
+	/*
+	hashOps = redisTemplate.opsForHMap();	
+	hashOps.put(ret.getToken(), ret.getUserInfo());// UserInfo:(at least) contains: name, userId, cname, 
+	*/
+	return ret;
     }
 }
