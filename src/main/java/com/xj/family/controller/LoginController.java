@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @Author: 三分恶
- * @Date: 2021/1/17
- * @Description: TODO
+ * 2023-01-19 20:40:16
  **/
 @RestController()
 public class LoginController {
@@ -25,17 +23,11 @@ public class LoginController {
     LoginService loginService;
 
     @PostMapping(value = "/api/login")
-    public Result login(@RequestBody LoginDTO loginDTO, HttpSession session) {
+    public Result login(@RequestBody LoginDTO loginDTO) {
         Result ret = loginService.login(loginDTO);
-        if (ret.getCode() != 200) {
-            // wrong in login service, so just return 
-            return ret;
-        } else {
-            // this session attr contain whole loginVo{id, token, User}
-            session.setAttribute(Constants.LOGIN_USER, ret.getData());
-            return ret;
-        }
-        
+        // we will not use session anymore, cause cross origin, and front-back split 
+        // arch will not support session, so let's use token
+        return ret;
 	/*
 	hashOps = redisTemplate.opsForHMap();	
 	hashOps.put(ret.getToken(), ret.getUserInfo());// UserInfo:(at least) contains: name, userId, cname, 

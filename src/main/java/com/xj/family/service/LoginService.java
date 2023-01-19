@@ -47,8 +47,8 @@ public class LoginService {
             //使用jwt的情况下，会生成一个jwt token,jwt token里会包含用户的信息
             String token = UUID.randomUUID().toString();
             loginVO.setToken(token);
-            // save token into redis
             loginVO.setUser(user);
+            
             saveTokenIntoRedis(token, user);
             return new Result(200,"",loginVO);
         }

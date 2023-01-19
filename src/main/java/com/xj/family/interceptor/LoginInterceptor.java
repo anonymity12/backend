@@ -7,20 +7,27 @@ package com.xj.family.interceptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xj.family.result.Result;
 import com.xj.family.util.HttpContextUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @Author: 三分恶
- * @Date: 2021/1/18
- * @Description: 用户登录拦截器
+ * 2023-01-19 20:40:49
+ * check before each handle, make sure user have already logged in
  **/
 
 public class LoginInterceptor implements HandlerInterceptor {
+    public static ThreadLocal<String> threadLocalUsername = new ThreadLocal<>();
+
+    @Autowired
+    private StringRedisTemplate template;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 
@@ -37,11 +44,15 @@ public class LoginInterceptor implements HandlerInterceptor {
             // and then we might save use in threadLocal or somethin
         // 2、token是否已经过期
         // use redis to check user
+        
         /*
- *	user = redisTemplate.opsForValue(token, 0);
- *      threadLocalUser.set(user);
- * */
-
+        *	user = redisTemplate.opsForValue(token, 0);
+        *      threadLocalUser.set(user);
+        * */
+        HashOperations<String, Object, Object> hashOperations =
+                template.opsForHash();
+        String username = (String)hashOperations.get("loggedInUser", token);
+        threadLocalUsername.set(username);
         return true;
     }
 

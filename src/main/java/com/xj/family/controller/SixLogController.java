@@ -5,6 +5,7 @@ import com.xj.family.bean.SixLog;
 import com.xj.family.bean.RespBean;
 import com.xj.family.config.Constants;
 import com.xj.family.utils.StringUtils;
+import com.xj.family.interceptor.LoginInterceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,14 @@ public class SixLogController {
     @GetMapping("/{id}")
     public SixLog getLogById(@PathVariable("id") Long id) {
         return sixLogService.getLogById(id);
+    }
+    @GetMapping("/getMine/{size}/{page}")
+    public List<SixLog> getLogOfMine(@PathVariable("size")
+                                    int size,
+                                    @PathVariable("page")
+                                    int page) {
+        String username = LoginInterceptor.threadLocalUsername.get();
+        return sixLogService.getLogOfMineWithPageAndSize(size, page); // todo 2023-01-19 23:03:35 impl it
     }
 
 /*
