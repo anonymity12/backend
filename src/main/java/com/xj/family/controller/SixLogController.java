@@ -31,7 +31,7 @@ public class SixLogController {
                                     int page) {
         return sixLogService.getLogByPage(size, page);
     }
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public SixLog getLogById(@PathVariable("id") Long id) {
         return sixLogService.getLogById(id);
     }
