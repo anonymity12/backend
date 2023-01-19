@@ -5,6 +5,7 @@ import com.xj.family.bean.RespBean;
 import com.xj.family.bean.vo.LifeIndicatorVo;
 import com.xj.family.bean.dto.ValidParentDto;
 import com.xj.family.service.UserService;
+import com.xj.family.service.FamilyTreeService;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    FamilyTreeService familyTreeService;
 
     @GetMapping("/{username}/getInfo")
     public User getInfo(@PathVariable("username") String name) {
@@ -46,6 +49,17 @@ public class UserController {
             return RespBean.error("faild to get user life indicator");
         }
     }
- 
+    @GetMapping("/familyTree")
+    public RespBean familyTree() {
+        List<FamilyTreeEntity> entities = familyTreeService.list();
+        List<FamilyTreeEntity> level1Entities = entities.stream()
+                                .filter((entity) -> entity.getParentId() == 0)
+                                .map((node) -> {
+                                    node.setChild(getChildren(node, entities));
+                                    return node;
+                                })
+                                .collect(Collectors.toList());
+        return RespBean.ok("got family tree", level1Entities);
+    }
 
 }
