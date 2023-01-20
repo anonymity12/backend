@@ -1,5 +1,7 @@
 package com.xj.family.bean;
 
+import java.util.List;
+
 public class FamilyTreeEntity {
     private Long leafId;
     private Long parentId;

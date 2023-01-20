@@ -27,4 +27,7 @@ public class SixLogService {
     public int getTotalAmount() {
         return sixLogMapper.getTotalAmount();
     }
+    public List<SixLog> getLogOfMineWithPageAndSize(int size, int page, String username) {
+        return null; // sixLogMapper impl 
+    }
 }

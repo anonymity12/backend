@@ -42,7 +42,7 @@ public class SixLogController {
                                     @PathVariable("page")
                                     int page) {
         String username = LoginInterceptor.threadLocalUsername.get();
-        return sixLogService.getLogOfMineWithPageAndSize(size, page); // todo 2023-01-19 23:03:35 impl it
+        return sixLogService.getLogOfMineWithPageAndSize(size, page, username); // todo 2023-01-19 23:03:35 impl it
     }
 
 /*

@@ -11,6 +11,11 @@
 - [ ] centos run redis
 - [ ] test read and write info for redis
 
+
+## family tree works
+
+- [x] clean compile error
+
 ## add sixlog with user identity
     
     redis support from gulimall code copy
