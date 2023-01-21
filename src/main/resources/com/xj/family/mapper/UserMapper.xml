@@ -12,4 +12,7 @@
     <select id="getUserLifeIndicator" resultType="com.xj.family.bean.LifeIndicator">
         select * from user_life_start_end_table where user_id=#{userId}
     </select>
+    <insert id="addNewUser" parameterType="com.xj.family.bean.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user SET birthday=#{birthday},password=#{password},name=#{name}
+    </insert>
 </mapper>

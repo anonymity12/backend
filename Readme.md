@@ -6,6 +6,10 @@
 
 # detail works
 
+## register related
+
+- [x] code support for register
+
 ## run redis for user identification
 
 - [x] centos run redis
