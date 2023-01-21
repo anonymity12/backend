@@ -8,8 +8,10 @@ import com.xj.family.utils.StringUtils;
 import com.xj.family.interceptor.LoginInterceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +23,8 @@ import java.util.Date;
 public class SixLogController {
     @Autowired
     SixLogService sixLogService ;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     /* should get by user, if frontend has specified for one user,
      * otherwise, get all user
@@ -64,6 +68,12 @@ public class SixLogController {
             return RespBean.ok("this is the totalAmount in obj", Integer.valueOf(ret));
         else 
             return RespBean.error("failed to get sixlog total amount");
+    }
+    @GetMapping("/getRedis/{key}")
+    public String getRedisUser(@PathVariable("key") String key) {
+        System.out.println("test redis with key: " + key);
+        String val = (String) redisTemplate.opsForHash().get("loggedInUser", key); // should null exception
+        return val;
     }
     
     @CrossOrigin(origins = Constants.FRONT_URL_DEV, methods = {RequestMethod.DELETE,
