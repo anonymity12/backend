@@ -27,6 +27,7 @@ public class SixLogService {
     }
     public int addNewSixLog(SixLog log, String username) {
         Long userId = userMapper.getUserIdByName(username);
+        System.out.println("username: id ->" + username + ": " + userId);
         log.setOwnerId(userId);
         return sixLogMapper.addNewSixLog(log);
     }
@@ -34,6 +35,7 @@ public class SixLogService {
         return sixLogMapper.getTotalAmount();
     }
     public List<SixLog> getLogOfMineWithPageAndSize(int size, int page, String username) {
+        // System.out.println("SixLogService: getLogOfMineWithPageAndSize: for user: " + username);
         return null; // sixLogMapper impl 
     }
 }
