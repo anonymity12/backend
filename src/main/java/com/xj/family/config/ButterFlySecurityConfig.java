@@ -13,7 +13,12 @@ import java.util.List;
 
 @Configuration
 public class ButterFlySecurityConfig implements WebMvcConfigurer {
-       /**
+
+    @Bean
+    public LoginInterceptor loginInterceptor() {
+        return new LoginInterceptor();
+    }
+    /**
      * 拦截器配置
      *
      * @param registry
@@ -21,9 +26,9 @@ public class ButterFlySecurityConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //添加拦截器
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/api/**")
+        registry.addInterceptor(loginInterceptor()).addPathPatterns("/api/**")
                 //放行路径，可以添加多个
-                .excludePathPatterns("/api/login", "/api/sixlog/**","/api/img/**");// append sixlog/covers at 2022-12-31 23:15:39
+                .excludePathPatterns("/api/login", "/api/sixlog/covers","/api/img/**");// append sixlog/covers at 2022-12-31 23:15:39
     }
 
     @Override

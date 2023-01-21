@@ -28,7 +28,7 @@ public class LoginService {
     @Autowired
     private UserMapper userMapper;
     @Autowired
-    private StringRedisTemplate template;
+    private StringRedisTemplate redisTemplate;
 
     public Result login(LoginDTO loginDTO) {
         if (StringUtils.isEmpty(loginDTO.getLoginName())){
@@ -39,24 +39,33 @@ public class LoginService {
         }
         String username = loginDTO.getLoginName();
         User user  = userMapper.getUserByName(username);
+        System.out.println("login 1");
+
         //比较密码
         if (user !=null && user.getPassword().equals(loginDTO.getPassword())){
             LoginVO loginVO = new LoginVO();
+            System.out.println("login 2");
+
             loginVO.setId(Integer.valueOf(Long.toString(user.getId())));
             //这里token直接用一个uuid
             //使用jwt的情况下，会生成一个jwt token,jwt token里会包含用户的信息
-            String token = UUID.randomUUID().toString();
+            String token = UUID.randomUUID().toString().substring(0,8);
             loginVO.setToken(token);
             loginVO.setUser(user);
+            System.out.println("login 3");
             
             saveTokenIntoRedis(token, user);
             return new Result(200,"",loginVO);
         }
+        System.out.println("login 4");
         return new Result(401,"登录失败","");
     }
     private void saveTokenIntoRedis(String token, User user) {
+        System.out.println("LoginService.SaveTokenToRedis: token: user:\n" + 
+                token + ":" + user.getName()
+                + "\n" + "with template: " + redisTemplate);
         HashOperations<String, Object, Object> hashOperations =
-                template.opsForHash();
+                redisTemplate.opsForHash();
         hashOperations.put("loggedInUser", token, user.getName());
     }
 }

@@ -9,10 +9,10 @@
 ## run redis for user identification
 
 - [x] centos run redis
-- [ ] pull into tencenttt
-- [ ] run in tecenttt
-- [ ] test read and write info for redis
-    - [ ] redis cli client
+- [x] pull into tencenttt
+- [x] run in tecenttt
+- [x] test read and write info for redis
+    - [x] redis cli client
 
 
 ## family tree works
@@ -31,6 +31,10 @@ field: CartInterceptor.(static).ThreadLocal<UserInfo> threadLocal
 see notibility
 
 ```
+
+### bug: dont know how to use redisTemplate
+
+https://www.notion.so/bug-redis-216a64a3bb084321bc69a6a7f12eb944
 
 
 # end

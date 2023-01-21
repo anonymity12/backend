@@ -22,36 +22,24 @@ import java.io.IOException;
  * 2023-01-19 20:40:49
  * check before each handle, make sure user have already logged in
  **/
-
 public class LoginInterceptor implements HandlerInterceptor {
     public static ThreadLocal<String> threadLocalUsername = new ThreadLocal<>();
 
     @Autowired
-    private StringRedisTemplate template;
+    private StringRedisTemplate redisTemplate;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-
-        //从header中获取token
+        System.out.println("login interceptor: request:response:handler \n" + request + "\n" + response + "\n" + handler);
         String token = request.getHeader("token");
-        //如果token为空
         if (StringUtils.isEmpty(token)) {
             setReturn(response,400,"用户未登录，请先登录");
             return false;
         }
-        //在实际使用中还会:
-        // 1、校验token是否能够解密出用户信息来获取访问者
-            // we may retrive use from redis by this token
-            // and then we might save use in threadLocal or somethin
-        // 2、token是否已经过期
         // use redis to check user
-        
-        /*
-        *	user = redisTemplate.opsForValue(token, 0);
-        *      threadLocalUser.set(user);
-        * */
-        HashOperations<String, Object, Object> hashOperations =
-                template.opsForHash();
-        String username = (String)hashOperations.get("loggedInUser", token);
+        System.out.println("ready to hash get loggedInUser for token: \n" + token + "\n" +
+                    "with redisTemplate: " + redisTemplate);
+        String username = (String) redisTemplate.opsForHash().get("loggedInUser", token); // should null exception
+        System.out.println("username from redis for above token:" + username);
         threadLocalUsername.set(username);
         return true;
     }
