@@ -50,11 +50,8 @@ public class SixLogController {
  */
     @PostMapping("/add")
     public RespBean addNewSixLog(@RequestBody SixLog log) {
-	/*
- *	currentUser = threadLocalUser.get();
- *	log.setOwner(currentUser);
- */
-        int ret = sixLogService.addNewSixLog(log);
+        String username = LoginInterceptor.threadLocalUsername.get();
+        int ret = sixLogService.addNewSixLog(log, username);
         if (ret == 1)
             return RespBean.ok("add new six log success!");
         else 

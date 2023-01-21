@@ -13,6 +13,8 @@ import java.util.List;
 public class SixLogService {
     @Autowired
     SixLogMapper sixLogMapper;
+    @Autowired 
+    UserMapper userMapper;
     
     public List<SixLog> getLogByPage(int size, int page) {
         int offset = size * (page - 1);
@@ -21,7 +23,9 @@ public class SixLogService {
     public SixLog getLogById(Long id) {
         return sixLogMapper.getLogById(id);
     }
-    public int addNewSixLog(SixLog log) {
+    public int addNewSixLog(SixLog log, String username) {
+        Long userId = userMapper.getUserIdByName(username);
+        log.setOwnerId(userId);
         return sixLogMapper.addNewSixLog(log);
     }
     public int getTotalAmount() {

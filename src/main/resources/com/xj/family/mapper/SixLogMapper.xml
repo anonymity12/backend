@@ -14,7 +14,7 @@
         SELECT * FROM sixlog where id=#{id};
     </select>
     <insert id="addNewSixLog" parameterType="com.xj.family.bean.SixLog" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO sixlog SET article_title=#{articleTitle},article_content_html=#{articleContentHtml},article_content_md=#{articleContentMd}, article_abstract=#{articleAbstract}, article_cover=#{articleCover}
+        INSERT INTO sixlog SET article_title=#{articleTitle},article_content_html=#{articleContentHtml},article_content_md=#{articleContentMd}, article_abstract=#{articleAbstract}, article_cover=#{articleCover}, ownerId=#{ownerId}
     </insert>
     <select id="getTotalAmount" resultType="int">
         select count('love') from sixlog;
