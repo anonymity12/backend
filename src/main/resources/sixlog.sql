@@ -1,14 +1,15 @@
 DROP TABLE IF EXISTS `sixlog`;
 CREATE TABLE `sixlog` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `article_title` varchar(255) DEFAULT NULL,
-  `article_content_html` longtext CHARACTER SET utf8mb4,
-  `article_content_md` longtext CHARACTER SET utf8mb4,
-  `article_abstract` varchar(255) DEFAULT NULL,
-  `article_cover` varchar(255) DEFAULT NULL,
-  `article_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `article_title` varchar(255) DEFAULT NULL,
+ `article_content_html` longtext,
+ `article_content_md` longtext,
+ `article_abstract` varchar(255) DEFAULT 'no description now',
+ `article_cover` varchar(255) DEFAULT 'https://picgorepo.oss-cn-beijing.aliyuncs.com//2022-02-04-17-37-11img_repo.png',
+ `article_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ `ownerId` int(11) NOT NULL DEFAULT '1' COMMENT 'sixlog 属主',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4
 
 -- test data
 
