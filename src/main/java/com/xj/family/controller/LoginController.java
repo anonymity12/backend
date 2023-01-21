@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 2023-01-19 20:40:16
  **/
+@CrossOrigin
 @RestController()
 public class LoginController {
     @Autowired
