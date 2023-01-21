@@ -12,6 +12,7 @@ public class SixLog{
     private String articleAbstract;
     private String articleCover;
     private Date articleDate;
+    private Long ownerId;
 
     SixLog() {
 
@@ -27,11 +28,14 @@ public class SixLog{
             ", articleAbstract='" + getArticleAbstract() + "'" +
             ", articleCover='" + getArticleCover() + "'" +
             ", articleDate='" + getArticleDate() + "'" +
+            ", owner='" + getOwnerId() + "'" +
             "}";
     }
 
 
 // getter and setters
+
+
 
     public Long getId() {
         return this.id;
@@ -39,6 +43,13 @@ public class SixLog{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getOwnerId() {
+        return this.ownerId;
+    }
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getArticleTitle() {
