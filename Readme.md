@@ -6,6 +6,11 @@
 
 # detail works
 
+## sixlog not shown cause interceptor
+
+- [x]  Request header field token is not allowed by Access-Control-Allow-Headers in preflight response.
+是拦截器 拦截了 任何 api 的请求, 原来只是拦截了一个options请求， 通过跳过options请求，来fix
+
 ## register related
 
 - [x] code support for register

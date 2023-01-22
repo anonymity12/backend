@@ -30,6 +30,10 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         System.out.println("login interceptor: request:response:handler \n" + request + "\n" + response + "\n" + handler);
+        if (request.getMethod().equals("OPTIONS")) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            return true;
+        }
         String token = request.getHeader("token");
         if (StringUtils.isEmpty(token)) {
             setReturn(response,400,"用户未登录，请先登录");
@@ -53,6 +57,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     //返回json格式错误信息
     private static void setReturn(HttpServletResponse response, Integer code, String msg) throws IOException {
+        System.out.println("error: not login");
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
         httpResponse.setHeader("Access-Control-Allow-Origin", HttpContextUtil.getOrigin());
@@ -63,6 +68,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(result);
         httpResponse.getWriter().print(json);
+        System.out.println("error: return will");
+
     }
 
 }
