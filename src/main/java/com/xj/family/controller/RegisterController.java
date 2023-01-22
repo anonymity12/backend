@@ -20,6 +20,7 @@ import java.util.Date;
 /**
  * 2023-01-21 23:05:20
  **/
+@CrossOrigin
 @RestController()
 public class RegisterController {
     @Autowired
