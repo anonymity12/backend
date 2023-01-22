@@ -3,6 +3,7 @@ package com.xj.family.service;
 import com.xj.family.mapper.SixLogMapper;
 import com.xj.family.mapper.UserMapper;
 import com.xj.family.bean.SixLog; 
+import com.xj.family.bean.vo.SixLogVo; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,7 @@ public class SixLogService {
     @Autowired 
     UserMapper userMapper;
     
-    public List<SixLog> getLogByPage(int size, int page) {
-        System.out.println("get log by page");
+    public List<SixLogVo> getLogByPage(int size, int page) {
         int offset = size * (page - 1);
         return sixLogMapper.getLogByPage(offset, size);
     }

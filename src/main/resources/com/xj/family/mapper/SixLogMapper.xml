@@ -7,8 +7,12 @@
         id, articleTitle, articleContentHtml, articleContentMd, articleAbstract, articleCover, articleDate
     </sql>
 
-    <select id="getLogByPage" resultType="com.xj.family.bean.SixLog" >
-        SELECT * FROM sixlog order by article_date desc limit #{offset}, #{size};
+    <select id="getLogByPage" resultType="com.xj.family.bean.vo.SixLogVo" >
+        SELECT s.id, s.`article_title`, s.`article_content_html`, s.`article_content_md`, s.`article_abstract`, s.`article_cover`, s.`article_date`, u.cname as ownerName
+        FROM sixlog s, user u
+        WHERE s.ownerId=u.id
+        ORDER BY s.`article_date` desc
+        LIMIT #{offset}, #{size};
     </select>
     <select id="getLogById" resultType="com.xj.family.bean.SixLog" >
         SELECT * FROM sixlog where id=#{id};

@@ -2,6 +2,7 @@ package com.xj.family.controller;
 
 import com.xj.family.service.SixLogService;
 import com.xj.family.bean.SixLog;
+import com.xj.family.bean.vo.SixLogVo;
 import com.xj.family.bean.RespBean;
 import com.xj.family.config.Constants;
 import com.xj.family.utils.StringUtils;
@@ -37,7 +38,7 @@ public class SixLogController {
      * otherwise, get all user
      */
     @GetMapping("/{size}/{page}")
-    public List<SixLog> getLogByPage(@PathVariable("size")
+    public List<SixLogVo> getLogByPage(@PathVariable("size")
                                     int size,
                                     @PathVariable("page")
                                     int page) {
@@ -76,6 +77,10 @@ public class SixLogController {
         else 
             return RespBean.error("failed to get sixlog total amount");
     }
+    /*
+    just a test method for the front, cause i wannt to know what has been
+    stored in Redis
+    */
     @GetMapping("/getRedis/{key}")
     public String getRedisUser(@PathVariable("key") String key) {
         System.out.println("test redis with key: " + key);
