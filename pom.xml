@@ -17,12 +17,16 @@
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/io.github.tokenjan/pinyin4j -->
+		<dependency>
+			<groupId>io.github.tokenjan</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>2.6.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

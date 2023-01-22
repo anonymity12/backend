@@ -28,7 +28,11 @@ public class ButterFlySecurityConfig implements WebMvcConfigurer {
         //添加拦截器
         registry.addInterceptor(loginInterceptor()).addPathPatterns("/api/**")
                 //放行路径，可以添加多个
-                .excludePathPatterns("/api/login", "/api/sixlog/covers","/api/img/**");// append sixlog/covers at 2022-12-31 23:15:39
+                .excludePathPatterns("/api/login", 
+                                     "/api/sixlog/covers",
+                                     "/api/img/**", 
+                                     "/api/register" // for when user want to register
+                                     );
     }
 
     @Override

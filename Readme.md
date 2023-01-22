@@ -9,6 +9,9 @@
 ## register related
 
 - [x] code support for register
+- [x] register  by chinese name
+    - [x] use pinyin4j lib in idea
+- [ ] login by chinese name or english name 
 
 ## run redis for user identification
 

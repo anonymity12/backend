@@ -67,6 +67,17 @@ public class User {
     public void setCname(String cname) {
         this.cname = cname;
     }
- 
 
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", birthday='" + getBirthday() + "'" +
+            ", name='" + getName() + "'" +
+            ", intro='" + getIntro() + "'" +
+            ", userface='" + getUserface() + "'" +
+            ", cname='" + getCname() + "'" +
+            ", password='" + getPassword() + "'" +
+            "}";
+    }
 }
