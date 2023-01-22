@@ -5,7 +5,7 @@ import java.util.Date;
 public class User {
     private Long id;
     private Date birthday;
-    private String name; // english name , used in url
+    private String name; // english name , used in url. or we should change it to cosmosId, it's a better name 
     private String intro;
     private String userface;
     private String cname; // chinese name, used for front-end show 
