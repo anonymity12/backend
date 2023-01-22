@@ -18,6 +18,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Date;
 
+@CrossOrigin(allowCredentials="true",
+            methods = {RequestMethod.GET, 
+                        RequestMethod.OPTIONS, 
+                        RequestMethod.POST, 
+                        RequestMethod.HEAD, 
+                        RequestMethod.PUT}
+)
 @RestController
 @RequestMapping("/api/sixlog")
 public class SixLogController {
