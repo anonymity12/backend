@@ -6,6 +6,8 @@
 
 # detail works
 
+## sixlog add with user identity
+
 ## sixlog not shown cause interceptor
 
 - [x]  Request header field token is not allowed by Access-Control-Allow-Headers in preflight response.
