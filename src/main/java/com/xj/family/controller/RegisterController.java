@@ -9,6 +9,7 @@ import com.xj.family.result.Result;
 import com.xj.family.bean.RespBean;
 import com.xj.family.bean.User;
 import com.xj.family.service.RegisterService;
+import com.xj.family.service.UserService;
 import com.xj.family.config.Constants;
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
@@ -31,6 +32,8 @@ import java.sql.Date;
 public class RegisterController {
     @Autowired
     RegisterService registerService;
+    @Autowired
+    UserService userService;
 
     @PostMapping(value = "/api/register")
     public RespBean register(@RequestBody RegisterDTO registerDTO) {
@@ -46,8 +49,28 @@ public class RegisterController {
         user.setBirthday(registerDTO.getBirthday());
         user.setPassword(registerDTO.getPassword());
         System.out.println("user before register: " + user);
-        RespBean ret = registerService.register(user);
-        return ret;
+        int userId = registerService.register(user);
+        if (userId < 0) {
+            String errMsg = null;
+            switch (userId) {
+                case RegisterService.ERR_NAME_EMPTY:
+                    errMsg = "请不要空名字";
+                    break;
+                case RegisterService.ERR_PASSWORD_EMPTY:
+                    errMsg = "请不要空密码";
+                    break;
+                case RegisterService.ERR_NAME_REPEAT:
+                    errMsg = "名字重复了";
+                    break;
+                default:
+                    errMsg = "其他未知错误";
+                    break;
+            }
+        
+            return RespBean.error("注册失败,原因是 " + errMsg);
+        }
+        userService.setDefaultLifeStartAndEnd(userId, registerDTO.getBirthday());
+        return RespBean.ok("注册成功");
     }
 
     private String convertToPinyin(String original) {
@@ -76,8 +99,5 @@ public class RegisterController {
             e.printStackTrace();
         }
         return ret;
-    }
-    private void setDefaultLifeIndicator(Date birthday) {
-        
     }
 }

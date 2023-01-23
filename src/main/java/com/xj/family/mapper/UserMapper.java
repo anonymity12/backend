@@ -8,5 +8,5 @@ public interface UserMapper {
     Long getUserIdByName(String username);
     User getUserByName(String username);
     LifeIndicator getUserLifeIndicator(Long userId);
-    int addNewUser(User user);
+    Integer addNewUser(User user);
 }

@@ -24,23 +24,29 @@ import java.util.UUID;
  **/
 @Service
 public class RegisterService {
+    public static final int ERR_NAME_EMPTY = -1;
+    public static final int ERR_PASSWORD_EMPTY = -2;
+    public static final int ERR_NAME_REPEAT = -3;
+    public static final int ERR_UNKNOWN = -4;
     @Autowired
     private UserMapper userMapper;
 
-    public RespBean register(User user) {
+    public int register(User user) {
         if (StringUtils.isEmpty(user.getName())){
-            return new RespBean(400,"名字不能为空","");
+            return ERR_NAME_EMPTY;
         }
         if (StringUtils.isEmpty(user.getPassword())){
-            return new RespBean(400,"密码不能为空","");
+            return ERR_PASSWORD_EMPTY;
         }
         User me = userMapper.getUserByName(user.getName());
         if (me != null) {
-            return new RespBean(400,"用户已经注册了","");
+            return ERR_NAME_REPEAT;
         }
-        if (1 == userMapper.addNewUser(user)) 
-            return RespBean.ok("用户注册成功");
+        int userId = userMapper.addNewUser(user);
+        System.out.println("will mysql return ai key?: "+userId);
+        if (userId > 0) 
+            return userId;
         else 
-            return RespBean.error("用户注册失败");
+            return ERR_UNKNOWN;
     }
 }

@@ -13,6 +13,10 @@
         select * from user_life_start_end_table where user_id=#{userId}
     </select>
     <insert id="addNewUser" parameterType="com.xj.family.bean.User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user SET birthday=#{birthday},password=#{password},name=#{name}, cname=#{cname}
+        <selectKey resultType="INTEGER" order="AFTER" keyProperty="id">
+          select LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO user (birthday, password, name, cname)
+        VALUES (#{birthday}, #{password}, #{name}, #{cname})
     </insert>
 </mapper>
