@@ -19,13 +19,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Date;
 
-@CrossOrigin(allowCredentials="true",
-            methods = {RequestMethod.GET, 
-                        RequestMethod.OPTIONS, 
-                        RequestMethod.POST, 
-                        RequestMethod.HEAD, 
-                        RequestMethod.PUT}
-)
+@CrossOrigin
 @RestController
 @RequestMapping("/api/sixlog")
 public class SixLogController {
@@ -88,11 +82,10 @@ public class SixLogController {
         return val;
     }
     
-    @CrossOrigin(origins = Constants.FRONT_URL_DEV, methods = {RequestMethod.DELETE,
-                    RequestMethod.GET,RequestMethod.POST,RequestMethod.OPTIONS}
-                , allowedHeaders = "*", allowCredentials="true")
+    
     @PostMapping("/covers")
     public String coversUpload(MultipartFile file) {
+        System.out.println("img upload, file is: " + file);
         String folder = "/home/tt/code/CodeForFamily/backend/img_upload/";
         File imageFolder = new File(folder);
         File f = new File(imageFolder, StringUtils.getRandomString(6) + file.getOriginalFilename()
