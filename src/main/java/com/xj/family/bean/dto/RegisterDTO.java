@@ -1,6 +1,7 @@
 package com.xj.family.bean.dto;
 
-import java.util.Date;
+import java.sql.Date;
+
 public class RegisterDTO {
     private String name;
     private String password;

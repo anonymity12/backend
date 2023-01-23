@@ -1,6 +1,6 @@
 package com.xj.family.bean;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class User {
     private Long id;

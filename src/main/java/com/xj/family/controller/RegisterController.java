@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import java.sql.Date;
 /**
  * 2023-01-21 23:05:20
  **/
@@ -76,5 +76,8 @@ public class RegisterController {
             e.printStackTrace();
         }
         return ret;
+    }
+    private void setDefaultLifeIndicator(Date birthday) {
+        
     }
 }
