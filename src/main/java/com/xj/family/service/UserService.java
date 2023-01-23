@@ -35,10 +35,11 @@ public class UserService {
         return false;
     }
 
-    public LifeIndicatorVo getUserLifeIndicatorVo() {
-        // todo find out user identity(with threadLocal??)
-        Long userId = 1L; // for now 1227, always xk;
+    public LifeIndicatorVo getUserLifeIndicatorVo(String username) {
+        Long userId = userMapper.getUserIdByName(username);
+        System.out.println("get userId for username " + username + " id: " + userId);
         LifeIndicator indi = userMapper.getUserLifeIndicator(userId);
+        System.out.println(">>>>" + indi);
         int dayPassed = indi.getDayPassed();
         int dayAll = indi.getDayAll();
         LifeIndicatorVo vo = new LifeIndicatorVo();

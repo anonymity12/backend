@@ -5,9 +5,9 @@ import com.xj.family.bean.RespBean;
 import com.xj.family.bean.vo.LifeIndicatorVo;
 import com.xj.family.bean.FamilyTreeEntity;
 import com.xj.family.bean.dto.ValidParentDto;
+import com.xj.family.interceptor.LoginInterceptor;
 import com.xj.family.service.UserService;
 import com.xj.family.service.FamilyTreeService;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,19 +16,19 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/users")
+@RequestMapping
 public class UserController {
     @Autowired
     UserService userService;
     @Autowired
     FamilyTreeService familyTreeService;
 
-    @GetMapping("/{username}/getInfo")
+    @GetMapping("/users/{username}/getInfo")
     public User getInfo(@PathVariable("username") String name) {
         return userService.getUserInfoByName(name);
     }
 
-    @PostMapping("/validParent")
+    @PostMapping("/users/validParent")
     public RespBean validParent(@RequestBody ValidParentDto item) {
         System.out.println("controller recieve valid parent dto: " + item);
         if (userService.validParent(item)) { 
@@ -38,10 +38,11 @@ public class UserController {
         }
     }
 
-    @GetMapping("/lifeIndicator")
+    @GetMapping("/api/lifeIndicator")
     public RespBean lifeIndicator() {
         // todo find out multi users, who make this request
-        LifeIndicatorVo vo = userService.getUserLifeIndicatorVo();
+        String username = LoginInterceptor.threadLocalUsername.get();
+        LifeIndicatorVo vo = userService.getUserLifeIndicatorVo(username);
         if (vo != null) {
             return RespBean.ok("got user life indicator", vo);
         } else {
