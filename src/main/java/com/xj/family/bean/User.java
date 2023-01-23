@@ -3,7 +3,7 @@ package com.xj.family.bean;
 import java.sql.Date;
 
 public class User {
-    private Long id;
+    private int id;
     private Date birthday;
     private String name; // english name , used in url. or we should change it to cosmosId, it's a better name 
     private String intro;
@@ -19,11 +19,11 @@ public class User {
         this.password = password;
     }
 
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

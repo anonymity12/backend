@@ -28,6 +28,7 @@ public class RegisterService {
     public static final int ERR_PASSWORD_EMPTY = -2;
     public static final int ERR_NAME_REPEAT = -3;
     public static final int ERR_UNKNOWN = -4;
+    public static final int ERR_DB_INSERT = -5;
     @Autowired
     private UserMapper userMapper;
 
@@ -42,10 +43,13 @@ public class RegisterService {
         if (me != null) {
             return ERR_NAME_REPEAT;
         }
-        int userId = userMapper.addNewUser(user);
-        System.out.println("will mysql return ai key?: "+userId);
-        if (userId > 0) 
-            return userId;
+        int opsCount = userMapper.addNewUser(user);
+        if (opsCount <= 0) {
+            return ERR_DB_INSERT;
+        }
+        System.out.println("will mysql return ai key?: "+user.getId());
+        if (opsCount > 0) 
+            return user.getId();
         else 
             return ERR_UNKNOWN;
     }
