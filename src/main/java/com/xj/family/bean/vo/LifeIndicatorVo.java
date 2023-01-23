@@ -3,7 +3,7 @@ package com.xj.family.bean.vo;
 import java.sql.Date;
 
 public class LifeIndicatorVo {
-    Long userId; 
+    String username; 
     int dayPassed;
     int dayAll;
 
@@ -13,19 +13,20 @@ public class LifeIndicatorVo {
     @Override
     public String toString() {
         return "{" +
-            " userId='" + getUserId() + "'" +
+            " username='" + getUsername() + "'" +
             ", dayPassed='" + getDayPassed() + "'" +
             ", dayAll='" + getDayAll() + "'" +
             "}";
     }
  
 
-    public Long getUserId() {
-        return this.userId;
+
+    public String getUsername() {
+        return this.username;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getDayPassed() {
@@ -43,8 +44,6 @@ public class LifeIndicatorVo {
     public void setDayAll(int dayAll) {
         this.dayAll = dayAll;
     }
-
- 
 
 
 }

@@ -45,7 +45,7 @@ public class UserService {
         LifeIndicatorVo vo = new LifeIndicatorVo();
         vo.setDayAll(dayAll);
         vo.setDayPassed(dayPassed);
-        vo.setUserId(userId);
+        vo.setUsername(username);
         return vo;
     }
     // when user register, give them a default life end, aka birthday + 100 years
