@@ -17,6 +17,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
+
+
 
 /**
  * 2023-01-19 20:40:49
@@ -29,8 +32,22 @@ public class LoginInterceptor implements HandlerInterceptor {
     private StringRedisTemplate redisTemplate;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        System.out.println("login interceptor: request:response:handler \n" + request + "\n" + response + "\n" + handler);
+        System.out.println("\nlogin interceptor start: request:response:handler \n" + request + "\n" + response + "\n" + handler);
+        // https://blog.csdn.net/m0_46269959/article/details/125098405
+        System.out.println("\t request method: " + request.getMethod());
+        Enumeration<String> headers = request.getHeaderNames();
+        while(headers.hasMoreElements()) {
+            System.out.println("\t request header: " + headers.nextElement());
+        }
+        System.out.println("\t ");
         if (request.getMethod().equals("OPTIONS")) {
+            System.out.println("origin url: " + HttpContextUtil.getOrigin());
+            // 似乎这个无法添加上呢 for upload img 的时候
+            response.setHeader("Access-Control-Allow-Origin", HttpContextUtil.getOrigin());
+            response.setHeader("Access-Control-Allow-Headers", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+            response.setHeader("Access-Control-Max-Age", "3600");
             response.setStatus(HttpServletResponse.SC_OK);
             return true;
         }
