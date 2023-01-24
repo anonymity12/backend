@@ -2,6 +2,7 @@ package com.xj.family.service;
 
 import com.xj.family.bean.User;
 import com.xj.family.bean.LifeIndicator;
+import com.xj.family.bean.dto.ProfileDto;
 import com.xj.family.bean.dto.ValidParentDto;
 import com.xj.family.bean.vo.LifeIndicatorVo;
 import com.xj.family.mapper.UserMapper;
@@ -55,5 +56,31 @@ public class UserService {
         a.add(Calendar.YEAR, 100);
         Date end = new Date(a.getTimeInMillis());
         return userLifeMapper.setLifeStartAndEnd(userId, start, end);
+    }
+
+    public ProfileDto getUserProfile(String username) {
+        User user = userMapper.getUserByName(username);
+        ProfileDto profileDto = new ProfileDto();
+        profileDto.setId(user.getId());
+        profileDto.setIntro(user.getIntro());
+        profileDto.setCosmosId(user.getName());
+        profileDto.setName(user.getCname());
+        profileDto.setPassword(user.getPassword());
+        profileDto.setUserface(user.getUserface());
+        profileDto.setBirthday(user.getBirthday());
+
+
+        return profileDto;
+    }
+
+    public int updateUserProfile(ProfileDto profileDto) {
+        // 1) update table: user_life_start_end_table
+        Calendar a = Calendar.getInstance();
+        a.setTime(profileDto.getBirthday());
+        a.add(Calendar.YEAR, 100); // maybe later we can input custom year
+        Date end = new Date(a.getTimeInMillis());
+        userLifeMapper.setLifeStartAndEnd(profileDto.getId(), profileDto.getBirthday(), end);
+        // 2) update table: user
+        return userMapper.updateUserProfile(profileDto);
     }
 }

@@ -16,4 +16,10 @@
         INSERT INTO user (birthday, password, name, cname)
         VALUES (#{birthday}, #{password}, #{name}, #{cname})
     </insert>
+    <update id="updateUserProfile" parameterType="com.xj.family.bean.dto.ProfileDto">
+        update user set
+        birthday=#{birthday}, name=#{cosmosId}, cname=#{name}, userface=#{userface},
+        intro=#{intro}, password=#{password}
+        where id=#{id}
+    </update>
 </mapper>
