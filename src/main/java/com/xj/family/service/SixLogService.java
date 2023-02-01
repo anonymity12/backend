@@ -25,16 +25,14 @@ public class SixLogService {
     public SixLog getLogById(Long id) {
         return sixLogMapper.getLogById(id);
     }
-    public int addNewSixLog(SixLog log, String username) {
-        Long userId = userMapper.getUserIdByName(username);
-        System.out.println("username: id ->" + username + ": " + userId);
+    public int addNewSixLog(SixLog log, int userId) {
         log.setOwnerId(userId);
         return sixLogMapper.addNewSixLog(log);
     }
     public int getTotalAmount() {
         return sixLogMapper.getTotalAmount();
     }
-    public List<SixLog> getLogOfMineWithPageAndSize(int size, int page, String username) {
+    public List<SixLog> getLogOfMineWithPageAndSize(int size, int page, int userId) {
         // System.out.println("SixLogService: getLogOfMineWithPageAndSize: for user: " + username);
         return null; // sixLogMapper impl 
     }

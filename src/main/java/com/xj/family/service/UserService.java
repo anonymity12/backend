@@ -5,12 +5,17 @@ import com.xj.family.bean.LifeIndicator;
 import com.xj.family.bean.dto.ProfileDto;
 import com.xj.family.bean.dto.ValidParentDto;
 import com.xj.family.bean.vo.LifeIndicatorVo;
+import com.xj.family.config.Constants;
+import com.xj.family.interceptor.LoginInterceptor;
 import com.xj.family.mapper.UserMapper;
 import com.xj.family.mapper.UserLifeMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Calendar;
 import java.sql.Date;
@@ -36,9 +41,7 @@ public class UserService {
         return false;
     }
 
-    public LifeIndicatorVo getUserLifeIndicatorVo(String username) {
-        Long userId = userMapper.getUserIdByName(username);
-        System.out.println("get userId for username " + username + " id: " + userId);
+    public LifeIndicatorVo getUserLifeIndicatorVo(int userId) {
         LifeIndicator indi = userMapper.getUserLifeIndicator(userId);
         System.out.println(">>>>" + indi);
         int dayPassed = indi.getDayPassed();
@@ -46,7 +49,6 @@ public class UserService {
         LifeIndicatorVo vo = new LifeIndicatorVo();
         vo.setDayAll(dayAll);
         vo.setDayPassed(dayPassed);
-        vo.setUsername(username);
         return vo;
     }
     // when user register, give them a default life end, aka birthday + 100 years
@@ -58,8 +60,8 @@ public class UserService {
         return userLifeMapper.setLifeStartAndEnd(userId, start, end);
     }
 
-    public ProfileDto getUserProfile(String username) {
-        User user = userMapper.getUserByName(username);
+    public ProfileDto getUserProfile(int userId) {
+        User user = userMapper.getUserById(userId);
         ProfileDto profileDto = new ProfileDto();
         profileDto.setId(user.getId());
         profileDto.setIntro(user.getIntro());
@@ -84,5 +86,28 @@ public class UserService {
         //    we must update, so wait for future todo(in the future, guess,we dont need the user_life_start_end_table anymore)
         // 2) update table: user
         return userMapper.updateUserProfile(profileDto);
+    }
+
+    public String headerPictureUpload(MultipartFile file) {
+        int userId = LoginInterceptor.threadLocalUserId.get();
+        User currentUser = userMapper.getUserById(userId);
+
+        System.out.println("UserService>>>> header picture uploading, file is: " + file);
+
+        String folder = "/home/tt/code/CodeForFamily/backend/img_upload/";
+        File imageFolder = new File(folder);
+        String imgName = currentUser.getName() + com.xj.family.utils.StringUtils.getRandomString(6)
+                + file.getOriginalFilename().substring(file.getOriginalFilename().length() - 4);
+        File f = new File(imageFolder, imgName);
+        if (!f.getParentFile().exists())
+            f.getParentFile().mkdirs();
+        try {
+            file.transferTo(f);
+            String imgURL = Constants.SERVER_URL + "/api/img/" + f.getName();
+            return imgURL;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

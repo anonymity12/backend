@@ -9,7 +9,8 @@ import java.util.List;
 public interface UserMapper {
     Long getUserIdByName(String username);
     User getUserByName(String username);
-    LifeIndicator getUserLifeIndicator(Long userId);
+    User getUserById(int userId);
+    LifeIndicator getUserLifeIndicator(int userId);
     Integer addNewUser(User user);
     int updateUserProfile(ProfileDto profileDto);
 }

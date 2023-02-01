@@ -25,8 +25,6 @@ import java.util.Date;
 public class SixLogController {
     @Autowired
     SixLogService sixLogService ;
-    @Autowired
-    private StringRedisTemplate redisTemplate;
 
     /* should get by user, if frontend has specified for one user,
      * otherwise, get all user
@@ -47,8 +45,8 @@ public class SixLogController {
                                     int size,
                                     @PathVariable("page")
                                     int page) {
-        String username = LoginInterceptor.threadLocalUsername.get();
-        return sixLogService.getLogOfMineWithPageAndSize(size, page, username); // todo 2023-01-19 23:03:35 impl it
+        int userId = LoginInterceptor.threadLocalUserId.get();
+        return sixLogService.getLogOfMineWithPageAndSize(size, page, userId); // todo 2023-01-19 23:03:35 impl it
     }
 
 /*
@@ -56,8 +54,8 @@ public class SixLogController {
  */
     @PostMapping("/add")
     public RespBean addNewSixLog(@RequestBody SixLog log) {
-        String username = LoginInterceptor.threadLocalUsername.get();
-        int ret = sixLogService.addNewSixLog(log, username);
+        int userId = LoginInterceptor.threadLocalUserId.get();
+        int ret = sixLogService.addNewSixLog(log, userId);
         if (ret == 1)
             return RespBean.ok("add new six log success!");
         else 
@@ -71,18 +69,7 @@ public class SixLogController {
         else 
             return RespBean.error("failed to get sixlog total amount");
     }
-    /*
-    just a test method for the front, cause i wannt to know what has been
-    stored in Redis
-    */
-    @GetMapping("/getRedis/{key}")
-    public String getRedisUser(@PathVariable("key") String key) {
-        System.out.println("test redis with key: " + key);
-        String val = (String) redisTemplate.opsForHash().get("loggedInUser", key); // should null exception
-        return val;
-    }
-    
-    
+
     @PostMapping("/covers")
     public String coversUpload(MultipartFile file) {
         System.out.println("img upload, file is: " + file);

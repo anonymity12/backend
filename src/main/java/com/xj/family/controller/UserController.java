@@ -48,9 +48,8 @@ public class UserController {
 
     @GetMapping("/api/lifeIndicator")
     public RespBean lifeIndicator() {
-        // todo find out multi users, who make this request
-        String username = LoginInterceptor.threadLocalUsername.get();
-        LifeIndicatorVo vo = userService.getUserLifeIndicatorVo(username);
+        int userId = LoginInterceptor.threadLocalUserId.get();
+        LifeIndicatorVo vo = userService.getUserLifeIndicatorVo(userId);
         if (vo != null) {
             return RespBean.ok("got user life indicator", vo);
         } else {
@@ -77,8 +76,8 @@ public class UserController {
     */
     @GetMapping("/api/user/profile")
     public RespBean getProfile() {
-        String username = LoginInterceptor.threadLocalUsername.get();
-        ProfileDto userProfile = userService.getUserProfile(username);
+        int userId = LoginInterceptor.threadLocalUserId.get();
+        ProfileDto userProfile = userService.getUserProfile(userId);
         if (userProfile != null) {
             return RespBean.ok("获取信息成功", userProfile);
         } else {
@@ -94,29 +93,6 @@ public class UserController {
     }
     @PostMapping("/upload/userface")
     public String headerPictureUpload(MultipartFile file) {
-        String username = LoginInterceptor.threadLocalUsername.get();
-        /* // we decide not to use 2023-01-02 as prefix, but username now;
-        Calendar a = Calendar.getInstance();
-        Date time = a.getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String format = sdf.format(time);
-        */
-        System.out.println("header picture upload, file is: " + file);
-
-        String folder = "/home/tt/code/CodeForFamily/backend/img_upload/";
-        File imageFolder = new File(folder);
-        String imgName = username + com.xj.family.utils.StringUtils.getRandomString(6)
-                + file.getOriginalFilename().substring(file.getOriginalFilename().length() - 4);
-        File f = new File(imageFolder, imgName);
-        if (!f.getParentFile().exists())
-            f.getParentFile().mkdirs();
-        try {
-            file.transferTo(f);
-            String imgURL = Constants.SERVER_URL + "/api/img/" + f.getName();
-            return imgURL;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "";
-        }
+        return userService.headerPictureUpload(file);
     }
 }
