@@ -75,7 +75,7 @@ public class UserController {
         return null;
     }
     */
-    @GetMapping("/api/user/profile/")
+    @GetMapping("/api/user/profile")
     public RespBean getProfile() {
         String username = LoginInterceptor.threadLocalUsername.get();
         ProfileDto userProfile = userService.getUserProfile(username);
@@ -85,7 +85,7 @@ public class UserController {
             return RespBean.error("获取profile失败");
         }
     }
-    @PostMapping("/api/user/profile/")
+    @PostMapping("/api/user/profile")
     public RespBean updateProfile(@RequestBody ProfileDto profileDto) {
         System.out.println(">>>>> before update profile, we got profile: \n\t" + profileDto);
         int a = userService.updateUserProfile(profileDto);

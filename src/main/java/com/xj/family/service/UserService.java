@@ -74,12 +74,14 @@ public class UserService {
     }
 
     public int updateUserProfile(ProfileDto profileDto) {
-        // 1) update table: user_life_start_end_table
-        Calendar a = Calendar.getInstance();
-        a.setTime(profileDto.getBirthday());
-        a.add(Calendar.YEAR, 100); // maybe later we can input custom year
-        Date end = new Date(a.getTimeInMillis());
-        userLifeMapper.setLifeStartAndEnd(profileDto.getId(), profileDto.getBirthday(), end);
+        // // 1) update table: user_life_start_end_table
+        // Calendar a = Calendar.getInstance();
+        // a.setTime(profileDto.getBirthday());
+        // a.add(Calendar.YEAR, 100); // maybe later we can input custom year
+        // Date end = new Date(a.getTimeInMillis());
+        // userLifeMapper.setLifeStartAndEnd(profileDto.getId(), profileDto.getBirthday(), end);
+        // close 1), because sql error: cannot insert into user_life_start_end_table again
+        //    we must update, so wait for future todo(in the future, guess,we dont need the user_life_start_end_table anymore)
         // 2) update table: user
         return userMapper.updateUserProfile(profileDto);
     }
