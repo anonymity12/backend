@@ -12,6 +12,7 @@ import com.xj.family.vo.LoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -55,6 +56,11 @@ public class LoginService {
             System.out.println("login 3");
             
             saveTokenIntoRedis(token, user);
+            System.out.println("login 3.1");
+
+            saveUserIdIntoRedis(token, user.getId());
+            System.out.println("login 3.2");
+
             return new Result(200,"",loginVO);
         }
         System.out.println("login 4");
@@ -67,5 +73,11 @@ public class LoginService {
         HashOperations<String, Object, Object> hashOperations =
                 redisTemplate.opsForHash();
         hashOperations.put("loggedInUser", token, user.getName());
+    }
+    private void saveUserIdIntoRedis(String key, int userId) {
+        System.out.println("LoginService.savaUserIdIntoRedis>> key: userId \n" +
+                key + ":" + userId);
+        ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
+        valueOperations.set(key, ""+userId);
     }
 }

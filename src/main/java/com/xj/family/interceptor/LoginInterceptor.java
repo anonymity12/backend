@@ -27,7 +27,7 @@ import java.util.Enumeration;
  **/
 public class LoginInterceptor implements HandlerInterceptor {
     public static ThreadLocal<String> threadLocalUsername = new ThreadLocal<>();
-
+    public static ThreadLocal<Integer> threadLocalUserId = new ThreadLocal<>();
     @Autowired
     private StringRedisTemplate redisTemplate;
     @Override
@@ -62,6 +62,19 @@ public class LoginInterceptor implements HandlerInterceptor {
         String username = (String) redisTemplate.opsForHash().get("loggedInUser", token); // should null exception
         System.out.println("username from redis for above token:" + username);
         threadLocalUsername.set(username);
+        /*
+        in redis:
+        we use string data structure
+        key   | string
+        token | userId
+        ------|-------
+        y7u9i | 16
+        nh891 | 2
+         */
+        System.out.println("ready to get loggedUser Id for token" + token);
+        int userId = Integer.valueOf(redisTemplate.opsForValue().get(token));
+        System.out.println("userId from redis for above token is: " + userId);
+        threadLocalUserId.set(userId);
         return true;
     }
 
