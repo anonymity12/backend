@@ -12,7 +12,7 @@ public class SixLog{
     private String articleAbstract;
     private String articleCover;
     private Date articleDate;
-    private Long ownerId;
+    private int ownerId;
 
     SixLog() {
 
@@ -45,10 +45,10 @@ public class SixLog{
         this.id = id;
     }
 
-    public Long getOwnerId() {
+    public int getOwnerId() {
         return this.ownerId;
     }
-    public void setOwnerId(Long ownerId) {
+    public void setOwnerId(int ownerId) {
         this.ownerId = ownerId;
     }
 
