@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xj.family.result.Result;
 import com.xj.family.util.HttpContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -24,9 +23,10 @@ import java.util.Enumeration;
 /**
  * 2023-01-19 20:40:49
  * check before each handle, make sure user have already logged in
+ * now(0201) we gradually migrate to using simple string
+ *  aka token:userId in redis(instead of hash)
  **/
 public class LoginInterceptor implements HandlerInterceptor {
-    public static ThreadLocal<String> threadLocalUsername = new ThreadLocal<>();
     public static ThreadLocal<Integer> threadLocalUserId = new ThreadLocal<>();
     @Autowired
     private StringRedisTemplate redisTemplate;
@@ -56,12 +56,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             setReturn(response,400,"用户未登录，请先登录");
             return false;
         }
-        // use redis to check user
-        System.out.println("ready to hash get loggedInUser for token: \n" + token + "\n" +
-                    "with redisTemplate: " + redisTemplate);
-        String username = (String) redisTemplate.opsForHash().get("loggedInUser", token); // should null exception
-        System.out.println("username from redis for above token:" + username);
-        threadLocalUsername.set(username);
+
         /*
         in redis:
         we use string data structure
@@ -71,7 +66,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         y7u9i | 16
         nh891 | 2
          */
-        System.out.println("ready to get loggedUser Id for token" + token);
+        System.out.println("\n >>> ready to get loggedUser Id for token" + token);
         int userId = Integer.valueOf(redisTemplate.opsForValue().get(token));
         System.out.println("userId from redis for above token is: " + userId);
         threadLocalUserId.set(userId);
