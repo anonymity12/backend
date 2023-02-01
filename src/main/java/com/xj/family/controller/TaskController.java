@@ -1,12 +1,11 @@
 package com.xj.family.controller;
 
+import com.xj.family.bean.RespBean;
 import com.xj.family.bean.Task;
+import com.xj.family.bean.dto.TaskDto;
 import com.xj.family.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,4 +20,20 @@ public class TaskController {
     public List<Task> getAllTask() {
         return taskService.getAllTask();
     }
+
+    @PostMapping("/add")
+    public RespBean addTask(@RequestBody String title) {
+        Task task = new Task();
+        task.setTitle(title);
+        return taskService.addTask(task);
+    }
+    @PostMapping("/cancel")
+    public RespBean cancelTask(@RequestBody int taskId) {
+        return taskService.cancelTask(taskId);
+    }
+    @PostMapping("/done")
+    public RespBean doneTask(@RequestBody TaskDto dto) {
+        return taskService.doneTask(dto);
+    }
+
 }

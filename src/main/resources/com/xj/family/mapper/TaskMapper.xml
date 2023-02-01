@@ -10,4 +10,15 @@
         where t.`owner`=#{owner}
         order by t.`edited` desc
     </select>
+    <insert id="addTask" parameterType="com.xj.family.bean.Task" useGeneratedKeys="true" keyProperty="id">
+        insert into task (title, status, created, edited, owner, matrix)
+        values
+        (#{title}, 1, now(), now(), #{owner}, 2)
+    </insert>
+    <update id="cancelTask" parameterType="Integer">
+        update task set status=0 where id=#{id}
+    </update>
+    <update id="doneTask" parameterType="com.xj.family.bean.dto.TaskDto">
+        update task set status=#{status} where id=#{id}
+    </update>
 </mapper>
