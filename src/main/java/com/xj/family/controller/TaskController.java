@@ -22,13 +22,14 @@ public class TaskController {
     }
 
     @PostMapping("/add")
-    public RespBean addTask(@RequestBody String title) {
+    public RespBean addTask(@RequestParam String title) {
+        System.out.println("TaskController: addTask: title: " + title);
         Task task = new Task();
         task.setTitle(title);
         return taskService.addTask(task);
     }
     @PostMapping("/cancel")
-    public RespBean cancelTask(@RequestBody int taskId) {
+    public RespBean cancelTask(@RequestParam int taskId) {
         return taskService.cancelTask(taskId);
     }
     @PostMapping("/done")

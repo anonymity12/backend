@@ -27,7 +27,7 @@ public class TaskService {
         task.setOwner(LoginInterceptor.threadLocalUserId.get());
         int ret = taskMapper.addTask(task);
         if (ret == 1) {
-            return RespBean.ok("add task ok!", task);
+            return RespBean.ok("add task ok!");
         }
         else {
             return RespBean.error("add task failed");
