@@ -16,9 +16,9 @@
         (#{title}, 1, now(), now(), #{owner}, 2)
     </insert>
     <update id="cancelTask" parameterType="Integer">
-        update task set status=0 where id=#{id}
+        update task set status=0, edited=now() where id=#{id}
     </update>
     <update id="doneTask" parameterType="com.xj.family.bean.dto.TaskDto">
-        update task set status=#{status} where id=#{id}
+        update task set status=#{status}, edited=now() where id=#{id}
     </update>
 </mapper>
