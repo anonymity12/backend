@@ -51,8 +51,9 @@ public class TaskService {
     }
 
     public RespBean cancelTask(int id) {
+        taskMapper.releaseFly(id);
         int ret = taskMapper.cancelTask(id);
-        if (ret == 1) {
+        if (ret == 1) { // maybe 2
             return RespBean.ok("cancel task ok!");
         }
         else {
@@ -61,6 +62,7 @@ public class TaskService {
     }
 
     public RespBean doneTask(TaskDto dto) {
+        taskMapper.toggleFly(dto.getStatus(), dto.getId());
         int ret = taskMapper.doneTask(dto);
         if (ret == 1) {
             return RespBean.ok("done task ok!");

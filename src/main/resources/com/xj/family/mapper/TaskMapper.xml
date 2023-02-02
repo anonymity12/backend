@@ -17,11 +17,14 @@
     </insert>
     <update id="cancelTask" parameterType="Integer">
         update task set status=0, edited=now() where id=#{id};
+    </update>
+    <update id="releaseFly" parameterType="Integer">
         update flies set status = -1 where id = (select fly_id from task where id=#{id});
     </update>
     <update id="doneTask" parameterType="com.xj.family.bean.dto.TaskDto">
         update task set status=#{status}, edited=now() where id=#{id};
-        select @my_fly_id:=fly_id from task where id=#{id} limit 1;
-        update flies set status = #{status}-1 where id = my_fly_id;
+    </update>
+    <update id="toggleFly" >
+        update flies set status = #{status}-1 where id = (select fly_id from task where id=#{id} limit 1) cc;--use limit
     </update>
 </mapper>

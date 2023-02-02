@@ -13,4 +13,8 @@ public interface TaskMapper {
     int cancelTask(int id);
 
     int doneTask(TaskDto dto);
+
+    int releaseFly(int id);
+
+    int toggleFly(int status, int id);
 }
