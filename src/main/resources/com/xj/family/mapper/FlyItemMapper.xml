@@ -10,6 +10,11 @@
         insert into flies (date, name, evaluate, image, owner)
         values (#{date}, #{name}, #{evaluate}, #{image}, #{owner})
     </insert>
+    <insert id="addForTaskCreated" parameterType="com.xj.family.bean.FlyItem" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into flies (name, evaluate, status, owner)
+        values (#{name}, #{evaluate}, #{status}, #{owner})
+    </insert>
     <update id="growStatus">
         update flies 
         set status = 1

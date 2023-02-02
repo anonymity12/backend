@@ -10,6 +10,7 @@ public class Task {
     Date edited;
     int owner;
     int matrix;
+    Long flyId;
 
     public Task() {
     }
@@ -68,5 +69,13 @@ public class Task {
 
     public void setMatrix(int matrix) {
         this.matrix = matrix;
+    }
+
+    public Long getFlyId() {
+        return flyId;
+    }
+
+    public void setFlyId(Long flyId) {
+        this.flyId = flyId;
     }
 }

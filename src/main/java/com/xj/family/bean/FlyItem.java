@@ -10,7 +10,7 @@ public class FlyItem {
     private String name;
     private String evaluate;
     private String image;
-    private Long owner;
+    private int owner;
     private int status;
 
     @Override
@@ -27,11 +27,11 @@ public class FlyItem {
     }
 
 
-    public Long getOwner() {
+    public int getOwner() {
         return this.owner;
     }
 
-    public void setOwner(Long owner) {
+    public void setOwner(int owner) {
         this.owner = owner;
     }
 

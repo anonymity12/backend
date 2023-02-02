@@ -1,5 +1,6 @@
 package com.xj.family.service;
 
+import com.xj.family.interceptor.LoginInterceptor;
 import com.xj.family.mapper.FlyItemMapper;
 import com.xj.family.bean.FlyItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class FlyService {
     }
 
     public int addItemForUser(FlyItem item, String username) {
-        long userId = userService.getUserIdByName(username);
+        int userId = LoginInterceptor.threadLocalUserId.get();
         item.setOwner(userId);
         int result = flyItemMapper.insert(item);
         return result;

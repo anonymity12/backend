@@ -1,10 +1,12 @@
 package com.xj.family.service;
 
+import com.xj.family.bean.FlyItem;
 import com.xj.family.bean.RespBean;
 import com.xj.family.bean.Task;
 import com.xj.family.bean.User;
 import com.xj.family.bean.dto.TaskDto;
 import com.xj.family.interceptor.LoginInterceptor;
+import com.xj.family.mapper.FlyItemMapper;
 import com.xj.family.mapper.TaskMapper;
 import com.xj.family.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,11 @@ import java.util.List;
 
 @Service
 public class TaskService {
+    private final String taskFlyName = "任务蝶";
     @Autowired
     TaskMapper taskMapper;
+    @Autowired
+    FlyItemMapper flyItemMapper;
 
     public List<Task> getAllTask() {
         int ownerId = LoginInterceptor.threadLocalUserId.get();
@@ -24,13 +29,24 @@ public class TaskService {
     }
 
     public RespBean addTask(Task task) {
-        task.setOwner(LoginInterceptor.threadLocalUserId.get());
+
+        int owner = LoginInterceptor.threadLocalUserId.get();
+        FlyItem flyItem = new FlyItem();
+        flyItem.setOwner(owner);
+        flyItem.setName(taskFlyName);
+        flyItem.setEvaluate(task.getTitle());
+        flyItem.setStatus(0);
+        flyItemMapper.addForTaskCreated(flyItem);
+        long flyId = flyItem.getId();
+
+        task.setOwner(owner);
+        task.setFlyId(flyId);
         int ret = taskMapper.addTask(task);
         if (ret == 1) {
-            return RespBean.ok("add task ok!");
+            return RespBean.ok("添加任务OK");
         }
         else {
-            return RespBean.error("add task failed");
+            return RespBean.error("添加任务失败了");
         }
     }
 

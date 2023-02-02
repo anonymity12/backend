@@ -11,14 +11,16 @@
         order by t.`edited` desc
     </select>
     <insert id="addTask" parameterType="com.xj.family.bean.Task" useGeneratedKeys="true" keyProperty="id">
-        insert into task (title, status, created, edited, owner, matrix)
+        insert into task (title, status, created, edited, owner, matrix, fly_id)
         values
-        (#{title}, 1, now(), now(), #{owner}, 2)
+        (#{title}, 1, now(), now(), #{owner}, 2, #{flyId})
     </insert>
     <update id="cancelTask" parameterType="Integer">
-        update task set status=0, edited=now() where id=#{id}
+        update task set status=0, edited=now() where id=#{id};
+        update flies set status = -1 where id = (select fly_id from task where id=#{id});
     </update>
     <update id="doneTask" parameterType="com.xj.family.bean.dto.TaskDto">
-        update task set status=#{status}, edited=now() where id=#{id}
+        update task set status=#{status}, edited=now() where id=#{id};
+        update flies set status=#{status}-1 where id = (select fly_id from task where id=#{id});
     </update>
 </mapper>
