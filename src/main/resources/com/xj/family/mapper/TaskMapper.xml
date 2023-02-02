@@ -21,6 +21,7 @@
     </update>
     <update id="doneTask" parameterType="com.xj.family.bean.dto.TaskDto">
         update task set status=#{status}, edited=now() where id=#{id};
-        update flies set status = #{status}-1 where id = (select fly_id from task where id=#{id} limit 1);--use limit
+        select @my_fly_id:=fly_id from task where id=#{id} limit 1;
+        update flies set status = #{status}-1 where id = my_fly_id;
     </update>
 </mapper>
