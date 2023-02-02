@@ -25,6 +25,6 @@
         update task set status=#{status}, edited=now() where id=#{id};
     </update>
     <update id="toggleFly" >
-        update flies set status = #{status}-1 where id = (select fly_id from task where id=#{id} limit 1) cc;--use limit
+        update flies set status = #{status}-1 where id = (select fly_id from task where id=#{id} limit 1)
     </update>
 </mapper>
