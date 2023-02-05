@@ -18,6 +18,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: 三分恶
@@ -59,6 +60,6 @@ public class LoginService {
         System.out.println("LoginService.savaUserIdIntoRedis>> key: userId \n" +
                 key + ":" + userId);
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
-        valueOperations.set(key, ""+userId);
+        valueOperations.set(key, ""+userId, 5, TimeUnit.DAYS);
     }
 }
