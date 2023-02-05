@@ -1,6 +1,8 @@
 package com.xj.family.bean.vo;
 
-public class RankInfoVo {
+import java.io.Serializable;
+
+public class RankInfoVo implements Serializable {
     int userId;
     String userface;
     String cname;
