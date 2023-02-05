@@ -18,9 +18,11 @@ public class RedisConfig {
         // StringRedisSerializer cause 500 err:
         //     java.util.ArrayList cannot be cast to java.lang.String
         template.setConnectionFactory(factory);
-        template.setKeySerializer(redisSerializer);
+        // ref: https://blog.csdn.net/huangpeigui/article/details/89671690
+        //     解决redis redistemplate KEY为字符串是多双引号的问题
+        template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(redisSerializer);
-        template.setHashKeySerializer(redisSerializer);
+        template.setHashKeySerializer(new StringRedisSerializer());
         template.setHashValueSerializer(redisSerializer);
 
         return template;
