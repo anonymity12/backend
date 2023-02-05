@@ -45,3 +45,9 @@ post /api/sixlog/covers
 ## life indicator
 
 /users/lifeIndicator
+
+## ranks
+
+获取全部用户的排名
+
+/ranks/getRanksForShow
