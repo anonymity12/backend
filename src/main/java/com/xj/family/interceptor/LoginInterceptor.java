@@ -42,7 +42,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         System.out.println("\t ");
         if (request.getMethod().equals("OPTIONS")) {
             System.out.println("origin url: " + HttpContextUtil.getOrigin());
-            // 似乎这个无法添加上呢 for upload img 的时候
             response.setHeader("Access-Control-Allow-Origin", HttpContextUtil.getOrigin());
             response.setHeader("Access-Control-Allow-Headers", "*");
             response.setHeader("Access-Control-Allow-Methods", "*");
