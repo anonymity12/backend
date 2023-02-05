@@ -7,6 +7,15 @@ public class RankInfoVo implements Serializable {
     String userface;
     String cname;
 
+    @Override
+    public String toString() {
+        return "RankInfoVo{" +
+                "userId=" + userId +
+                ", userface='" + userface + '\'' +
+                ", cname='" + cname + '\'' +
+                '}';
+    }
+
     public RankInfoVo() {
     }
 

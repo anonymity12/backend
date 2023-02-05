@@ -41,9 +41,12 @@ public class RankController {
         if (redisTemplate.opsForHash().hasKey(RANK_CONTAINER, RANK_KEY)) {
             Object o = redisTemplate.opsForHash().get(RANK_CONTAINER, RANK_KEY);
             List<RankInfoVo> rankInfoVos = (List<RankInfoVo>) o;
+            System.out.println("has cache for ranksForShowHashKey:" + o);
+
             return rankInfoVos;
         } else {
             List<RankInfoVo> rankForShow = rankService.getRankForShow();
+            System.out.println("no cache, now put it in, it is: " + rankForShow);
             redisTemplate.opsForHash().put(RANK_CONTAINER, RANK_KEY, rankForShow);
             redisTemplate.expire(RANK_CONTAINER, 3, TimeUnit.MINUTES);
             return rankForShow;
