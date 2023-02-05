@@ -23,7 +23,7 @@ public class RankController {
     @Autowired
     RankService rankService;
     @Autowired
-    RedisTemplate redisTemplate;
+    RedisTemplate<Object, Object> redisTemplate;
 
     /**
      * 返回某个用户的排名数字
@@ -42,7 +42,6 @@ public class RankController {
             Object o = redisTemplate.opsForHash().get(RANK_CONTAINER, RANK_KEY);
             List<RankInfoVo> rankInfoVos = (List<RankInfoVo>) o;
             System.out.println("has cache for ranksForShowHashKey:" + o);
-
             return rankInfoVos;
         } else {
             List<RankInfoVo> rankForShow = rankService.getRankForShow();
