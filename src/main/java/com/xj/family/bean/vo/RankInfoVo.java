@@ -7,12 +7,20 @@ public class RankInfoVo implements Serializable {
     String userface;
     String cname;
 
+    int growFlyCnt;
+    int diedFlyCnt;
+    int babyFlyCnt;
+
+
     @Override
     public String toString() {
         return "RankInfoVo{" +
                 "userId=" + userId +
                 ", userface='" + userface + '\'' +
                 ", cname='" + cname + '\'' +
+                ", growFlyCnt=" + growFlyCnt +
+                ", diedFlyCnt=" + diedFlyCnt +
+                ", babyFlyCnt=" + babyFlyCnt +
                 '}';
     }
 
@@ -42,4 +50,29 @@ public class RankInfoVo implements Serializable {
     public void setCname(String cname) {
         this.cname = cname;
     }
+
+    public int getGrowFlyCnt() {
+        return growFlyCnt;
+    }
+
+    public void setGrowFlyCnt(int growFlyCnt) {
+        this.growFlyCnt = growFlyCnt;
+    }
+
+    public int getDiedFlyCnt() {
+        return diedFlyCnt;
+    }
+
+    public void setDiedFlyCnt(int diedFlyCnt) {
+        this.diedFlyCnt = diedFlyCnt;
+    }
+
+    public int getBabyFlyCnt() {
+        return babyFlyCnt;
+    }
+
+    public void setBabyFlyCnt(int babyFlyCnt) {
+        this.babyFlyCnt = babyFlyCnt;
+    }
+
 }

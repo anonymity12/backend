@@ -9,5 +9,24 @@
             select owner, count(1) as c from `flies` GROUP BY owner ORDER BY c DESC
         ) as table_u;
     </select>
-    
+    <select id="getUserListRankedWithFliesCnt" resultType="com.xj.family.bean.vo.RankInfoVo">
+        select user.id as userId, user.userface, user.cname, tb1.growFlyCnt, tb1.diedFlyCnt, tb1.babyFlyCnt   from
+        (select owner,
+        count(
+        case when status=-1 then 1 else null
+        end) diedFlyCnt,
+        count(
+        case when status=0 then 1 else null
+        end) as babyFlyCnt,
+        count(
+        case when status=1 then 1 else null
+        end) as growFlyCnt
+        from flies  group by owner) as tb1
+        left join
+        user
+        on user.id=tb1.owner
+
+        order by tb1.growFlyCnt desc
+    </select>
+
 </mapper>

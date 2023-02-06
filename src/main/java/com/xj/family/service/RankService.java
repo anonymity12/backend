@@ -37,16 +37,8 @@ public class RankService {
         return String.valueOf(yourRank);
     }
     public List<RankInfoVo> getRankForShow() {
-        List<Integer> userIdsByRank = rankMapper.getUserListRanked();
-        List<RankInfoVo> rankInfoVos = new ArrayList<>();
-        userIdsByRank.forEach(i -> {
-            RankInfoVo rankInfoVo = new RankInfoVo();
-            rankInfoVo.setUserId(i);
-            User userById = userMapper.getUserById(i);
-            rankInfoVo.setCname(userById.getCname());
-            rankInfoVo.setUserface(userById.getUserface());
-            rankInfoVos.add(rankInfoVo);
-        });
+        System.out.println("in rank service");
+        List<RankInfoVo> rankInfoVos = rankMapper.getUserListRankedWithFliesCnt();
         return rankInfoVos;
     }
 }
