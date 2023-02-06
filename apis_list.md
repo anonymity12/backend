@@ -51,3 +51,27 @@ post /api/sixlog/covers
 获取全部用户的排名
 
 /ranks/getRanksForShow
+
+return:
+
+```txt
+[
+    {
+        "userId": 13,
+        "userface": "https://picgorepo.oss-cn-beijing.aliyuncs.com//2022-11-23-13-28-38README.png",
+        "cname": "玥玥",
+        "growFlyCnt": 30,
+        "diedFlyCnt": 0,
+        "babyFlyCnt": 11
+    },
+    {
+        "userId": 16,
+        "userface": "http://101.43.166.211:8081/api/img/kw1gqejpeg",
+        "cname": "天天",
+        "growFlyCnt": 10,
+        "diedFlyCnt": 3,
+        "babyFlyCnt": 19
+    },
+    ...
+]
+```
