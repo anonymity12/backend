@@ -2,7 +2,6 @@ package com.xj.family.bean.scheduler;
 
 import com.xj.family.bean.FlyItem;
 import com.xj.family.bean.Task;
-import com.xj.family.bean.dto.TaskDto;
 import com.xj.family.mapper.FlyItemMapper;
 import com.xj.family.mapper.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class Scheduler {
     TaskMapper taskMapper;
     @Autowired
     FlyItemMapper flyItemMapper;
-    @Scheduled(cron = "0 0 15 * * ?") // At 03:00 AM  , see: https://crontab.cronhub.io/
+    @Scheduled(cron = "0 0 3 * * ?") // At 03:00 AM  , see: https://crontab.cronhub.io/
     public void scheduleTask() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
         String strDate = dateFormat.format(new Date());
