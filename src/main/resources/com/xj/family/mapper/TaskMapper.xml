@@ -7,7 +7,7 @@
         select t.id, t.`title`, t.`status`, t.`created`,
                t.`edited`, t.`owner`, t.`matrix`
         from task t
-        where t.`owner`=#{owner}
+        where t.`owner`=#{owner} and t.`matrix`!=5
         order by t.`edited` desc
     </select>
     <insert id="addTask" parameterType="com.xj.family.bean.Task" useGeneratedKeys="true" keyProperty="id">
@@ -36,4 +36,9 @@
         where
             t.`matrix`=5
     </select>
+    <insert id="addRoutineTask" parameterType="com.xj.family.bean.Task" useGeneratedKeys="true" keyProperty="id">
+        insert into task (title, status, created, edited, owner, matrix, fly_id)
+        values
+        (#{title}, 1, now(), now(), #{owner}, 1, #{flyId})
+    </insert>
 </mapper>

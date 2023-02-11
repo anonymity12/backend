@@ -19,7 +19,7 @@ public class Scheduler {
     TaskMapper taskMapper;
     @Autowired
     FlyItemMapper flyItemMapper;
-    @Scheduled(cron = "0 * 14 * * ?")
+    @Scheduled(cron = "0 0 15 * * ?") // At 03:00 AM  , see: https://crontab.cronhub.io/
     public void scheduleTask() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
         String strDate = dateFormat.format(new Date());
@@ -48,7 +48,7 @@ public class Scheduler {
             flyItemMapper.addForTaskCreated(flyItem);
             long flyId = flyItem.getId();
             it.setFlyId(flyId);
-            int ret = taskMapper.addTask(it);
+            int ret = taskMapper.addRoutineTask(it);
             if (ret < 1) {
                 insertFailFlag[0] = true;
             }
@@ -57,7 +57,5 @@ public class Scheduler {
         if (insertFailFlag[0]) {
             System.out.println("Cron Job: insert routine failed at least once");
         }
-
-
     }
 }

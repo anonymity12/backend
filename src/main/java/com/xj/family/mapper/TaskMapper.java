@@ -10,6 +10,8 @@ public interface TaskMapper {
 
     int addTask(Task task);
 
+    int addRoutineTask(Task task);
+
     int cancelTask(int id);
 
     int doneTask(TaskDto dto);
