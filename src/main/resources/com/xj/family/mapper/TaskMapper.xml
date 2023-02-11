@@ -27,4 +27,13 @@
     <update id="toggleFly" >
         update flies set status = #{status}-1 where id = (select fly_id from task where id=#{id} limit 1)
     </update>
+    <select id="queryRoutines" resultType="com.xj.family.bean.Task">
+        select
+            t.id, t.`title`, t.`status`, t.`created`,
+            t.`edited`, t.`owner`, t.`matrix`
+        from
+            task t
+        where
+            t.`matrix`=5
+    </select>
 </mapper>

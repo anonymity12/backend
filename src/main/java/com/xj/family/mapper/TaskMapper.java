@@ -17,4 +17,6 @@ public interface TaskMapper {
     int releaseFly(int id);
 
     int toggleFly(int status, int id);
+
+    List<Task> queryRoutines();
 }
