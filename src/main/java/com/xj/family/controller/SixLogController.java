@@ -76,7 +76,7 @@ public class SixLogController {
         String folder = "/home/tt/code/CodeForFamily/backend/img_upload/";
         File imageFolder = new File(folder);
         File f = new File(imageFolder, StringUtils.getRandomString(6) + file.getOriginalFilename()
-                .substring(file.getOriginalFilename().length() - 4));
+                .substring(file.getOriginalFilename().length() - 5));// -5 for .JPEG like file
         if (!f.getParentFile().exists())
             f.getParentFile().mkdirs();
         try {
