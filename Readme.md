@@ -1,10 +1,16 @@
 # tech I used
 
 - java
+- spring-boot
 - mysql
+- mybatis
 - redis
 
 # detail works
+
+# rank list user story
+
+- they want to know their rank info in the first page
 
 ## sixlog add with user identity
 

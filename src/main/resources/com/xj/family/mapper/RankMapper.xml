@@ -4,9 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xj.family.mapper.RankMapper">
     <select id="getUserListRanked" resultType="java.lang.Integer" >
-        select table_u.owner FROM 
+        select table_u.owner FROM
         (
-            select owner, count(1) as c from `flies` GROUP BY owner ORDER BY c DESC
+        select owner, count(1) as c from `flies` GROUP BY owner ORDER BY c DESC
+        ) as table_u;
+    </select>
+    <select id="getUserListRankedForGrowCnt" resultType="java.lang.Integer" >
+        select table_u.owner FROM
+        (
+        select owner, count(1) as c from `flies` where status = 1 GROUP BY owner ORDER BY c DESC
         ) as table_u;
     </select>
     <select id="getUserListRankedWithFliesCnt" resultType="com.xj.family.bean.vo.RankInfoVo">
