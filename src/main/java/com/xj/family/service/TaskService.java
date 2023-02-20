@@ -54,10 +54,10 @@ public class TaskService {
         taskMapper.releaseFly(id);
         int ret = taskMapper.cancelTask(id);
         if (ret == 1) { // maybe 2
-            return RespBean.ok("cancel task ok!");
+            return RespBean.ok("任务被取消了");
         }
         else {
-            return RespBean.error("cancel task failed");
+            return RespBean.error("无法取消任务");
         }
     }
 
@@ -65,10 +65,10 @@ public class TaskService {
         taskMapper.toggleFly(dto.getStatus(), dto.getId());
         int ret = taskMapper.doneTask(dto);
         if (ret == 1) {
-            return RespBean.ok("done task ok!");
+            return RespBean.ok("完成任务啦😄");
         }
         else {
-            return RespBean.error("done task failed");
+            return RespBean.error("无法完成任务😭");
         }
     }
 }
