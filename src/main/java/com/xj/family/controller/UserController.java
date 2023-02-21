@@ -6,6 +6,7 @@ import com.xj.family.bean.dto.ProfileDto;
 import com.xj.family.bean.vo.LifeIndicatorVo;
 import com.xj.family.bean.FamilyTreeEntity;
 import com.xj.family.bean.dto.ValidParentDto;
+import com.xj.family.bean.vo.RankInfoVo;
 import com.xj.family.config.Constants;
 import com.xj.family.interceptor.LoginInterceptor;
 import com.xj.family.service.UserService;
@@ -94,5 +95,15 @@ public class UserController {
     @PostMapping("/upload/userface")
     public String headerPictureUpload(MultipartFile file) {
         return userService.headerPictureUpload(file);
+    }
+
+    @GetMapping("/api/user/getMyCntOverview")
+    public RespBean getMyCntOverview() {
+        RankInfoVo myCntOverview = userService.getUser3KindFliesCnt();
+        if (myCntOverview != null) {
+            return RespBean.ok("获取我的数据统计OK", myCntOverview);
+        } else {
+            return RespBean.error("获取我的数据统计Failed");
+        }
     }
 }

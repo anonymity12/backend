@@ -21,4 +21,6 @@ public interface RankMapper {
      */
     List<RankInfoVo> getUserListRankedWithFliesCnt();
 
+    RankInfoVo getUser3KindFliesCnt(int userId);
+
 }

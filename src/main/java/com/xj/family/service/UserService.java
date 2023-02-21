@@ -5,8 +5,10 @@ import com.xj.family.bean.LifeIndicator;
 import com.xj.family.bean.dto.ProfileDto;
 import com.xj.family.bean.dto.ValidParentDto;
 import com.xj.family.bean.vo.LifeIndicatorVo;
+import com.xj.family.bean.vo.RankInfoVo;
 import com.xj.family.config.Constants;
 import com.xj.family.interceptor.LoginInterceptor;
+import com.xj.family.mapper.RankMapper;
 import com.xj.family.mapper.UserMapper;
 import com.xj.family.mapper.UserLifeMapper;
 
@@ -26,6 +28,9 @@ public class UserService {
     UserMapper userMapper;
     @Autowired
     UserLifeMapper userLifeMapper;
+
+    @Autowired
+    RankMapper rankMapper;
 
     public Long getUserIdByName(String name) {
         return userMapper.getUserIdByName(name);
@@ -109,5 +114,11 @@ public class UserService {
             e.printStackTrace();
             return "";
         }
+    }
+
+    // 0221 22:33
+    public RankInfoVo getUser3KindFliesCnt() {
+        int userId = LoginInterceptor.threadLocalUserId.get();
+        return rankMapper.getUser3KindFliesCnt(userId);
     }
 }
