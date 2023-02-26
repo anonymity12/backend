@@ -5,7 +5,7 @@ import java.sql.Date;
 public class User {
     private int id;
     private Date birthday;
-    private String name; // english name , used in url. or we should change it to cosmosId, it's a better name 
+    private String name; // english name , used in url. or we should change it to cosmosId, it's a better name; but now 0226, just use `name`
     private String intro;
     private String userface;
     private String cname; // chinese name, used for front-end show 

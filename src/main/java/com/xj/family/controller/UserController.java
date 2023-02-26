@@ -87,10 +87,10 @@ public class UserController {
     }
     @PostMapping("/api/user/profile")
     public RespBean updateProfile(@RequestBody ProfileDto profileDto) {
-        System.out.println(">>>>> before update profile, we got profile: \n\t" + profileDto);
-        int a = userService.updateUserProfile(profileDto);
-        if (a < 0) return RespBean.error("update profile failed");
-        else return RespBean.ok("update profile ok");
+        System.out.println(">>>>> before update profile, we got new profile: \n\t" + profileDto);
+        User u = userService.updateUserProfile(profileDto);
+        if (u == null) return RespBean.error("update profile failed");
+        else return RespBean.ok("update profile ok", u);
     }
     @PostMapping("/upload/userface")
     public String headerPictureUpload(MultipartFile file) {

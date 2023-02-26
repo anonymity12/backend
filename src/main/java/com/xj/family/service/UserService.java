@@ -80,7 +80,7 @@ public class UserService {
         return profileDto;
     }
 
-    public int updateUserProfile(ProfileDto profileDto) {
+    public User updateUserProfile(ProfileDto profileDto) {
         // // 1) update table: user_life_start_end_table
         // Calendar a = Calendar.getInstance();
         // a.setTime(profileDto.getBirthday());
@@ -90,7 +90,11 @@ public class UserService {
         // close 1), because sql error: cannot insert into user_life_start_end_table again
         //    we must update, so wait for future todo(in the future, guess,we dont need the user_life_start_end_table anymore)
         // 2) update table: user
-        return userMapper.updateUserProfile(profileDto);
+        int ret = userMapper.updateUserProfile(profileDto);
+        if (ret < 0) { // update failed, return null
+            return null;
+        }// update successful, return the new user
+        return userMapper.getUserById(profileDto.getId());
     }
 
     public String headerPictureUpload(MultipartFile file) {
