@@ -4,6 +4,7 @@
 
 package com.xj.family.controller;
 
+import com.xj.family.bean.RespBean;
 import com.xj.family.dto.LoginDTO;
 import com.xj.family.result.Result;
 import com.xj.family.service.LoginService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 2023-01-19 20:40:16
+ * 2023-02-26 10:16
  **/
 @CrossOrigin
 @RestController()
@@ -23,16 +25,15 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
+    /**
+     * login with user loginDto(name, passwd)
+     * this method is useful when we use front-backend split arch, because we don't use session(cross-origin issue)
+     * to track user, we use a token to track user
+     * @param loginDTO aka (name, passwd)
+     * @return RespBean contains loginVo(token, user bean)
+     */
     @PostMapping(value = "/api/login")
-    public Result login(@RequestBody LoginDTO loginDTO) {
-        Result ret = loginService.login(loginDTO);
-        // we will not use session anymore, cause cross origin, and front-back split 
-        // arch will not support session, so let's use token
-        return ret;
-	/*
-	hashOps = redisTemplate.opsForHMap();	
-	hashOps.put(ret.getToken(), ret.getUserInfo());// UserInfo:(at least) contains: name, userId, cname, 
-    maybe: use session is enough, for {username, cname, name, userId}
-	*/
+    public RespBean login(@RequestBody LoginDTO loginDTO) {
+        return loginService.login(loginDTO);
     }
 }
