@@ -6,7 +6,6 @@ package com.xj.family.service;
 
 import com.xj.family.bean.User;
 import com.xj.family.mapper.UserMapper;
-import com.xj.family.result.Result;
 import com.xj.family.bean.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;

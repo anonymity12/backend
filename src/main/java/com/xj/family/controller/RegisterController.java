@@ -5,7 +5,6 @@
 package com.xj.family.controller;
 
 import com.xj.family.bean.dto.RegisterDTO;
-import com.xj.family.result.Result;
 import com.xj.family.bean.RespBean;
 import com.xj.family.bean.User;
 import com.xj.family.service.RegisterService;

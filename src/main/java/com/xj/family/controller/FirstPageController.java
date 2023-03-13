@@ -1,6 +1,6 @@
 package com.xj.family.controller;
 
-import com.xj.family.result.Result;
+import com.xj.family.bean.RespBean;
 import com.xj.family.service.FlyService;
 
 
@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class FirstPageController {
     @GetMapping(value = "/ping")
-    public Result hello(){
-        return new Result(200,"pingping","pongpong");
+    public RespBean hello(){
+        return RespBean.ok("pongpong");
     }
 }

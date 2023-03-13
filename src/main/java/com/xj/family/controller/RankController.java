@@ -1,11 +1,7 @@
 package com.xj.family.controller;
 
-import com.xj.family.bean.RespBean;
 import com.xj.family.bean.vo.RankInfoVo;
-import com.xj.family.interceptor.LoginInterceptor;
 import com.xj.family.service.RankService;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;

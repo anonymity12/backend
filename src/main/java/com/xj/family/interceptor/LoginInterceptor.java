@@ -5,7 +5,7 @@
 package com.xj.family.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xj.family.result.Result;
+import com.xj.family.bean.RespBean;
 import com.xj.family.util.HttpContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -88,9 +88,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         //UTF-8编码
         httpResponse.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=utf-8");
-        Result result = new Result(code,msg,"");
         ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(result);
+        String json = objectMapper.writeValueAsString(RespBean.error(msg));
         httpResponse.getWriter().print(json);
         System.out.println("error: return will");
 
