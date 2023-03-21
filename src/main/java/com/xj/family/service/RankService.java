@@ -24,10 +24,11 @@ public class RankService {
     @Autowired
     UserMapper userMapper;
 
+    // 0321 changelog: now return the bottom rank number by the Grow Cnt(aka finished tasks number); not total count anymore
     public String getRankForUser(String username) {
         long userId = userService.getUserIdByName(username); 
-        // 从 flies 里面 选择所有的 蝴蝶，并依据 owner 来分组
-        List<Integer> rankForAllUser = rankMapper.getUserListRanked();
+        // will return an int list(userIds), ordered by their finished tasks count;
+        List<Integer> rankForAllUser = rankMapper.getUserListRankedByGrowCnt();
         int yourRank = 9999;
         for (int i = 1; i <= rankForAllUser.size(); i++) {
             if (userId == rankForAllUser.get(i-1)) {

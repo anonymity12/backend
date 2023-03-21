@@ -7,6 +7,7 @@ import java.lang.Integer;
 
 public interface RankMapper {
     List<Integer> getUserListRanked();
+    List<Integer> getUserListRankedByGrowCnt();
 
     /**
      *
