@@ -19,7 +19,7 @@ public interface RankMapper {
      * 37	http://101.43.166.pg胡锦晗	    0	0	1
      * 1	https://picgorepo.om虚空	        0	0	5
      */
-    List<RankInfoVo> getUserListRankedByFliesCnt();
+    List<RankInfoVo> getUserListRankedWithFliesCnt();
 
     RankInfoVo getUser3KindFliesCnt(int userId);
 
