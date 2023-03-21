@@ -38,7 +38,7 @@ public class RankService {
     }
     public List<RankInfoVo> getRankForShow() {
         System.out.println("in rank service");
-        List<RankInfoVo> rankInfoVos = rankMapper.getUserListRankedWithFliesCnt();
+        List<RankInfoVo> rankInfoVos = rankMapper.getUserListRankedByFliesCnt();
         return rankInfoVos;
     }
 }
