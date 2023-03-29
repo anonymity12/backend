@@ -1,0 +1,8 @@
+archOfPostCommentGoldSystem.txt
+- comment: addComment: + score for post
+					 : - gold for commenter
+					 : + gold for post owner;
+- post: addPost: + gold for post owner;
+
+- rankList of post:
+	sorted by score;
