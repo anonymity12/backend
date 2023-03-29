@@ -2,26 +2,88 @@ archOfPostCommentGoldSystem.txt
 - comment: addComment: + score for post
 					 : - gold for commenter
 					 : + gold for post owner;
-- post: addPost: + gold for post owner; URL：/add
-        * watchPost: +gold for owner; URL: /detail/postId
-                   : - gold for watcher
-                   : +userInfo
-                   : +likeCount <- likeService.findEntityLikeCount(postId)
-                   : +likeStatus<- likeService.findEntityLikeStatus(curUserId, postId)
-                   : +comments (commentService.findCommentByEntity(type:post/comment, entityId, ))
-                        : for this post
-                        : for some comment
-                      - comment(conent)
-                      - user(comment owner)
-                      - likeCount
-                      - likeStatus
-                      - replyCount
-                      - replys
-                          + reply
-                          + user
-                          + target
-                          + likeCount
-                          + likeStatus
-        * topPost置顶帖子：updateType/updateStatus(id, type/status)
+- post: 
+    * addPost: URL：/add
+        * + gold for post owner; 
+    * watchPost: URL: /detail/postId
+        --- do some calculation for this post start---
+        + gold for owner, +score for this post; 
+        - gold for watcher
+        --- do some calculation for this post end---
+        ---retrive related info start---
+        +userInfo
+        +likeCount <- likeService.findEntityLikeCount(postId)
+        +likeStatus<- likeService.findEntityLikeStatus(curUserId, postId)
+        +comments (commentService.findCommentByEntity(type:post/comment, entityId, ))
+            : for this post
+            : for some comment
+          - comment(conent)
+          - user(comment owner)
+          - likeCount
+          - likeStatus
+          - replyCount
+          - replys
+              + reply
+              + user
+              + target
+              + likeCount
+              + likeStatus
+        ---retrive related info end---
+        * summary: when watch a post:
+            - do some calculation(for backend)
+            - retrive related info(for frontend)
+        ```java
+PostDetailVo watchPost(postId){
+    postDetailVo.setPost(post);
+    postDetailVo.setOwner(user);
+    postDetailVo.setLikeCount(likeCount);
+    postDetailVo.setLikeStatus(likeStatus);
+    commentList = commentService.findCommentByEntity();
+    commentVoList = initCommentVoList();
+    commentList.forEach(it->)
+        // for post comment
+        commentVo.put("comment", commentContent);
+        commentVo.put("user", commentOwner);
+        commentVo.put("likeCount", likeCount);
+        commentVo.put("likeStatus", likeStatus);
+        replyList = commentService.findCommentByEntity();
+        replyVoList = initReplyVoList();
+        replyList.forEach(it->)
+            // for comment comment
+            replyVo.put("reply", it.reply)
+            replyVo.put("user", it.replyOwner)
+            replyVo.put("target", it.replyTarget)
+            replyVo.put("likeCount", it.likeCount)
+            replyVo.put("likeStatus", it.likeStatus)
+            replyVoList.add(replyVo)
+        commentVo.put("replys", replyVoList)
+        commentVoList.add(commentVo);
+    postDetailVo.setComments(commentVoList);
+}
+        ```
+    * topPost置顶帖子：updateType/updateStatus(id, type/status)
 - rankList of post:
 	sorted by score;
+
+---
+
+comment bean:
+    id
+    userId(owner)
+    entityType(post or comment)
+    entityId(postId, or commentId)
+    targetId(targetEntityOwner)
+    content
+    status(0:normal; 1:banned)
+    createTime
+
+discussPost bean:
+    id
+    userId
+    title
+    content
+    type
+    status
+    createTime
+    commentCount
+    score
