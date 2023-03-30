@@ -3,6 +3,9 @@ archOfPostCommentGoldSystem.txt
 					 : - gold for commenter
 					 : + gold for post owner;
 - post: 
+    * listAllPosts
+        - commentCount
+        - likeCount
     * addPost: URL：/add
         * + gold for post owner; 
     * watchPost: URL: /detail/postId
@@ -66,7 +69,7 @@ archOfPostCommentGoldSystem.txt
 	sorted by score;
 
 ---
-
+# beans
 comment bean:
     id
     userId(owner)
@@ -87,7 +90,9 @@ discussPost bean:
     createTime
     commentCount
     score
-
+Gold bean:
+    owner
+    amount
 ---
 # mappers
 commentMapper
