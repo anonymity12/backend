@@ -1,5 +1,6 @@
 package com.xj.family.controller;
 
+import com.xj.family.service.GoldService;
 import com.xj.family.service.SixLogService;
 import com.xj.family.bean.SixLog;
 import com.xj.family.bean.vo.SixLogVo;
@@ -19,12 +20,16 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Date;
 
+import static com.xj.family.config.Constants.ADD_SIXLOG_REWARD;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/sixlog")
 public class SixLogController {
     @Autowired
     SixLogService sixLogService ;
+    @Autowired
+    GoldService goldService;
 
     /* should get by user, if frontend has specified for one user,
      * otherwise, get all user
@@ -56,6 +61,8 @@ public class SixLogController {
     public RespBean addNewSixLog(@RequestBody SixLog log) {
         int userId = LoginInterceptor.threadLocalUserId.get();
         int ret = sixLogService.addNewSixLog(log, userId);
+        // now we will have gold each time we post a new sixLog
+        goldService.addGoldForUser(userId, ADD_SIXLOG_REWARD);
         if (ret == 1)
             return RespBean.ok("add new six log success!");
         else 

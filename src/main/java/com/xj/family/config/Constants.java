@@ -7,4 +7,6 @@ public class Constants {
     public static final String LOGIN_USER = "loginUser";
     public static final String RANK_CONTAINER = "ranksForShowHashContainer";
     public static final String RANK_KEY = "ranksForShowHashKey";
+    public static final int ADD_SIXLOG_REWARD = 5;
+    public static final int INIT_ALLOC_GOLD_AMOUNT = 100;
 }
