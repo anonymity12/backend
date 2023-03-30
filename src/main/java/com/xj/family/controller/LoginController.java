@@ -5,7 +5,7 @@
 package com.xj.family.controller;
 
 import com.xj.family.bean.RespBean;
-import com.xj.family.dto.LoginDTO;
+import com.xj.family.bean.dto.LoginDTO;
 import com.xj.family.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

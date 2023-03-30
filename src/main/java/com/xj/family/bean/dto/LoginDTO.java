@@ -2,7 +2,7 @@
  * Copyright (c) 2022  12 25  <br> author tt <br>
  */
 
-package com.xj.family.dto;
+package com.xj.family.bean.dto;
 public class LoginDTO {
     private String loginName;
     private String password;
