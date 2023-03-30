@@ -15,7 +15,7 @@ public class GoldService {
         return goldMapper.allocateGoldForUser(ownerId, amount);
     }
     public int addGoldForUser(int ownerId, int addAmount) {
-        if (goldMapper.getGoldAmountForUser(ownerId) == 0) {
+        if (goldMapper.getGoldAmountForUser(ownerId) == null) {
             // user doesn't have gold record yet, let's make one for him
             System.out.println("allocate new gold record for userId" + ownerId);
             allocateNewGoldForUser(ownerId, INIT_ALLOC_GOLD_AMOUNT);
