@@ -17,7 +17,7 @@
         set amount = amount - #{subtractAmount}
         where owner_id=#{ownerId}
     </update>
-    <select id="getGoldAmountForUser">
+    <select id="getGoldAmountForUser" resultType="java.lang.Integer">
         select amount from gold
         where owner_id=#{ownerId}
     </select>
