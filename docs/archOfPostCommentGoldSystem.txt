@@ -6,11 +6,14 @@ archOfPostCommentGoldSystem.txt
     * addPost: URL：/add
         * + gold for post owner; 
     * watchPost: URL: /detail/postId
-        --- do some calculation for this post start---
+        * summary: when watch a post:
+            - do some calculation(for backend)
+            - retrive related info(for frontend)
+        1) --- do some calculation for this post start---
         + gold for owner, +score for this post; 
         - gold for watcher
         --- do some calculation for this post end---
-        ---retrive related info start---
+        2) ---retrive related info start---
         +userInfo
         +likeCount <- likeService.findEntityLikeCount(postId)
         +likeStatus<- likeService.findEntityLikeStatus(curUserId, postId)
@@ -29,37 +32,34 @@ archOfPostCommentGoldSystem.txt
               + likeCount
               + likeStatus
         ---retrive related info end---
-        * summary: when watch a post:
-            - do some calculation(for backend)
-            - retrive related info(for frontend)
         ```java
-PostDetailVo watchPost(postId){
-    postDetailVo.setPost(post);
-    postDetailVo.setOwner(user);
-    postDetailVo.setLikeCount(likeCount);
-    postDetailVo.setLikeStatus(likeStatus);
-    commentList = commentService.findCommentByEntity();
-    commentVoList = initCommentVoList();
-    commentList.forEach(it->)
-        // for post comment
-        commentVo.put("comment", commentContent);
-        commentVo.put("user", commentOwner);
-        commentVo.put("likeCount", likeCount);
-        commentVo.put("likeStatus", likeStatus);
-        replyList = commentService.findCommentByEntity();
-        replyVoList = initReplyVoList();
-        replyList.forEach(it->)
-            // for comment comment
-            replyVo.put("reply", it.reply)
-            replyVo.put("user", it.replyOwner)
-            replyVo.put("target", it.replyTarget)
-            replyVo.put("likeCount", it.likeCount)
-            replyVo.put("likeStatus", it.likeStatus)
-            replyVoList.add(replyVo)
-        commentVo.put("replys", replyVoList)
-        commentVoList.add(commentVo);
-    postDetailVo.setComments(commentVoList);
-}
+        PostDetailVo watchPost(postId){
+            postDetailVo.setPost(post);
+            postDetailVo.setOwner(user);
+            postDetailVo.setLikeCount(likeCount);
+            postDetailVo.setLikeStatus(likeStatus);
+            commentList = commentService.findCommentByEntity();
+            commentVoList = initCommentVoList();
+            commentList.forEach(it->)
+                // for post comment
+                commentVo.put("comment", commentContent);
+                commentVo.put("user", commentOwner);
+                commentVo.put("likeCount", likeCount);
+                commentVo.put("likeStatus", likeStatus);
+                replyList = commentService.findCommentByEntity();
+                replyVoList = initReplyVoList();
+                replyList.forEach(it->)
+                    // for comment comment
+                    replyVo.put("reply", it.reply)
+                    replyVo.put("user", it.replyOwner)
+                    replyVo.put("target", it.replyTarget)
+                    replyVo.put("likeCount", it.likeCount)
+                    replyVo.put("likeStatus", it.likeStatus)
+                    replyVoList.add(replyVo)
+                commentVo.put("replys", replyVoList)
+                commentVoList.add(commentVo);
+            postDetailVo.setComments(commentVoList);
+        }
         ```
     * topPost置顶帖子：updateType/updateStatus(id, type/status)
 - rankList of post:
@@ -83,7 +83,56 @@ discussPost bean:
     title
     content
     type
-    status
+    status(!=2 is fine)
     createTime
     commentCount
     score
+
+---
+# mappers
+commentMapper
+    selectCommentById
+    selectCommentByEntity
+    selectCommentCountByEntity
+    selectCommentByUserId
+    selectCommentCountByUserId
+    insertComment
+discussPostMapper
+    selectDiscussPosts
+        might by:
+            userId
+            orderMode
+            limit offset limit
+    selectDiscussPostRows
+        might by:
+            userId
+    selectDiscussPostById
+    insertDiscussPost
+    updateCommentCount
+    updateType
+    updateStatus
+    updateScore
+---
+# services
+commentService
+    findCommentByEntity
+    findCommentCount
+    findCommentByUserId
+    findCommentCountByUserId
+    addComment(@Transactional(isolation, propagation))
+        discussPostService.updateCommentCount
+DiscussPostService(like my SixLogService)
+    @PostConstruct:initCache
+    findDiscussPosts
+    findDiscussPostRows
+    findDiscussPostById
+    addDiscussPost
+    updateCommentCount
+    updateType
+    updateStatus
+    updateScore
+---
+# controllers
+DiscussPostController
+IndexController
+    共同：getInfo about posts
