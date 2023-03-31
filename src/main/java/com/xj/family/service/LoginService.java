@@ -8,7 +8,7 @@ import com.xj.family.bean.RespBean;
 import com.xj.family.bean.User;
 import com.xj.family.bean.dto.LoginDTO;
 import com.xj.family.mapper.UserMapper;
-import com.xj.family.vo.LoginVO;
+import com.xj.family.bean.vo.LoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;

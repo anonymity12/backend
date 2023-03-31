@@ -2,7 +2,7 @@
  * Copyright (c) 2022  12 25  <br> author tt <br>
  */
 
-package com.xj.family.vo;
+package com.xj.family.bean.vo;
 
 
 import com.xj.family.bean.User;
@@ -10,10 +10,6 @@ import com.xj.family.bean.User;
 import java.io.Serializable;
 
 /**
- * @Author: 三分恶
- * @Date: 2021/1/18
- * @Description: 登录VO
-  tt todo 2023-01-19 20:26:17 : we need move it to bean/vo folder
   todo 2023-01-19 20:32:54 try not use User inside as a member; may has serialization error, but test will tell us
   todo 2023-01-24 23:09:51 maybe loginVo should contain profileDto, instead a user
  **/
