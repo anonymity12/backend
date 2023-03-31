@@ -45,6 +45,12 @@ public class SixLogController {
     public SixLog getLogById(@PathVariable("id") Long id) {
         return sixLogService.getLogById(id);
     }
+    @PostMapping("/likeSixLog")
+    public RespBean likeSixLog(@RequestParam long sixLogId) {
+        int userId = LoginInterceptor.threadLocalUserId.get();
+        sixLogService.likeLogById(userId, sixLogId);
+        return RespBean.ok("点赞是个好习惯！");
+    }
     @GetMapping("/getMine/{size}/{page}")
     public List<SixLog> getLogOfMine(@PathVariable("size")
                                     int size,

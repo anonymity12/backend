@@ -141,3 +141,14 @@ DiscussPostService(like my SixLogService)
 DiscussPostController
 IndexController
     共同：getInfo about posts
+
+---
+# like function
+1) use redis
+redis save
+    1) likeCount for one entity
+        using: set; post:332<->(userId1, userId2,...)
+        set.size() -> likeCount 
+    2) likeCount for one user
+        using: string; 16<->56
+2) design RedisKeyUtil
