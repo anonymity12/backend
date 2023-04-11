@@ -27,7 +27,15 @@ public class SixLogService {
     
     public List<SixLogVo> getLogByPage(int size, int page) {
         int offset = size * (page - 1);
-        return sixLogMapper.getLogByPage(offset, size);
+        // 2023-04-11 22:21:34 chaging start
+        List<SixLogVo> logs = sixLogMapper.getLogByPage(offset, size);
+        for (SixLogVo log: logs) {
+            Long tmpLikeCounts = findSixLogLikeCount(log.getId());
+            long likeCounts = tmpLikeCounts == null? 0: tmpLikeCounts;
+            log.setLikeCounts(likeCounts);
+        }
+        return logs;
+        // 2023-04-11 22:24:17 changing end
     }
     public SixLog getLogById(Long id) {
         return sixLogMapper.getLogById(id);
@@ -44,26 +52,18 @@ public class SixLogService {
         return null; // sixLogMapper impl 
     }
 
-    public void likeLogById(int userId, long sixLogId) {
+    public void likeLogById(int userId, int sixLogId) {
         redisTemplate.execute(new SessionCallback() {
             @Override
             public Object execute(RedisOperations operations) throws DataAccessException {
-                String entityLikeKey = RedisKeyUtil.getEntityLikeKey(0, sixLogId);
-                boolean isMember = operations.opsForSet().isMember(entityLikeKey, userId);
-                operations.multi();
-                if (isMember) {
-                    // cancel like
-                    operations.opsForSet().remove(entityLikeKey, userId);
-                } else {
-                    // do like
-                    operations.opsForSet().add(entityLikeKey, userId);
-                }
+                String postKey = RedisKeyUtil.getSixLogKey(sixLogId);
+                operations.opsForList().rightPush(postKey, userId);
                 return operations.exec();
             }
         });
     }
-    public Long findSixLogLikeCount(long sixLogId) {
-        String entityLikeKey = RedisKeyUtil.getEntityLikeKey(0, sixLogId);
-        return redisTemplate.opsForSet().size(entityLikeKey);
+    public Long findSixLogLikeCount(int sixLogId) {
+        String entityLikeKey = RedisKeyUtil.getSixLogKey(sixLogId);
+        return redisTemplate.opsForList().size(entityLikeKey);
     }
 }

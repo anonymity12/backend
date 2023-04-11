@@ -46,7 +46,7 @@ public class SixLogController {
         return sixLogService.getLogById(id);
     }
     @PostMapping("/likeSixLog")
-    public RespBean likeSixLog(@RequestParam long sixLogId) {
+    public RespBean likeSixLog(@RequestParam int sixLogId) {
         int userId = LoginInterceptor.threadLocalUserId.get();
         sixLogService.likeLogById(userId, sixLogId);
         return RespBean.ok("点赞是个好习惯！");

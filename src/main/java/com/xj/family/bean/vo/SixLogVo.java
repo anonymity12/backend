@@ -3,9 +3,9 @@ package com.xj.family.bean.vo;
 
 import java.util.Date;
 
-public class SixLogVo{
+public class SixLogVo {
 
-    private Long id;
+    private Integer id; // 2023-04-11 22:23:09 consider change it to Integer
     private String articleTitle;
     private String articleContentHtml;
     private String articleContentMd;
@@ -13,32 +13,33 @@ public class SixLogVo{
     private String articleCover;
     private Date articleDate;
     private String ownerName;
+    // 2023-04-11 22:20:02 add for like counts
+    private long likeCounts;
 
     SixLogVo() {
 
     }
 
-
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", articleTitle='" + getArticleTitle() + "'" +
-            ", articleContentHtml='" + getArticleContentHtml() + "'" +
-            ", articleContentMd='" + getArticleContentMd() + "'" +
-            ", articleAbstract='" + getArticleAbstract() + "'" +
-            ", articleCover='" + getArticleCover() + "'" +
-            ", articleDate='" + getArticleDate() + "'" +
-            ", ownerName='" + getOwnerName() + "'" +
-            "}";
+        return "SixLogVo{" +
+                "id=" + id +
+                ", articleTitle='" + articleTitle + '\'' +
+                ", articleContentHtml='" + articleContentHtml + '\'' +
+                ", articleContentMd='" + articleContentMd + '\'' +
+                ", articleAbstract='" + articleAbstract + '\'' +
+                ", articleCover='" + articleCover + '\'' +
+                ", articleDate=" + articleDate +
+                ", ownerName='" + ownerName + '\'' +
+                ", likeCounts=" + likeCounts +
+                '}';
     }
 
-
-    public Long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -98,5 +99,12 @@ public class SixLogVo{
         this.ownerName = ownerName;
     }
 
+    public long getLikeCounts() {
+        return likeCounts;
+    }
+
+    public void setLikeCounts(long likeCounts) {
+        this.likeCounts = likeCounts;
+    }
 
 }
