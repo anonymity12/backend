@@ -27,7 +27,7 @@ public class SixLogService {
     
     public List<SixLogVo> getLogByPage(int size, int page) {
         int offset = size * (page - 1);
-        // 2023-04-11 22:21:34 chaging start
+        // 2023-04-11 22:21:34 changing start
         List<SixLogVo> logs = sixLogMapper.getLogByPage(offset, size);
         for (SixLogVo log: logs) {
             Long tmpLikeCounts = findSixLogLikeCount(log.getId());

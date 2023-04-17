@@ -32,10 +32,7 @@ http://101.43.166.211:8081/users/yy/getInfo
 
 like: 
 post
-http://101.43.166.211:8081/api/sixlog/likeSixLog
-{
-"sixLogId": 255
-}
+http://101.43.166.211:8081/api/sixlog/likeSixLog?sixLogId=255
 
 ### upload img
 
