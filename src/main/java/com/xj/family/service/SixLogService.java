@@ -53,14 +53,8 @@ public class SixLogService {
     }
 
     public void likeLogById(int userId, int sixLogId) {
-        redisTemplate.execute(new SessionCallback() {
-            @Override
-            public Object execute(RedisOperations operations) throws DataAccessException {
-                String postKey = RedisKeyUtil.getSixLogKey(sixLogId);
-                operations.opsForList().rightPush(postKey, ""+userId);
-                return operations.exec();
-            }
-        });
+        String postKey = RedisKeyUtil.getSixLogKey(sixLogId);
+        redisTemplate.opsForList().rightPush(postKey, ""+userId);
     }
     public Long findSixLogLikeCount(int sixLogId) {
         String entityLikeKey = RedisKeyUtil.getSixLogKey(sixLogId);
