@@ -66,8 +66,15 @@ public class LoginInterceptor implements HandlerInterceptor {
         nh891 | 2
          */
         System.out.println("\n >>> ready to get loggedUser Id for token" + token);
-        int userId = Integer.valueOf(redisTemplate.opsForValue().get(token));
-        System.out.println("userId from redis for above token is: " + userId);
+        // 2023-04-17 23:09:01 fix error: when no such token, Integer.valueOf(null) will throws:java.lang.NumberFormatException
+        String userIdString = redisTemplate.opsForValue().get(token);
+        if (userIdString == null) {
+            setReturn(response,25014250,"用户token已过期，或者无效token");
+            return false;
+        }
+        int userId = Integer.parseInt(userIdString);
+        System.out.println("correspond userId for incoming token is: " + userId);
+        // 2023-04-17 23:16:07 fix done;
         threadLocalUserId.set(userId);
         return true;
     }
