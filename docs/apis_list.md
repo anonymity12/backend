@@ -30,6 +30,13 @@ http://101.43.166.211:8081/users/yy/getInfo
 
 /api/sixlog/getTotalAmount; get
 
+like: 
+post
+http://101.43.166.211:8081/api/sixlog/likeSixLog
+{
+"sixLogId": 255
+}
+
 ### upload img
 
 post /api/sixlog/covers

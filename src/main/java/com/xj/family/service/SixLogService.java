@@ -57,7 +57,7 @@ public class SixLogService {
             @Override
             public Object execute(RedisOperations operations) throws DataAccessException {
                 String postKey = RedisKeyUtil.getSixLogKey(sixLogId);
-                operations.opsForList().rightPush(postKey, userId);
+                operations.opsForList().rightPush(postKey, ""+userId);
                 return operations.exec();
             }
         });
