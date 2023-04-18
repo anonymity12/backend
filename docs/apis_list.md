@@ -30,9 +30,16 @@ http://101.43.166.211:8081/users/yy/getInfo
 
 /api/sixlog/getTotalAmount; get
 
-like: 
-post
+like a sixlog: 
+POST
 http://101.43.166.211:8081/api/sixlog/likeSixLog?sixLogId=255
+OK
+
+get sixlog with like count:
+GET
+http://101.43.166.211:8081/api/sixlog/5/1
+OK
+
 
 ### upload img
 
