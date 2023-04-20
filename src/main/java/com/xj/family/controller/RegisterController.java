@@ -48,10 +48,11 @@ public class RegisterController {
         user.setBirthday(registerDTO.getBirthday());
         user.setPassword(registerDTO.getPassword());
         System.out.println("user before register: " + user);
-        int userId = registerService.register(user);
-        if (userId < 0) {
+        int registerReturnCode = registerService.register(user);
+        System.out.println("registerReturnCode:" + registerReturnCode);
+        if (registerReturnCode < 0) {
             String errMsg = null;
-            switch (userId) {
+            switch (registerReturnCode) {
                 case RegisterService.ERR_NAME_EMPTY:
                     errMsg = "请不要空名字";
                     break;
@@ -66,8 +67,9 @@ public class RegisterController {
                     break;
             }
         
-            return RespBean.error("注册失败,原因是 " + errMsg);
+            return RespBean.error("注册失败,原因: " + errMsg);
         }
+        int userId = registerReturnCode; // if goes here, then no error happen, then registerReturnCode is just the userId we added! congrats!
         userService.setDefaultLifeStartAndEnd(userId, registerDTO.getBirthday());
         return RespBean.ok("注册成功");
     }
