@@ -32,14 +32,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     private StringRedisTemplate redisTemplate;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        System.out.println("\nlogin interceptor start: request:response:handler \n" + request + "\n" + response + "\n" + handler);
+        System.out.println("\t\tlogin interceptor intercepted:" + handler);
+        // fix OPTIONS 预检请求不成功, cors preflight failed
         // https://blog.csdn.net/m0_46269959/article/details/125098405
-        System.out.println("\t request method: " + request.getMethod());
-        Enumeration<String> headers = request.getHeaderNames();
-        while(headers.hasMoreElements()) {
-            System.out.println("\t request header: " + headers.nextElement());
-        }
-        System.out.println("\t ");
         if (request.getMethod().equals("OPTIONS")) {
             System.out.println("origin url: " + HttpContextUtil.getOrigin());
             response.setHeader("Access-Control-Allow-Origin", HttpContextUtil.getOrigin());
@@ -73,7 +68,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
         int userId = Integer.parseInt(userIdString);
-        System.out.println("correspond userId for incoming token is: " + userId);
+        System.out.println("now, user: " + userId + "is active");
         // 2023-04-17 23:16:07 fix done;
         threadLocalUserId.set(userId);
         return true;
@@ -99,7 +94,5 @@ public class LoginInterceptor implements HandlerInterceptor {
         String json = objectMapper.writeValueAsString(RespBean.error(msg));
         httpResponse.getWriter().print(json);
         System.out.println("error: return will");
-
     }
-
 }
