@@ -2,10 +2,12 @@ package com.xj.family.service;
 
 import com.xj.family.bean.RespBean;
 import com.xj.family.bean.Routine;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class RoutineService {
 
     public List<Routine> queryAllRoutineForUser(Integer userId) {
