@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class RoutineService {
 
-    public List<Routine> queryAllRoutineForUser(Integer userId) {
+    public List<Routine> queryAllRoutineForUser() {
         List<Routine> fake = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             fake.add(new Routine("内容"+i, i, i*10));

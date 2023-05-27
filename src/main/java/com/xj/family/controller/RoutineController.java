@@ -16,8 +16,8 @@ public class RoutineController {
     @Autowired
     RoutineService routineService;
     @GetMapping("/queryAll")
-    public List<Routine> queryAll(@RequestBody Integer userId) {
-        return routineService.queryAllRoutineForUser(userId);
+    public List<Routine> queryAll() {
+        return routineService.queryAllRoutineForUser();
     }
     @PostMapping("/addRoutine")
     public RespBean addRoutine(@RequestBody Routine routine) {
