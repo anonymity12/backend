@@ -4,6 +4,7 @@ import com.xj.family.bean.FlyItem;
 import com.xj.family.bean.Task;
 import com.xj.family.mapper.FlyItemMapper;
 import com.xj.family.mapper.TaskMapper;
+import com.xj.family.service.RoutineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,8 @@ public class Scheduler {
     TaskMapper taskMapper;
     @Autowired
     FlyItemMapper flyItemMapper;
+    @Autowired
+    RoutineService routineService;
     @Scheduled(cron = "0 0 3 * * ?") // At 03:00 AM  , see: https://crontab.cronhub.io/
     public void scheduleTask() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
@@ -28,7 +31,7 @@ public class Scheduler {
 
     private void insertDailyRoutine() {
         // 1. query routine
-        List<Task> tasks = taskMapper.queryRoutines();
+        List<Task> tasks = routineService.transformAllRoutineToTask();
         // 2. shape new task
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM月dd日:");
         String todayStr = simpleDateFormat.format(new Date());

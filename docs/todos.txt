@@ -1,0 +1,7 @@
+2023 0529
+- [x] recheck the matrix == 5, routine current logic
+- [x] dont use matrix == 5, use routine table to save the users' routines
+- [x] create `routine` table in server
+- [x] move old matrix == 5 to routine table：：INSERT INTO routine (content, owner) SELECT title, owner  FROM task where matrix=5;
+- [x] db check routine schedule logic is fine when at 3AM
+- [x] mk commit of routine auto insert feat
