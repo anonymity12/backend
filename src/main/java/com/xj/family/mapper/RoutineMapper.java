@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface RoutineMapper {
     List<Routine> queryAllUsersRoutines();
+
+    List<Routine> queryAllRoutineForUser(int userId);
 }

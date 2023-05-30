@@ -1,0 +1,14 @@
+# 0530 todo
+
+## mapper problem
+
+at com.xj.family.FamilyApplication.main(FamilyApplication.java:14) [classes/:na]
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'routineServi
+ce': Unsatisfied dependency expressed through field 'routineMapper'; nested exception is org.springframework.beans.facto
+ry.BeanCreationException: Error creating bean with name 'routineMapper' defined in file [/home/tt/code/CodeForFamily/bac
+kend/target/classes/com/xj/family/mapper/RoutineMapper.class]: Invocation of init method failed; nested exception is jav
+a.lang.IllegalArgumentException: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache
+.ibatis.builder.BuilderException: Mapper's namespace cannot be empty
+
+## login no prompt, not good
+

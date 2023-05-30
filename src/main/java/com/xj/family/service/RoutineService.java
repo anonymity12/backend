@@ -4,6 +4,7 @@ import com.xj.family.bean.FlyItem;
 import com.xj.family.bean.RespBean;
 import com.xj.family.bean.Routine;
 import com.xj.family.bean.Task;
+import com.xj.family.interceptor.LoginInterceptor;
 import com.xj.family.mapper.RoutineMapper;
 import com.xj.family.mapper.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,8 @@ public class RoutineService {
 
 
     public List<Routine> queryAllRoutineForUser() {
-        List<Routine> fake = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            fake.add(new Routine("内容"+i, i, i*10));
-        }
-        return fake;
+        int ownerId = LoginInterceptor.threadLocalUserId.get();
+        return routineMapper.queryAllRoutineForUser(ownerId);
     }
 
     public RespBean addRoutineForUser(Routine routine) {
