@@ -70,9 +70,9 @@ public class SixLogController {
         // now we will have gold each time we post a new sixLog
         goldService.addGoldForUser(userId, ADD_SIXLOG_REWARD);
         if (ret == 1)
-            return RespBean.ok("add new six log success!");
+            return RespBean.ok("成功写入六记");
         else 
-            return RespBean.error("add sixlog failed");
+            return RespBean.error("添加失败了");
     }
     @GetMapping("/getTotalAmount")
     public RespBean getTotalAmount() {
