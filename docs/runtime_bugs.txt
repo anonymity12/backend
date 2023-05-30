@@ -1,4 +1,4 @@
-# 0530 todo
+# 0530 tdo
 
 ## mapper problem
 
@@ -12,3 +12,4 @@ a.lang.IllegalArgumentException: org.apache.ibatis.builder.BuilderException: Err
 
 ## login no prompt, not good
 
+---

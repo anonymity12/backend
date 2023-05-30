@@ -5,3 +5,7 @@
 - [x] move old matrix == 5 to routine table：：INSERT INTO routine (content, owner) SELECT title, owner  FROM task where matrix=5;
 - [x] db check routine schedule logic is fine when at 3AM
 - [x] mk commit of routine auto insert feat
+
+
+2023 0530
+- [x] fix login no prompt bug
