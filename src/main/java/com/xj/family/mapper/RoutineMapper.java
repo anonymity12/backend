@@ -8,4 +8,10 @@ public interface RoutineMapper {
     List<Routine> queryAllUsersRoutines();
 
     List<Routine> queryAllRoutineForUser(int userId);
+
+    int addRoutine(Routine routine);
+
+    int updateRoutine(Routine routine);
+
+    int deleteRoutine(Integer routineId);
 }

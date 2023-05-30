@@ -40,14 +40,30 @@ public class RoutineService {
     }
 
     public RespBean addRoutineForUser(Routine routine) {
-        return RespBean.ok("add faked");
+        int ownerId = LoginInterceptor.threadLocalUserId.get();
+        routine.setRoutineOwner(ownerId);
+        int i = routineMapper.addRoutine(routine);
+        if (i>0)
+            return RespBean.ok("添加新惯例成功");
+        else
+            return RespBean.error("添加失败了");
     }
 
     public RespBean updateRoutineForUser(Routine routine) {
-        return RespBean.ok("update faked");
+        int ownerId = LoginInterceptor.threadLocalUserId.get();
+        routine.setRoutineOwner(ownerId);
+        int i = routineMapper.updateRoutine(routine);
+        if (i>0)
+            return RespBean.ok("更新新惯例成功");
+        else
+            return RespBean.error("更新失败了");
     }
 
     public RespBean deleteRoutineById(Integer routineId) {
-        return RespBean.ok("delete faked");
+        int i = routineMapper.deleteRoutine(routineId);
+        if (i>0)
+            return RespBean.ok("更新新惯例成功");
+        else
+            return RespBean.error("更新失败了");
     }
 }

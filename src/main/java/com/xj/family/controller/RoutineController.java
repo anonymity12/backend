@@ -21,14 +21,17 @@ public class RoutineController {
     }
     @PostMapping("/addRoutine")
     public RespBean addRoutine(@RequestBody Routine routine) {
+        System.out.println("adding routine is: " + routine);
         return routineService.addRoutineForUser(routine);
     }
     @PostMapping("/updateRoutine")
     public RespBean updateRoutine(@RequestBody Routine routine) {
+        System.out.println("updating routine is: " + routine);
         return routineService.updateRoutineForUser(routine);
     }
     @DeleteMapping("/deleteRoutine")
     public RespBean deleteRoutine(@RequestBody Integer routineId) {
+        System.out.println("delete routineId is:" + routineId);
         return routineService.deleteRoutineById(routineId);
     }
 

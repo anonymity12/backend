@@ -11,4 +11,16 @@
     <select id="queryAllUsersRoutines" resultMap="routineResultMap">
         select * from routine
     </select>
+    <select id="queryAllRoutineForUser" resultMap="routineResultMap">
+        select * from routine where owner=#{userId}
+    </select>
+    <insert id="addRoutine" parameterType="com.xj.family.bean.Routine" useGeneratedKeys="true" keyProperty="routineId">
+        insert into routine set content=#{routineContent}, owner=#{routineOwner}
+    </insert>
+    <update id="updateRoutine" parameterType="com.xj.family.bean.Routine">
+        update routine set content = #{routineContent} where id = #{routineId}
+    </update>
+    <delete id="deleteRoutine" parameterType="java.lang.Integer">
+        delete from routine where id = #{routineId}
+    </delete>
 </mapper>
