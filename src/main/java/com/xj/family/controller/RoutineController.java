@@ -29,6 +29,8 @@ public class RoutineController {
         System.out.println("updating routine is: " + routine);
         return routineService.updateRoutineForUser(routine);
     }
+
+    // bug : Integer is not pass to here
     @DeleteMapping("/deleteRoutine")
     public RespBean deleteRoutine(@RequestBody Integer routineId) {
         System.out.println("delete routineId is:" + routineId);

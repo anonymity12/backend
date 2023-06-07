@@ -9,3 +9,11 @@
 
 2023 0530
 - [x] fix login no prompt bug
+- [x] write routine curd code
+- [x] update f, b code of gww in server
+- [x] test routine curd func tomorrow
+
+2023 0607
+
+- [x] i remember the delete func is not work
+- [ ] fix above bug: pass the deleteId
