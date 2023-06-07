@@ -31,8 +31,8 @@ public class RoutineController {
     }
 
     // bug : Integer is not pass to here
-    @DeleteMapping("/deleteRoutine")
-    public RespBean deleteRoutine(@RequestBody Integer routineId) {
+    @DeleteMapping("/deleteRoutine/{id}")
+    public RespBean deleteRoutine(@PathVariable("id") Integer routineId) {
         System.out.println("delete routineId is:" + routineId);
         return routineService.deleteRoutineById(routineId);
     }
