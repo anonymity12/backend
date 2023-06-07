@@ -62,8 +62,8 @@ public class RoutineService {
     public RespBean deleteRoutineById(Integer routineId) {
         int i = routineMapper.deleteRoutine(routineId);
         if (i>0)
-            return RespBean.ok("更新新惯例成功");
+            return RespBean.ok("删除惯例成功");
         else
-            return RespBean.error("更新失败了");
+            return RespBean.error("删除失败了");
     }
 }
