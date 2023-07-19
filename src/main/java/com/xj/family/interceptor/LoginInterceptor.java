@@ -60,7 +60,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         y7u9i | 16
         nh891 | 2
          */
-        System.out.println("\n >>> ready to get loggedUser Id for token" + token);
+        System.out.println("\nLOGIN_INTERCEPTOR: get userId for token: " + token + " from redis now");
         // 2023-04-17 23:09:01 fix error: when no such token, Integer.valueOf(null) will throws:java.lang.NumberFormatException
         String userIdString = redisTemplate.opsForValue().get(token);
         if (userIdString == null) {
@@ -68,7 +68,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
         int userId = Integer.parseInt(userIdString);
-        System.out.println("now, user: " + userId + "is active");
+        System.out.println("user " + userId + " is active");
         // 2023-04-17 23:16:07 fix done;
         threadLocalUserId.set(userId);
         return true;
@@ -83,7 +83,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     //返回json格式错误信息
     private static void setReturn(HttpServletResponse response, Integer code, String msg) throws IOException {
-        System.out.println("error: not login");
+        System.out.print("error: not login! encapsulating return msg......");
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
         httpResponse.setHeader("Access-Control-Allow-Origin", HttpContextUtil.getOrigin());
@@ -93,6 +93,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(RespBean.error(msg));
         httpResponse.getWriter().print(json);
-        System.out.println("error: return will");
+        System.out.println("encapsulated done for frontend");
     }
 }
