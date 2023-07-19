@@ -21,6 +21,7 @@ public class CommitHeatMapController {
   @GetMapping("/getMyCommitHeatMap")
   public RespBean getMyCommitHeatMap() {
     Integer userId = LoginInterceptor.threadLocalUserId.get();
+    System.out.println("COMMIT_VIEW_Controller: see user: " + userId);
     List<CommitRedisView> commits = commitHeatMapService.getMyCommitHeatMap(userId);
     return RespBean.ok("got all your commits heatmap: ", commits);
   }

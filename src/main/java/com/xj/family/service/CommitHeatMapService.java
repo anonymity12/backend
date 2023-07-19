@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 // basic of service
@@ -23,8 +22,8 @@ public class CommitHeatMapService {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         for (CommitDBView view: dbViews){
             CommitRedisView redisView = new CommitRedisView();
-            redisView.setSimplifiedDateString(formatter.format(view.getDate()));
-            redisView.setCount(view.getCount());
+            redisView.setSimplifiedDateString(formatter.format(view.getCommitDate()));
+            redisView.setCount(view.getCommitCount());
             redisViews.add(redisView);
         }
         System.out.println("SERVICE: demo redis commit view: " + redisViews.get(0));

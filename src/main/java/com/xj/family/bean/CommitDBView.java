@@ -3,30 +3,30 @@ package com.xj.family.bean;
 import java.util.Date;
 
 public class CommitDBView {
-    Date date;
-    Integer count;
+    Date commitDate;
+    Integer commitCount;
 
-    public Date getDate() {
-        return date;
+    public Date getCommitDate() {
+        return commitDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCommitDate(Date commitDate) {
+        this.commitDate = commitDate;
     }
 
-    public Integer getCount() {
-        return count;
+    public Integer getCommitCount() {
+        return commitCount;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setCommitCount(Integer commitCount) {
+        this.commitCount = commitCount;
     }
 
     @Override
     public String toString() {
         return "CommitDBView{" +
-                "date=" + date +
-                ", count=" + count +
+                "date=" + commitDate +
+                ", count=" + commitCount +
                 '}';
     }
 }
