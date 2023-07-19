@@ -4,6 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xj.family.mapper.CommitHeatMapMapper">
     <select id="calcCommitForOnePerson">
-        select count(*) from task where ownerId=#{userId} group by date;
+        select DATE(edited), count(*) from task where owner=16 and status=2 group by DATE(edited);
     </select>
 </mapper>

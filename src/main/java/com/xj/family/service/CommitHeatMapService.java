@@ -16,13 +16,16 @@ public class CommitHeatMapService {
     CommitHeatMapMapper commitHeatMapMapper;
     public List<CommitRedisView> getMyCommitHeatMap(Integer userId) {
         List<CommitDBView> dbViews = commitHeatMapMapper.calcCommitForOnePerson(userId);
+        System.out.println("MAPPER: demo db commit view: " + dbViews.get(0));
         List<CommitRedisView> redisViews = new ArrayList<CommitRedisView>();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         for (CommitDBView view: dbViews){
             CommitRedisView redisView = new CommitRedisView();
             redisView.setSimplifiedDateString(formatter.format(view.getDate()));
+            redisView.setCount(view.getCount());
             redisViews.add(redisView);
         }
+        System.out.println("SERVICE: demo redis commit view: " + redisViews.get(0));
         return redisViews;
     }
 }
