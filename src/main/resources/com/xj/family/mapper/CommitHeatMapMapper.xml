@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xj.family.mapper.CommitHeatMapMapper">
-    <select id="calcCommitForOnePerson">
+    <select id="calcCommitForOnePerson" resultType="com.xj.family.bean.CommitDBView">
         select DATE(edited), count(*) from task where owner=16 and status=2 group by DATE(edited);
     </select>
 </mapper>
