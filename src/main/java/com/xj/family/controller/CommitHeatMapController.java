@@ -14,7 +14,7 @@ import java.util.List;
 // basic framework of Commit Heat Map Controller
 @CrossOrigin
 @RestController
-@RequestMapping("/testapi/heatmap")
+@RequestMapping("/api/heatmap")
 public class CommitHeatMapController {
   @Autowired
   CommitHeatMapService commitHeatMapService;
