@@ -4,6 +4,7 @@ import com.xj.family.bean.CommitDBView;
 import com.xj.family.bean.CommitRedisView;
 import com.xj.family.mapper.CommitHeatMapMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 // basic of service
+@Service
 public class CommitHeatMapService {
     @Autowired
     CommitHeatMapMapper commitHeatMapMapper;
