@@ -1,5 +1,11 @@
 family backend
 
+## how to test these api endpoint
+
+to 
+
+https://hoppscotch.io/
+
 ## api endpoints for butterfly 
 
 ### get someone flies
