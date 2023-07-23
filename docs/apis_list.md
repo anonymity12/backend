@@ -92,3 +92,8 @@ return:
     ...
 ]
 ```
+
+
+## commit heatmap
+
+http://101.43.166.211:8081/api/heatmap/getMyCommitHeatMap
