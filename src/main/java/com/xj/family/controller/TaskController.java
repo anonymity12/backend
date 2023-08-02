@@ -3,6 +3,7 @@ package com.xj.family.controller;
 import com.xj.family.bean.RespBean;
 import com.xj.family.bean.Task;
 import com.xj.family.bean.dto.TaskDto;
+import com.xj.family.interceptor.LoginInterceptor;
 import com.xj.family.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +23,13 @@ public class TaskController {
     }
 
     @PostMapping("/add")
-    public RespBean addTask(@RequestParam String title) {
-        System.out.println("TaskController: addTask: title: " + title);
+    public RespBean addTask(@RequestParam String title, @RequestParam Integer matrix) {
+        System.out.println("TaskController: addTask: title: " + title + " matrix: " + matrix);
+        int owner = LoginInterceptor.threadLocalUserId.get();
         Task task = new Task();
+        task.setOwner(owner);
         task.setTitle(title);
+        task.setMatrix(matrix);
         return taskService.addTask(task);
     }
     @PostMapping("/cancel")

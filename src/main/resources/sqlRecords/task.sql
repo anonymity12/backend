@@ -6,6 +6,6 @@ CREATE TABLE `task` (
  `edited` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '任务最近编辑时间',
  `owner` int(11) NOT NULL DEFAULT '1' COMMENT '任务属主',
  `matrix` int(11) NOT NULL DEFAULT '2' COMMENT '任务象限;default:2',
- `fly_id` int(11) NOT NULL COMMENT '对应的蝴蝶id',
+ `fly_id` int(11) DEFAULT '45' COMMENT '对应的蝴蝶id.逐渐会废弃',
  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1504 DEFAULT CHARSET=utf8mb4
+) ENGINE=InnoDB AUTO_INCREMENT=2434 DEFAULT CHARSET=utf8mb4

@@ -29,18 +29,6 @@ public class TaskService {
     }
 
     public RespBean addTask(Task task) {
-
-        int owner = LoginInterceptor.threadLocalUserId.get();
-        FlyItem flyItem = new FlyItem();
-        flyItem.setOwner(owner);
-        flyItem.setName(taskFlyName);
-        flyItem.setEvaluate(task.getTitle());
-        flyItem.setStatus(0);
-        flyItemMapper.addForTaskCreated(flyItem);
-        long flyId = flyItem.getId();
-
-        task.setOwner(owner);
-        task.setFlyId(flyId);
         int ret = taskMapper.addTask(task);
         if (ret == 1) {
             return RespBean.ok("添加任务OK");
