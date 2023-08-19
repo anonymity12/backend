@@ -51,6 +51,14 @@ public class TaskService {
 
     public RespBean doneTask(TaskDto dto) {
         taskMapper.toggleFly(dto.getStatus(), dto.getId());
+        /*
+        int finishStatus = dto.getStatus();
+        if (finishStatus == 1) { // undone
+            cardMapper.unRefineCard(userCurrentCardId);
+        } else if (finishStatus == 2) { // done task
+            cardMapper.refineCard(userCurrentCardId);
+        }
+         */
         int ret = taskMapper.doneTask(dto);
         if (ret == 1) {
             return RespBean.ok("完成任务啦😄");

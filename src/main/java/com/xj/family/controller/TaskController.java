@@ -36,6 +36,8 @@ public class TaskController {
     public RespBean cancelTask(@RequestParam int taskId) {
         return taskService.cancelTask(taskId);
     }
+    // no matter user done or undone a task, they all call this method. in the request body, we know the status of
+    // the task(status=1: undone; status=2: done)
     @PostMapping("/done")
     public RespBean doneTask(@RequestBody TaskDto dto) {
         return taskService.doneTask(dto);
