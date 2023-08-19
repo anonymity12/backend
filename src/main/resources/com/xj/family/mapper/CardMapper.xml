@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xj.family.mapper.CardMapper">
+    <select id="calcCommitForOnePerson" resultType="com.xj.family.bean.CommitDBView">
+        select DATE(edited) commit_date, count(*) commit_count from task where owner=#{userId} and status=2 group by DATE(edited);
+    </select>
+</mapper>
