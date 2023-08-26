@@ -24,6 +24,10 @@ public class CardService {
     public int createCardInstance(int userId, int cardTemplateId) {
         return cardInstanceMapper.createCardInstance(userId, cardTemplateId);
     }
+    public int tradeCard(int cardInstanceId, int from, int to) {
+
+        return 0;
+    }
 
     public List<CardVo> getAllMyCards(int userId) {
         List<CardInstance> cardInstances = cardInstanceMapper.listUserCards(userId);
@@ -41,5 +45,23 @@ public class CardService {
             cardVos.add(cardVo);
         });
         return cardVos;
+    }
+
+    public int setMainCard(Integer owner, int newMainCardId) {
+        cardInstanceMapper.clearUserMainCard(owner);
+        cardInstanceMapper.setUserMainCard(newMainCardId);
+        return 0;
+    }
+
+    public int upgradeCard(Integer owner) {
+        int cardInstanceId = cardInstanceMapper.getUserMainCard(owner);
+        cardInstanceMapper.upgradeCard(cardInstanceId);
+        return 0;
+    }
+
+    public int downgradeCard(Integer owner) {
+        int cardInstanceId = cardInstanceMapper.getUserMainCard(owner);
+        cardInstanceMapper.downgradeCard(cardInstanceId);
+        return 0;
     }
 }

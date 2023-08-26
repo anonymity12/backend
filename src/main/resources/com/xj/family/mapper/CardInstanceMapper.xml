@@ -12,4 +12,10 @@
     <select id="listUserCards" parameterType="java.lang.Integer">
         select template_id, hard_work_rate, status from card_instance where owner=#{userId};
     </select>
+    <update id="clearUserMainCard" parameterType="java.lang.Integer">
+        update card_instance set status=0 where owner=#{owner} and status=1;
+    </update>
+    <update id="setUserMainCard">
+        update card_instance set status=1 where id=#{cardInstanceId};
+    </update>
 </mapper>

@@ -1,6 +1,8 @@
 package com.xj.family.mapper;
 
 import com.xj.family.bean.CardInstance;
+import org.apache.ibatis.annotations.Param;
+
 
 import java.util.List;
 
@@ -20,4 +22,11 @@ public interface CardInstanceMapper {
     int upgradeCard(int cardId); // called when user finish a task
     int downgradeCard(int cardId); // called when user undone a task
     int deleteCardInstance(int cardId);
+
+    int clearUserMainCard(Integer owner);
+
+    int getUserMainCard(@Param("owner")Integer owner);
+
+    int setUserMainCard(@Param("cardInstanceId") int cardInstanceId);
+
 }
