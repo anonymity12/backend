@@ -1,6 +1,7 @@
 package com.xj.family.mapper;
 
 import com.xj.family.bean.CardInstance;
+import com.xj.family.bean.CardTemplate;
 import org.apache.ibatis.annotations.Param;
 
 
@@ -25,8 +26,13 @@ public interface CardInstanceMapper {
 
     int clearUserMainCard(Integer owner);
 
-    int getUserMainCard(@Param("owner")Integer owner);
+    CardInstance getUserMainCard(@Param("owner")Integer owner);
 
     int setUserMainCard(@Param("cardInstanceId") int cardInstanceId);
 
+    int getCardOwner(int cardInstanceId);
+
+    int setCardOwner(int cardInstanceId, int cardTo);
+
+    CardTemplate getCardTemplate(int cardInstanceId);
 }

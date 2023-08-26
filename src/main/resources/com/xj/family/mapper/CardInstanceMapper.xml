@@ -18,4 +18,24 @@
     <update id="setUserMainCard">
         update card_instance set status=1 where id=#{cardInstanceId};
     </update>
+<!--    todo createCardInstance-->
+    <select id="readCardInstance" resultType="com.xj.family.bean.CardInstance">
+        select * from card_instance where id=#{cardInstanceId}
+    </select>
+    <select id="getUserMainCard" resultType="com.xj.family.bean.CardInstance">
+        select id, template_id, hard_work_rate, owner, status
+        from card_instance
+        where owner=#{owner} and status=1;
+    </select>
+    <select id="getCardOwner" parameterType="java.lang.Integer">
+        select owner from card_instance where id=#{cardInstanceId};
+    </select>
+    <update id="setCardOwner">
+        update card_instance set owner=#{cardTo} where id=#{cardInstanceId};
+    </update>
+    <select id="getCardTemplate" resultType="com.xj.family.bean.CardTemplate">
+        select id, name, series, image_url, base_price
+        from card_template
+        where id=(select template_id from card_instance where id=#{cardInstanceId});
+    </select>
 </mapper>

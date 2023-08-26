@@ -26,14 +26,16 @@ public class CardController {
     // user buy the basic shop card with his/her gold
     @PostMapping("/buyNewCard")
     public RespBean buyNewCard(@RequestParam int cardTemplateId) {
+
         return null;
     }
 
     // user buy other user's card with his/her gold
     @PostMapping("/tradeCard")
-    public RespBean tradeCard(@RequestParam int cardInstanceId, @RequestParam int to) {
-        Integer from = LoginInterceptor.threadLocalUserId.get();
-        cardService.tradeCard(cardInstanceId, from, to);
+    public RespBean tradeCard(@RequestParam int cardInstanceId) {
+        int cardOwner = cardService.getCardOwner(cardInstanceId);
+        Integer me = LoginInterceptor.threadLocalUserId.get();
+        cardService.tradeCard(cardInstanceId, cardOwner, me);
         return null;
     }
 

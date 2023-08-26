@@ -8,4 +8,7 @@
         from card_template
         where id=#{templateId};
     </select>
+    <select id="getCardTemplateBasePrice">
+        select base_price from card_template where id=#{cardTemplateId};
+    </select>
 </mapper>
