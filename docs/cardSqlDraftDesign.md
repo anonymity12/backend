@@ -30,8 +30,6 @@ CREATE TABLE IF NOT EXISTS `card_instance` (
     // = points = each time the user finish a task(or undone a task), the point++(--)
     // so we might have a function like:
     // taskService.doneTask():cardMapper.refineCard():update card_instance set hard_work_rate=hard_work_rate+1 （sql was validated ok)
-  `price` int(11) COMMENT '卡片的实际最终价值',
-    // price = should be calculate by the template_base_price * hard_work_rate
   `owner` int(11) NOT NULL DEFAULT '1' COMMENT '这个卡片当前属于谁', 
     // 卡片后期可以换手，买卖，换主人(only card status in 0 can be trade; 1 means refining, cannot be trade)
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '卡片的状态0:入库，1:正在炼制' 

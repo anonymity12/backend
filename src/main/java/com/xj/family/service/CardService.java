@@ -19,6 +19,12 @@ public class CardService {
     @Autowired
     CardTemplateMapper cardTemplateMapper;
 
+    // user might buy a new card in the shop, then we in service to create a new card instance for he/she
+    // so in controller, a method called buyNewCard() might call this method
+    public int createCardInstance(int userId, int cardTemplateId) {
+        return cardInstanceMapper.createCardInstance(userId, cardTemplateId);
+    }
+
     public List<CardVo> getAllMyCards(int userId) {
         List<CardInstance> cardInstances = cardInstanceMapper.listUserCards(userId);
         List<CardVo> cardVos = new ArrayList<>();
