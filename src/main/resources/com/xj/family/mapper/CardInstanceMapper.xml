@@ -18,7 +18,10 @@
     <update id="setUserMainCard">
         update card_instance set status=1 where id=#{cardInstanceId};
     </update>
-<!--    todo createCardInstance-->
+    <insert id="createCardInstance">
+        insert into card_instance (template_id, hard_work_rate, owner, status)
+        values (#{templateId}, 0, #{owner}, 0);
+    </insert>
     <select id="readCardInstance" resultType="com.xj.family.bean.CardInstance">
         select * from card_instance where id=#{cardInstanceId}
     </select>

@@ -26,7 +26,8 @@ public class CardController {
     // user buy the basic shop card with his/her gold
     @PostMapping("/buyNewCard")
     public RespBean buyNewCard(@RequestParam int cardTemplateId) {
-
+        Integer owner = LoginInterceptor.threadLocalUserId.get();
+        cardService.createCardInstance(owner, cardTemplateId);
         return null;
     }
 
