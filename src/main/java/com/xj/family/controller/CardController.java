@@ -1,10 +1,13 @@
 package com.xj.family.controller;
 
 import com.xj.family.bean.RespBean;
+import com.xj.family.bean.vo.CardVo;
 import com.xj.family.interceptor.LoginInterceptor;
 import com.xj.family.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /*
 user can use such controller to:
@@ -22,6 +25,13 @@ user can use such controller to:
 public class CardController {
     @Autowired
     CardService cardService;
+
+    @GetMapping("/listAllMyCard")
+    public RespBean listAllMyCard() {
+        Integer owner = LoginInterceptor.threadLocalUserId.get();
+        List<CardVo> allMyCards = cardService.getAllMyCards(owner);
+        return RespBean.ok("OK", allMyCards);
+    }
 
     // user buy the basic shop card with his/her gold
     @PostMapping("/buyNewCard")
