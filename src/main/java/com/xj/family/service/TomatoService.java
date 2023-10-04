@@ -9,6 +9,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+/**
+ * 在redis里面我们存储的key是 mysql 的 userID + 类型
+ * 比如 userId:alltime
+ * 或者 userId:2023-09-01
+ * 实际的key案例是：
+ *  16:alltime
+ *  23:2023-09-01
+ * 或许有一天，我们可以把userId:2023-09-01这种给替换为：userId:today
+ */
 @Service
 public class TomatoService {
     public static final String ALL_TIME_KEY = "alltime";
@@ -44,7 +53,7 @@ public class TomatoService {
         String todayCountsKey = String.valueOf(userId) + ":" + formattedToday;
         Long incrementResult2 = redisTemplate.opsForValue().increment(todayCountsKey);
 
-        return (int)(incrementResult1 + incrementResult2);// should greater than 0 when success
+        return (int)(incrementResult1 + incrementResult2);// greater than 0 when success
     }
 
 }
