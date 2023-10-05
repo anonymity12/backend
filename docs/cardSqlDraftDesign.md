@@ -48,10 +48,10 @@ sold it.
 so here is my new thought: 
 1) users can buy the card at shop at arbitrary time
 2) after he/she buy the card, the card goes to his/her card cabinet
-3) the card cabinet contains all cards user own
-4) the one card is being refining is paint will light edge, others are just normal card form
+3) the card cabinet contains all cards that user own
+4) the one card is being refining is paint with light edge, others are just normal card form
 5) when user click one card, here is a dialog(button1: select: user can set this as primary refining card; button2: sold)
-6) maybe we can make a card plaza(users buy and sold their card)
+6) maybe we can make a card plaza/market(users buy and sold their card)
 
 so based on the new thought 0819, I think that: we need a center shop.
 shop has many series card, aka many template card.
@@ -90,3 +90,49 @@ CREATE TABLE IF NOT EXISTS `user_card_series_tbl` (
 # final pic explain
 
 ![2023-08-19-14-24-32](https://picgorepo.oss-cn-beijing.aliyuncs.com/2023-08-19-14-24-32.png)
+
+# coding part
+
+1005
+
+do we need a cardShopController?
+funcs:
+    sellCard
+    buyCard
+
+NO,why? since only two func in the shopController, then we don't need the controller
+
+what we need, is a mySql shop table
+and a user_cabinet tbl
+
+```sql
+create table if not exists `shop` (
+    
+) engine=InnoDB default charset=utf8mb4;
+```
+
+```sql 
+create table if not exists `user_cabinet` (
+    id int(11) not null,
+    user_id int,
+    card_list json default null,
+    primary key (id)
+) engine=InnoDB default charset=uft8mb4;
+```
+
+guess we can use JSON in mysql5.7 and later, see: https://dev.mysql.com/doc/refman/8.0/en/json.html#json-values
+
+## 查询我的卡片
+
+getAllMyCards
+
+查询一个用户拥有哪些卡片，实际上不是从用户表里面搜索，而是从卡片表里搜索
+这是数据库的一个反人类之处，但是对于计算世界来说，非常合理
+具体做法是: select id from card_instance where owner = #{userId}
+
+## 决定我首要卡片
+
+其实就是设定一个 card instance 的 status （从0 到1）
+并且记得把之前的 primary card 的状态 从1到0；
+实际上 先做2，再做1；
+这里可以再借鉴一下gulimall的@Transactional注解

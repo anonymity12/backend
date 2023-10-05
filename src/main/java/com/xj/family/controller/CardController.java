@@ -41,7 +41,7 @@ public class CardController {
         return null;
     }
 
-    // user buy other user's card with his/her gold
+    // user buy other user's card with his/her gold, in the plaza/market
     @PostMapping("/tradeCard")
     public RespBean tradeCard(@RequestParam int cardInstanceId) {
         int cardOwner = cardService.getCardOwner(cardInstanceId);
