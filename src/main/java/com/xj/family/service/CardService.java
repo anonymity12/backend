@@ -55,14 +55,14 @@ public class CardService {
 
     public int upgradeCard(Integer owner) {
         int cardInstanceId = cardInstanceMapper.getUserMainCard(owner).getId();
-        cardInstanceMapper.upgradeCard(cardInstanceId);
-        return 0;
+        int ret = cardInstanceMapper.upgradeCard(cardInstanceId);
+        return ret-1;
     }
 
     public int downgradeCard(Integer owner) {
         int cardInstanceId = cardInstanceMapper.getUserMainCard(owner).getId();
-        cardInstanceMapper.downgradeCard(cardInstanceId);
-        return 0;
+        int ret = cardInstanceMapper.downgradeCard(cardInstanceId);
+        return ret-1;
     }
 
     public int getCardOwner(int cardInstanceId) {

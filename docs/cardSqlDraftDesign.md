@@ -128,11 +128,37 @@ getAllMyCards
 
 查询一个用户拥有哪些卡片，实际上不是从用户表里面搜索，而是从卡片表里搜索
 这是数据库的一个反人类之处，但是对于计算世界来说，非常合理
-具体做法是: select id from card_instance where owner = #{userId}
+具体做法是: `select id from card_instance where owner = #{userId}`
 
 ## 决定我首要卡片
+
+`determineMainCard()`
 
 其实就是设定一个 card instance 的 status （从0 到1）
 并且记得把之前的 primary card 的状态 从1到0；
 实际上 先做2，再做1；
 这里可以再借鉴一下gulimall的@Transactional注解
+
+## 修改：升级卡片
+
+在增加交易功能前，或许我们更多应该关注基本的修改操作；
+在关注修改操作的时候，我们更多关注 升级 的操作；
+user would like their card to be upgrade each time they finish a task
+and we think, for now, users would not downgrade their card on purpose.
+maybe later the cardSystem will have a sub-punishment system, then user
+would see that their cards are downgraded(downgrade by system)
+
+so, we focus on the aim: `upgradeCard(ownerId)`
+
+
+
+
+
+
+
+
+
+
+
+
+
