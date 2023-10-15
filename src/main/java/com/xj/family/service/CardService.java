@@ -27,6 +27,16 @@ public class CardService {
     public int createCardInstance(int userId, int cardTemplateId) {
         return cardInstanceMapper.createCardInstance(userId, cardTemplateId);
     }
+    public CardVo getOneCard(int cardInstanceId) {
+        CardInstance cardInstance = cardInstanceMapper.readCardInstance(cardInstanceId);
+        CardVo cardVo = new CardVo();
+        BeanUtils.copyProperties(cardInstance, cardVo);
+        CardTemplate cardTemplate = cardTemplateMapper.readTemplate(cardVo.getTemplateId());
+        cardVo.setImageUrl(cardTemplate.getImageUrl());
+        cardVo.setBasePrice(cardTemplate.getBasePrice());
+        cardVo.setFinalPrice(cardVo.calcFinalPrice());
+        return cardVo;
+    }
 
 
     public List<CardVo> getAllMyCards(int userId) {
@@ -86,5 +96,9 @@ public class CardService {
         goldMapper.addGoldForUser(cardFrom, price);
         cardInstanceMapper.setCardOwner(cardInstanceId, cardTo);
         return 0;
+    }
+
+    public CardVo getMyMainCard(Integer owner) {
+        return null;
     }
 }

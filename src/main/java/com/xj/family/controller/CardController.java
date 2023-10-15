@@ -33,6 +33,14 @@ public class CardController {
         return RespBean.ok("OK", allMyCards);
     }
 
+    @GetMapping("/getMyMainCard")
+    public RespBean getMyMainCard() {
+        Integer owner = LoginInterceptor.threadLocalUserId.get();
+        CardVo card = cardService.getMyMainCard(owner);
+        return RespBean.ok("OK", card);
+    }
+
+
     // user buy the basic shop card with his/her gold
     @PostMapping("/buyNewCard")
     public RespBean buyNewCard(@RequestParam int cardTemplateId) {
