@@ -6,6 +6,7 @@ public class CardTemplate {
     int series;
     String imageUrl;
     int basePrice;
+    String desc;
 
     public int getId() {
         return id;
@@ -45,5 +46,13 @@ public class CardTemplate {
 
     public void setBasePrice(int basePrice) {
         this.basePrice = basePrice;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }
