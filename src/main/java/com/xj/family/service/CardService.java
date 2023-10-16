@@ -99,6 +99,11 @@ public class CardService {
     }
 
     public CardVo getMyMainCard(Integer owner) {
-        return null;
+        CardInstance i = cardInstanceMapper.getUserMainCard(owner);
+        CardVo cardVo = new CardVo();
+        BeanUtils.copyProperties(i, cardVo);
+        CardTemplate cardTemplate = cardTemplateMapper.readTemplate(i.getId());
+        cardVo.setDesc(cardTemplate.getDesc());
+        return cardVo;
     }
 }
