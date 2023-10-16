@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `card_template` (
   `series` int(11) DEFAULT 0 COMMENT '这个卡片属于什么系列',
   `image_url` varchar(255) DEFAULT NULL,
   `base_price` int(11) NOT NULL DEFAULT 100 COMMENT '卡片的基础价格'
+  `desc` varchar(255) DEFAULT '一张价值连城的卡片，前提是经过了你的努力' COMMENT '卡片描述'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `card_instance` (
