@@ -9,10 +9,17 @@ public class CardVo {
     int templateId;
     String name;
     int series;
+    String desc;
     String imageUrl; // should derive from its template
     int basePrice; // should derive from its template
-
     int finalPrice; // 卡片的实际最终价值=base_price * 1.05^{hard_work_rate}
+
+    public String getDesc() {
+        return desc;
+    }
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
     public int getId() {
         return id;
