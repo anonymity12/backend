@@ -14,7 +14,7 @@ public interface CardInstanceMapper {
      */
     int tradeCard(int fromUserId, int toUserId);
     List<CardInstance> listUserCards(int userId); // called when one user want to see all his/her cards
-    int replaceCardToRefine(int newCardId, int userId); // called when someone decide a card to refine
+    int switchMainCard(int newCardId, int userId); // called when someone decide a card to refine
 
 
     // ----------------------- basic crud methods -----------------------
