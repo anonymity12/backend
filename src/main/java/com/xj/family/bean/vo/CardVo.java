@@ -7,11 +7,12 @@ public class CardVo {
     Boolean status;
 
     int templateId;
-    String name;
-    int series;
-    String desc;
+    String name; // should derive from its template
+    int series; // should derive from its template
     String imageUrl; // should derive from its template
     int basePrice; // should derive from its template
+    String desc; // should derive from its template
+
     int finalPrice; // 卡片的实际最终价值=base_price * 1.05^{hard_work_rate}
 
     public String getDesc() {
@@ -29,8 +30,8 @@ public class CardVo {
         this.id = id;
     }
 
-    public int calcFinalPrice() {
-        return (int) (basePrice * Math.pow(1.05, this.hardWorkRate));
+    public void calcFinalPrice() {
+        this.finalPrice = (int) (basePrice * Math.pow(1.05, this.hardWorkRate));
     }
 
     public int getSeries() {
