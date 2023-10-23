@@ -34,7 +34,7 @@ public class CardService {
         CardTemplate cardTemplate = cardTemplateMapper.readTemplate(cardVo.getTemplateId());
         cardVo.setImageUrl(cardTemplate.getImageUrl());
         cardVo.setBasePrice(cardTemplate.getBasePrice());
-        cardVo.setFinalPrice(cardVo.calcFinalPrice());
+        cardVo.calcFinalPrice();
         return cardVo;
     }
 
