@@ -32,3 +32,5 @@ ALTER TABLE `card_series` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 ---insert part
 
 INSERT INTO `xj`.`card_template` (`name`, `series`, `image_url`, `base_price`, `desc`) VALUES ('快乐熊', '1', 'https://picgorepo.oss-cn-beijing.aliyuncs.com/Happy_cf0.png', '250', '越努力越快乐的小熊熊')
+insert into xj.card_series (`name`, `desc`) values ('日常动物', '一些可爱的现代动物')
+insert into xj.card_instance (`template_id`, `owner`, `status`) values ('1', '16', '1')
