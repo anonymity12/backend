@@ -27,3 +27,8 @@ CREATE TABLE `card_instance` (
 ALTER TABLE `card_instance` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `card_template` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `card_series` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
+
+
+---insert part
+
+INSERT INTO `xj`.`card_template` (`name`, `series`, `image_url`, `base_price`, `desc`) VALUES ('快乐熊', '1', 'https://picgorepo.oss-cn-beijing.aliyuncs.com/Happy_cf0.png', '250', '越努力越快乐的小熊熊')
