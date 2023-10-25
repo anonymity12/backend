@@ -40,8 +40,10 @@ public class CardService {
 
 
     public List<CardVo> getAllMyCards(int userId) {
+        System.out.println("TTAG: <><><><>");
+
         List<CardInstance> cardInstances = cardInstanceMapper.listUserCards(userId);
-        System.out.println(cardInstances);
+        System.out.println("TTAG: " + cardInstances);
         cardInstances.forEach(System.out::println);
         List<CardVo> cardVos = new ArrayList<>();
         cardInstances.forEach(i -> {
