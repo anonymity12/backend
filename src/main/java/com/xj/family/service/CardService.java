@@ -41,6 +41,8 @@ public class CardService {
 
     public List<CardVo> getAllMyCards(int userId) {
         List<CardInstance> cardInstances = cardInstanceMapper.listUserCards(userId);
+        System.out.println(cardInstances);
+        cardInstances.forEach(System.out::println);
         List<CardVo> cardVos = new ArrayList<>();
         cardInstances.forEach(i -> {
             CardVo cardVo = new CardVo();

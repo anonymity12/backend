@@ -49,4 +49,15 @@ public class CardInstance {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "CardInstance{" +
+                "id=" + id +
+                ", templateId=" + templateId +
+                ", hardWorkRate=" + hardWorkRate +
+                ", owner=" + owner +
+                ", status=" + status +
+                '}';
+    }
 }
