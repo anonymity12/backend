@@ -8,3 +8,8 @@ I code for family
 - mybatis
 - redis
 
+# how to start this app
+
+## redis start
+
+`redis-server  &`  
