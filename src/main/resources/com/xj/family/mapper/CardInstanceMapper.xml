@@ -10,7 +10,7 @@
         update card_instance set hard_work_rate=hard_work_rate-1 where id=#{cardId};
     </update>
     <select id="listUserCards" parameterType="java.lang.Integer" resultType="com.xj.family.bean.CardInstance">
-        select template_id, hard_work_rate, status from card_instance where owner=#{userId};
+        select template_id, hard_work_rate, status, owner from card_instance where owner=#{userId};
     </select>
     <update id="clearUserMainCard" parameterType="java.lang.Integer">
         update card_instance set status=0 where owner=#{owner} and status=1;

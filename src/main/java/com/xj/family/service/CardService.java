@@ -49,7 +49,7 @@ public class CardService {
         cardInstances.forEach(i -> {
             CardVo cardVo = new CardVo();
             BeanUtils.copyProperties(i, cardVo);
-            CardTemplate cardTemplate = cardTemplateMapper.readTemplate(i.getId());
+            CardTemplate cardTemplate = cardTemplateMapper.readTemplate(i.getTemplateId());
             cardVo.setName(cardTemplate.getName());
             cardVo.setSeries(cardTemplate.getSeries());
             cardVo.setImageUrl(cardTemplate.getImageUrl());
