@@ -43,7 +43,7 @@ public class CardService {
         CardInstance cardInstance = cardInstanceMapper.getUserMainCard(owner);
         CardVo cardVo = new CardVo();
         BeanUtils.copyProperties(cardInstance, cardVo);
-        CardTemplate cardTemplate = cardTemplateMapper.readTemplate(cardInstance.getId());
+        CardTemplate cardTemplate = cardTemplateMapper.readTemplate(cardInstance.getTemplateId());
         BeanUtils.copyProperties(cardTemplate, cardVo);
         cardVo.calcFinalPrice();
         return cardVo;
