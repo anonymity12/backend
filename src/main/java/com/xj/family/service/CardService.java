@@ -22,23 +22,6 @@ public class CardService {
     @Autowired
     GoldMapper goldMapper;
 
-    // user might buy a new card in the shop, then we in service to create a new card instance for he/she
-    // so in controller, a method called buyNewCard() might call this method
-    public int createCardInstance(int userId, int cardTemplateId) {
-        return cardInstanceMapper.createCardInstance(userId, cardTemplateId);
-    }
-    public CardVo getOneCard(int cardInstanceId) {
-        CardInstance cardInstance = cardInstanceMapper.readCardInstance(cardInstanceId);
-        CardVo cardVo = new CardVo();
-        BeanUtils.copyProperties(cardInstance, cardVo);
-        CardTemplate cardTemplate = cardTemplateMapper.readTemplate(cardVo.getTemplateId());
-        cardVo.setImageUrl(cardTemplate.getImageUrl());
-        cardVo.setBasePrice(cardTemplate.getBasePrice());
-        cardVo.calcFinalPrice();
-        return cardVo;
-    }
-
-
     public List<CardVo> getAllMyCards(int userId) {
         List<CardInstance> cardInstances = cardInstanceMapper.listUserCards(userId);
         List<CardVo> cardVos = new ArrayList<>();
@@ -56,23 +39,45 @@ public class CardService {
         });
         return cardVos;
     }
-
+    public CardVo getMyMainCard(Integer owner) {
+        CardInstance cardInstance = cardInstanceMapper.getUserMainCard(owner);
+        CardVo cardVo = new CardVo();
+        BeanUtils.copyProperties(cardInstance, cardVo);
+        CardTemplate cardTemplate = cardTemplateMapper.readTemplate(cardInstance.getId());
+        BeanUtils.copyProperties(cardTemplate, cardVo);
+        cardVo.calcFinalPrice();
+        return cardVo;
+    }
+    public int upgradeCard(Integer owner) {
+        int cardInstanceId = cardInstanceMapper.getUserMainCard(owner).getId();
+        int ret = cardInstanceMapper.upgradeCard(cardInstanceId);
+        return ret-1;
+    }
+    public int downgradeCard(Integer owner) {
+        int cardInstanceId = cardInstanceMapper.getUserMainCard(owner).getId();
+        int ret = cardInstanceMapper.downgradeCard(cardInstanceId);
+        return ret-1;
+    }
     public int setMainCard(Integer owner, int newMainCardId) {
         cardInstanceMapper.clearUserMainCard(owner);
         cardInstanceMapper.setUserMainCard(newMainCardId);
         return 0;
     }
 
-    public int upgradeCard(Integer owner) {
-        int cardInstanceId = cardInstanceMapper.getUserMainCard(owner).getId();
-        int ret = cardInstanceMapper.upgradeCard(cardInstanceId);
-        return ret-1;
+    // user might buy a new card in the shop, then we in service to create a new card instance for he/she
+    // so in controller, a method called buyNewCard() might call this method
+    public int createCardInstance(int userId, int cardTemplateId) {
+        return cardInstanceMapper.createCardInstance(userId, cardTemplateId);
     }
-
-    public int downgradeCard(Integer owner) {
-        int cardInstanceId = cardInstanceMapper.getUserMainCard(owner).getId();
-        int ret = cardInstanceMapper.downgradeCard(cardInstanceId);
-        return ret-1;
+    public CardVo getOneCard(int cardInstanceId) {
+        CardInstance cardInstance = cardInstanceMapper.readCardInstance(cardInstanceId);
+        CardVo cardVo = new CardVo();
+        BeanUtils.copyProperties(cardInstance, cardVo);
+        CardTemplate cardTemplate = cardTemplateMapper.readTemplate(cardVo.getTemplateId());
+        cardVo.setImageUrl(cardTemplate.getImageUrl());
+        cardVo.setBasePrice(cardTemplate.getBasePrice());
+        cardVo.calcFinalPrice();
+        return cardVo;
     }
 
     public int getCardOwner(int cardInstanceId) {
@@ -98,13 +103,4 @@ public class CardService {
         return 0;
     }
 
-    public CardVo getMyMainCard(Integer owner) {
-        CardInstance cardInstance = cardInstanceMapper.getUserMainCard(owner);
-        CardVo cardVo = new CardVo();
-        BeanUtils.copyProperties(cardInstance, cardVo);
-        CardTemplate cardTemplate = cardTemplateMapper.readTemplate(cardInstance.getId());
-        BeanUtils.copyProperties(cardTemplate, cardVo);
-        cardVo.calcFinalPrice();
-        return cardVo;
-    }
 }
