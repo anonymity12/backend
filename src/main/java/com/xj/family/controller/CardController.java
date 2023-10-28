@@ -26,6 +26,8 @@ public class CardController {
     @Autowired
     CardService cardService;
 
+    /************************* basic feat: list, query, update ***************************/
+
     @GetMapping("/listAllMyCard")
     public RespBean listAllMyCard() {
         Integer owner = LoginInterceptor.threadLocalUserId.get();
@@ -38,24 +40,31 @@ public class CardController {
         CardVo card = cardService.getMyMainCard(owner);
         return RespBean.ok("OK", card);
     }
-    //
-    @PostMapping("/determineMainCard")
-    public RespBean determineMainCard(@RequestParam int cardInstanceId) {
-        Integer owner = LoginInterceptor.threadLocalUserId.get();
-        cardService.setMainCard(owner, cardInstanceId);
-        return null;
-    }
     @PostMapping("/upgradeCard")
     public RespBean upgradeCard() {
         Integer owner = LoginInterceptor.threadLocalUserId.get();
         cardService.upgradeCard(owner);
         return null;
     }
-
+    // for now 1028, we'll not use this api-endpoint
+    // because it only will be used when punishment is achieved
+    // might achieve at Nov
+    // guess achieve is also a stimulation for gww users
     @PostMapping("/downgradeCard")
     public RespBean downgradeCard(@RequestParam int cardInstanceId) {
         Integer owner = LoginInterceptor.threadLocalUserId.get();
         cardService.downgradeCard(owner);
+        return null;
+    }
+    // for now 1028, we'll not support this feat; we'll support till the shop page
+    // is online, guess is the Nov thing
+    // for now 1028, we manually set the main card for each user
+    // and in Nov, we'll collect more cards, so we can make the shop exist
+    // then: determine main card, or trade card will be good to go
+    @PostMapping("/determineMainCard")
+    public RespBean determineMainCard(@RequestParam int cardInstanceId) {
+        Integer owner = LoginInterceptor.threadLocalUserId.get();
+        cardService.setMainCard(owner, cardInstanceId);
         return null;
     }
 
