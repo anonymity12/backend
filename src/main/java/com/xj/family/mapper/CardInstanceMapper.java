@@ -8,6 +8,12 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface CardInstanceMapper {
+    // ----------------------- basic crud methods -----------------------
+    int createCardInstance(int userId, int cardTemplateId);
+    CardInstance readCardInstance(int cardId);
+    int upgradeCard(int cardId); // called when user finish a task
+    int downgradeCard(int cardId); // called when user undone a task
+    int deleteCardInstance(int cardId);
     // ----------------------- business methods -----------------------
     CardTemplate getCardTemplate(int cardInstanceId);
     List<CardInstance> listUserCards(int userId); // called when one user want to see all his/her cards
@@ -23,10 +29,5 @@ public interface CardInstanceMapper {
      */
     int tradeCard(int fromUserId, int toUserId);
 
-    // ----------------------- basic crud methods -----------------------
-    int createCardInstance(int userId, int cardTemplateId);
-    CardInstance readCardInstance(int cardId);
-    int upgradeCard(int cardId); // called when user finish a task
-    int downgradeCard(int cardId); // called when user undone a task
-    int deleteCardInstance(int cardId);
+
 }
