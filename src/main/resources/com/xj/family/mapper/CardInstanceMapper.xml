@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xj.family.mapper.CardInstanceMapper">
+<!--   🤖 basic curd 😎 -->
     <insert id="createCardInstance">
         insert into card_instance (template_id, hard_work_rate, owner, status)
         values (#{templateId}, 0, #{owner}, 0);
@@ -20,6 +21,7 @@
         delete from card_instance where id=#{cardId}
     </delete>
 
+<!--   🏓 business logic 😎-->
     <select id="getCardTemplate" resultType="com.xj.family.bean.CardTemplate">
         select id, name, series, image_url, base_price
         from card_template
