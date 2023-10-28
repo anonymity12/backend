@@ -3,21 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xj.family.mapper.CardInstanceMapper">
-    <update id="upgradeCard" parameterType="java.lang.Integer">
-        update card_instance set hard_work_rate=hard_work_rate+1 where id=#{cardId};
-    </update>
-    <update id="downgradeCard" parameterType="java.lang.Integer">
-        update card_instance set hard_work_rate=hard_work_rate-1 where id=#{cardId};
-    </update>
-    <select id="listUserCards" parameterType="java.lang.Integer" resultType="com.xj.family.bean.CardInstance">
-        select template_id, hard_work_rate, status, owner from card_instance where owner=#{userId};
-    </select>
-    <update id="clearUserMainCard" parameterType="java.lang.Integer">
-        update card_instance set status=0 where owner=#{owner} and status=1;
-    </update>
-    <update id="setUserMainCard">
-        update card_instance set status=1 where id=#{cardInstanceId};
-    </update>
     <insert id="createCardInstance">
         insert into card_instance (template_id, hard_work_rate, owner, status)
         values (#{templateId}, 0, #{owner}, 0);
@@ -25,20 +10,40 @@
     <select id="readCardInstance" resultType="com.xj.family.bean.CardInstance">
         select * from card_instance where id=#{cardInstanceId}
     </select>
+    <update id="upgradeCard" parameterType="java.lang.Integer">
+        update card_instance set hard_work_rate=hard_work_rate+1 where id=#{cardId};
+    </update>
+    <update id="downgradeCard" parameterType="java.lang.Integer">
+        update card_instance set hard_work_rate=hard_work_rate-1 where id=#{cardId};
+    </update>
+    <delete id="deleteCardInstance" parameterType="java.lang.Integer">
+        delete from card_instance where id=#{cardId}
+    </delete>
+
+    <select id="getCardTemplate" resultType="com.xj.family.bean.CardTemplate">
+        select id, name, series, image_url, base_price
+        from card_template
+        where id=(select template_id from card_instance where id=#{cardInstanceId});
+    </select>
+    <select id="listUserCards" parameterType="java.lang.Integer" resultType="com.xj.family.bean.CardInstance">
+        select template_id, hard_work_rate, status, owner from card_instance where owner=#{userId};
+    </select>
     <select id="getUserMainCard" resultType="com.xj.family.bean.CardInstance">
         select id, template_id, hard_work_rate, owner, status
         from card_instance
         where owner=#{owner} and status=1;
     </select>
+    <update id="clearUserMainCard" parameterType="java.lang.Integer">
+        update card_instance set status=0 where owner=#{owner} and status=1;
+    </update>
+    <update id="setUserMainCard">
+        update card_instance set status=1 where id=#{cardInstanceId};
+    </update>
     <select id="getCardOwner" parameterType="java.lang.Integer">
         select owner from card_instance where id=#{cardInstanceId};
     </select>
     <update id="setCardOwner">
         update card_instance set owner=#{cardTo} where id=#{cardInstanceId};
     </update>
-    <select id="getCardTemplate" resultType="com.xj.family.bean.CardTemplate">
-        select id, name, series, image_url, base_price
-        from card_template
-        where id=(select template_id from card_instance where id=#{cardInstanceId});
-    </select>
+
 </mapper>
