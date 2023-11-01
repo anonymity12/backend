@@ -14,7 +14,7 @@ public interface TaskMapper {
 
     int cancelTask(int id);
 
-    int doneTask(TaskDto dto);
+    int doneTask(TaskDto dto);// an update will return 1 when matched(no matter updated or not)
 
     int releaseFly(int id);
 
