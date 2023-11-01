@@ -41,7 +41,6 @@ public class CardController {
         return RespBean.ok("OK", card);
     }
 
-    // TODO: 2023/10/28 user task finish will add the hardWorkRate, and should reflect  immediately on front 
     @PostMapping("/upgradeCard")
     public RespBean upgradeCard() {
         Integer owner = LoginInterceptor.threadLocalUserId.get();

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xj.family.mapper.CardTemplateMapper">
     <select id="readTemplate" parameterType="java.lang.Integer" resultType="com.xj.family.bean.CardTemplate">
-        select name, series, image_url, base_price
+        select name, series, image_url, base_price, desc
         from card_template
         where id=#{templateId};
     </select>
