@@ -71,14 +71,6 @@ public class CardController {
 
     /************************* adv feat: trading(will finish at Nov) ***************************/
 
-    // user buy the basic shop card with his/her gold
-    @PostMapping("/buyNewCard")
-    public RespBean buyNewCard(@RequestParam int cardTemplateId) {
-        Integer owner = LoginInterceptor.threadLocalUserId.get();
-        cardService.createCardInstance(owner, cardTemplateId);
-        return null;
-    }
-
     // user buy other user's card with his/her gold, in the plaza/market
     @PostMapping("/tradeCard")
     public RespBean tradeCard(@RequestParam int cardInstanceId) {
