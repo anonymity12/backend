@@ -64,11 +64,6 @@ public class CardService {
         return 0;
     }
 
-    // user might buy a new card in the shop, then we in service to create a new card instance for he/she
-    // so in controller, a method called buyNewCard() might call this method
-    public int createCardInstance(int userId, int cardTemplateId) {
-        return cardInstanceMapper.createCardInstance(userId, cardTemplateId);
-    }
     public CardVo getOneCard(int cardInstanceId) {
         CardInstance cardInstance = cardInstanceMapper.readCardInstance(cardInstanceId);
         CardVo cardVo = new CardVo();
