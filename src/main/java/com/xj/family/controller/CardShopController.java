@@ -36,5 +36,15 @@ public class CardShopController {
     }
 
     // card lottery
-    // todo 1114: im tired at 2023-11-13 22:15:45
+    // tdo 1114: im tired at 2023-11-13 22:15:45
+    @PostMapping("/cardLottery")
+    public RespBean cardLottery() {
+        // 1. get user id
+        // 2. get card numbers: randomLimit
+        // 3. generate random number: lotteryNum; from 1 to randomLimit
+        // 4. write sql: insert a new card instance record for card tbl, and that card belongs to this user
+        Integer owner = LoginInterceptor.threadLocalUserId.get();
+        // tt>>> todo 2023-11-15 23:05:20; time to sleep, it's cold outside, especially u went out for a moto drive with newly meet friend;
+        return RespBean.ok("抽奖完成");
+    }
 }
