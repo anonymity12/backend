@@ -14,10 +14,8 @@ import java.util.List;
 @RequestMapping("/api/card-shop")
 public class CardShopController {
 
-
     @Autowired
     CardShopService cardShopService;
-
 
     // user buy the basic shop card with his/her gold
     @PostMapping("/buyNewCard")

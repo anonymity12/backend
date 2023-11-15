@@ -153,5 +153,5 @@ redis save
         using: string; 16<->56
 2) design RedisKeyUtil
 
-todo, 2023 0411, doing: like func
-next todo: test commit "i think backend like func now is fine to test"
+tdo, 2023 0411, doing: like func
+next tdo: test commit "i think backend like func now is fine to test"
