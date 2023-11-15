@@ -57,6 +57,6 @@ public class LoginService {
         System.out.println("LoginService.savaUserIdIntoRedis>> key: userId \n" +
                 key + ":" + userId);
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
-        valueOperations.set(key, ""+userId, 30, TimeUnit.DAYS);
+        valueOperations.set(key, ""+userId, 180, TimeUnit.DAYS);
     }
 }
