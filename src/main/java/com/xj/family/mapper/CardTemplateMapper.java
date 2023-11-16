@@ -4,4 +4,6 @@ import com.xj.family.bean.CardTemplate;
 
 public interface CardTemplateMapper {
     CardTemplate readTemplate(int templateId);
+
+    int getRandomCardId();
 }

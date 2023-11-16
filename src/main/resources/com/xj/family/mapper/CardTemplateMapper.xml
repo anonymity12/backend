@@ -11,4 +11,7 @@
     <select id="getCardTemplateBasePrice">
         select base_price from card_template where id=#{cardTemplateId};
     </select>
+    <select id="getRandomCardId">
+        SELECT * FROM card_template as t1 WHERE t1.id>=(RAND()*(SELECT MAX(id) FROM card_template)) LIMIT 1;
+    </select>
 </mapper>
