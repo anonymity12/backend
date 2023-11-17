@@ -18,7 +18,7 @@ public class CardShopController {
     CardShopService cardShopService;
 
     // user buy the basic shop card with his/her gold
-    @PostMapping("/buyNewCard")
+    @GetMapping("/buyNewCard")
     public RespBean buyNewCard(@RequestParam int cardTemplateId) {
         Integer owner = LoginInterceptor.threadLocalUserId.get();
         int status = cardShopService.buyANewCard(owner, cardTemplateId);
@@ -35,11 +35,8 @@ public class CardShopController {
         return RespBean.ok("ok", allSellCards);
     }
 
-    // card lottery
-    // tdo 1114: im tired at 2023-11-13 22:15:45
     @PostMapping("/cardLottery")
     public RespBean cardLottery() {
-        // 1. get user id
         Integer userId = LoginInterceptor.threadLocalUserId.get();
         cardShopService.makeCardLotteryForUser(userId);
         // tt>>> time to pao foot 2023-11-16 23:25:07
