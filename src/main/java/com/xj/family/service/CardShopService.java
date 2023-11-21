@@ -1,5 +1,6 @@
 package com.xj.family.service;
 
+import com.xj.family.bean.CardTemplate;
 import com.xj.family.bean.vo.CardVo;
 import com.xj.family.mapper.CardInstanceMapper;
 import com.xj.family.mapper.CardTemplateMapper;
@@ -23,11 +24,14 @@ public class CardShopService {
     @Autowired
     GoldMapper goldMapper;
     public int buyANewCard(Integer owner, int cardTemplateId) {
-        // read the card price from tbl: card_template
-        // read the user's balance
-        // compare the values to verify that user can afford this card
-        // then create a card instance for him/her
-        // cardInstanceMapper.createCardInstance(userId, cardTemplateId);
+        CardTemplate cardTemplate = cardTemplateMapper.readTemplate(cardTemplateId);
+        int cardPrice = cardTemplate.getBasePrice();
+        Integer balance = goldMapper.getGoldAmountForUser(owner);
+        if (balance < cardPrice) {
+            return -1;
+        }
+        cardInstanceMapper.createCardInstance(owner, cardTemplateId);
+        goldMapper.subtractGoldForUser(owner, cardPrice);
         return 0;
     }
 

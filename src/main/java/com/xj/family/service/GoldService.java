@@ -25,4 +25,7 @@ public class GoldService {
     public int subtractGoldForUser(int ownerId, int subtractAmount) {
         return goldMapper.subtractGoldForUser(ownerId, subtractAmount);
     }
+    public int getUserBalance(int userId) {
+        return goldMapper.getGoldAmountForUser(userId);
+    }
 }
