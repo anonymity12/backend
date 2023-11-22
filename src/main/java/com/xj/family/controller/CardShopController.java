@@ -22,9 +22,16 @@ public class CardShopController {
     public RespBean buyNewCard(@RequestParam int cardTemplateId) {
         Integer owner = LoginInterceptor.threadLocalUserId.get();
         int status = cardShopService.buyANewCard(owner, cardTemplateId);
-        // return based on the status
-        return null;
+        if (status == -1) {
+            return RespBean.error("无法完成卡片购买");
+        } else if (status == 0){
+            return RespBean.ok("已完成卡片购买");
+        } else {
+            return RespBean.error("未知错误，状态码为：" + status);
+        }
     }
+
+
 
     // users will see all the sellable cards on the shop
     // these cards could come from users who sell their card
@@ -44,3 +51,9 @@ public class CardShopController {
         return RespBean.ok("抽奖完成");
     }
 }
+/*
+用户如何使用这个controller
+
+1. buy new card from the shop, so they can start refine it by finish daily tasks ✅： buyNewCard
+
+ */

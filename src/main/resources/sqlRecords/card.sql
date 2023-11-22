@@ -20,7 +20,7 @@ CREATE TABLE `card_instance` (
  `template_id` int(11) NOT NULL,
  `hard_work_rate` int(11) DEFAULT '1' COMMENT '卡片上附加的努力率，用于计算实际最终价值的因子',
  `owner` int(11) NOT NULL DEFAULT '0' COMMENT '这个卡片当前属于谁',
- `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '卡片的状态0:入库，1:正在炼制',
+ `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '卡片的状态0:储藏，1:正在炼制;2:标记为出售状态',
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
 

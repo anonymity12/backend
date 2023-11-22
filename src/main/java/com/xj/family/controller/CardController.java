@@ -8,17 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 /*
-user can use such controller to:
-1. buy new card from the shop, so they can start refine it by finish daily tasks
-2. they can trade card with each other
-    by default, trading also happen in shop page
-    but buy is first row, and trading is later rows；and trading is low priority feat, we'll finish at Dec
-3. user will determine which is the main card to refine
-4. refine the card: upgrade or downgrade;(1028, do we really support downgrade? and how?)
+使用说明：
+这个controller 能干嘛？
+1. 在card画廊界面  user will determine which is the main card to refine；❌ not support yet at 1122;
+2. 在gww主页界面 refine the card: upgrade or downgrade;(1028, do we really support downgrade? and how?)✅ 已经与task控制器联动了
+3. 在card画廊界面 展示出所有我的卡片 ⭕️还没实现 前端的  card画廊界面
+4。在gww主页界面   展示每个用户的主卡片 ✅
  */
-
 @CrossOrigin
 @RestController
 @RequestMapping("/api/card")
@@ -71,12 +68,17 @@ public class CardController {
 
     /************************* adv feat: trading(will finish at Nov) ***************************/
 
-    // user buy other user's card with his/her gold, in the plaza/market
-    @PostMapping("/tradeCard")
-    public RespBean tradeCard(@RequestParam int cardInstanceId) {
-        int cardOwner = cardService.getCardOwner(cardInstanceId);
-        Integer me = LoginInterceptor.threadLocalUserId.get();
-        cardService.tradeCard(cardInstanceId, cardOwner, me);
-        return null;
+
+    // 某个用户面对自己的card 画廊，要卖card，点击出售按钮，让某个card变为可出售的
+    @PostMapping("/sellCard")
+    public RespBean markCardSellable(@RequestParam int cardInstanceId) {
+        cardService.markCardSellable(cardInstanceId);// TODO: 2023/11/22  use it's ret
+        return RespBean.ok("标记卡片为出售状态");
+    }
+    // 用户标记某个card为不出售，他/她 可能反悔了这个出售操作
+    @PostMapping("/unsellCard")
+    public RespBean markCardUnsellable(@RequestParam int cardInstanceId) {
+        cardService.markCardUnsellable(cardInstanceId);// TODO: 2023/11/22  use it's ret
+        return RespBean.ok("标记卡片为储藏状态");
     }
 }

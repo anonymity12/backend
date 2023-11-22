@@ -3,6 +3,7 @@ package com.xj.family.controller;
 import com.xj.family.bean.RespBean;
 import com.xj.family.bean.vo.CardVo;
 import com.xj.family.interceptor.LoginInterceptor;
+import com.xj.family.service.CardService;
 import com.xj.family.service.CardSquareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,15 +16,41 @@ import java.util.List;
 public class CardSquareController {
     @Autowired
     CardSquareService cardSquareService;
+    @Autowired
+    CardService cardService;
 
     @GetMapping("/listAll")
     public RespBean listAll() {
-        Integer owner = LoginInterceptor.threadLocalUserId.get();
         List<CardVo> allSquareCards = cardSquareService.getAllSquareCards();
         return RespBean.ok("OK", allSquareCards);
     }
-    // user wanna buy others card instance, not buy template in the shop
-    @GetMapping("/send-buy-request/{cardId}")
+
+    @PostMapping("/tradeCard")
+    public RespBean tradeCard(@RequestParam int cardInstanceId) {
+        int cardOwner = cardService.getCardOwner(cardInstanceId);
+        Integer me = LoginInterceptor.threadLocalUserId.get();
+        cardSquareService.tradeCard(cardInstanceId, cardOwner, me);
+        return null;
+    }
+
+
+}
+    /*
+卡片广场最核心支持的是：
+    列出所有卡片
+    交易卡片
+
+    @GetMapping("/getTop3")
+
+
+    @GetMapping("/query/{keyword}")
+
+    @PostMapping("/thumbs-up/{cardId}")
+
+
+     */
+//  或许这是拍卖的场景，后续实现，用户可以通过拍卖，进行聊天。为何可以拍卖？因为NFT是前车可参考
+    /*@GetMapping("/send-buy-request/{cardId}")
     public RespBean sendBuyRequest(@PathVariable("cardId") int cardId) {
         // 1. check user balance
 
@@ -37,15 +64,4 @@ public class CardSquareController {
         return RespBean.ok("发送购买请求OK");
     }
 
-    /*
-
-    @GetMapping("/getTop3")
-
-
-    @GetMapping("/query/{keyword}")
-
-    @PostMapping("/thumbs-up/{cardId}")
-
-
      */
-}

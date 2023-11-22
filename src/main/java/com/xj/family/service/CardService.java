@@ -19,8 +19,7 @@ public class CardService {
     CardInstanceMapper cardInstanceMapper;
     @Autowired
     CardTemplateMapper cardTemplateMapper;
-    @Autowired
-    GoldMapper goldMapper;
+
 
     public List<CardVo> getAllMyCards(int userId) {
         List<CardInstance> cardInstances = cardInstanceMapper.listUserCards(userId);
@@ -83,19 +82,16 @@ public class CardService {
         return cardInstanceMapper.getCardTemplate(cardInstanceId);
     }
 
-    public int calcCardPrice(int cardInstanceId) {
-        int price = (int) (cardInstanceMapper.getCardTemplate(cardInstanceId).getBasePrice() *
-                Math.pow(1.05, cardInstanceMapper.readCardInstance(cardInstanceId).getHardWorkRate())
-                );
-        return price;
+
+
+
+
+    public int markCardSellable(int cardInstanceId) {
+        return cardInstanceMapper.markCardSellable(cardInstanceId);
     }
 
-    public int tradeCard(int cardInstanceId, int cardFrom, int cardTo) {
-        int price = this.calcCardPrice(cardInstanceId);
-        goldMapper.subtractGoldForUser(cardTo, price);
-        goldMapper.addGoldForUser(cardFrom, price);
-        cardInstanceMapper.setCardOwner(cardInstanceId, cardTo);
-        return 0;
-    }
+    public int markCardUnsellable(int cardInstanceId) {
+        return cardInstanceMapper.markCardUnsellable(cardInstanceId);
 
+    }
 }

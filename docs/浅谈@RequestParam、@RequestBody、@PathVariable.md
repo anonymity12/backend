@@ -3,7 +3,7 @@ https://zhuanlan.zhihu.com/p/624114484
 # @RequestParam
 
 ```
-@RequestParam注解一般与get请求一起使用。
+@RequestParam注解一般与get请求一起使用。但是也可配合post请求使用，见SixLogController：：likeSixLog
 一个请求（一个方法中）可以有多个@RequestParam。
 @RequestParam 用来接收普通参数
 ```

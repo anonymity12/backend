@@ -47,5 +47,14 @@
     <update id="setCardOwner">
         update card_instance set owner=#{cardTo} where id=#{cardInstanceId};
     </update>
+    <update id="markCardSellable">
+        update card_instance set status=2 where id=#{cardInstanceId};
+    </update>
+    <update id="markCardUnsellable">
+        update card_instance set status=0 where id=#{cardInstanceId};
+    </update>
+    <select id="getAllSellableCards">
+        select * from card_instance where status=2;
+    </select>
 
 </mapper>

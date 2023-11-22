@@ -2,6 +2,7 @@ package com.xj.family.mapper;
 
 import com.xj.family.bean.CardInstance;
 import com.xj.family.bean.CardTemplate;
+import com.xj.family.bean.vo.CardVo;
 import org.apache.ibatis.annotations.Param;
 
 
@@ -30,4 +31,8 @@ public interface CardInstanceMapper {
     int tradeCard(int fromUserId, int toUserId);
 
 
+    int markCardSellable(int cardInstanceId);
+    int markCardUnsellable(int cardInstanceId);
+
+    List<CardVo> getAllSellableCards();
 }
