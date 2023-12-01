@@ -36,6 +36,7 @@ public class CardSquareService {
             CardTemplate template = cardTemplateMapper.readTemplate(ins.getTemplateId());
             BeanUtils.copyProperties(template, vo);
             vo.calcFinalPrice();
+            vos.add(vo);
         }
         return vos;
     }
