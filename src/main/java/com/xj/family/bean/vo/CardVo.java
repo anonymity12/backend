@@ -1,17 +1,24 @@
 package com.xj.family.bean.vo;
 
 public class CardVo {
+    // ---- ⬇ contains whole field of cardInstance ️----
     int id;
+    int templateId;
     int hardWorkRate;
     int owner;
     Boolean status;
+    // ---- ⬆ contains whole field of cardInstance ️️----
 
-    int templateId;
-    String name; // should derive from its template
-    int series; // should derive from its template
-    String imageUrl; // should derive from its template
-    int basePrice; // should derive from its template
-    String desc; // should derive from its template
+    String ownerName; // derive from user table
+
+    // ---- ⬇ contains whole field of cardTemplate ️----
+    String name;
+    int series;
+    String imageUrl;
+    int basePrice;
+    String desc;
+    // ---- ⬆ contains whole field of cardTemplate ️️----
+
 
     int finalPrice; // 卡片的实际最终价值=base_price * 1.05^{hard_work_rate}
 
@@ -56,6 +63,14 @@ public class CardVo {
 
     public void setOwner(int owner) {
         this.owner = owner;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
     public String getName() {

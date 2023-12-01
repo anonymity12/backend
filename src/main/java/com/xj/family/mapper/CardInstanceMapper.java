@@ -34,5 +34,5 @@ public interface CardInstanceMapper {
     int markCardSellable(int cardInstanceId);
     int markCardUnsellable(int cardInstanceId);
 
-    List<CardVo> getAllSellableCards();
+    List<CardInstance> getAllSellableCards();
 }
