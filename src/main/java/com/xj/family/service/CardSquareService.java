@@ -31,7 +31,7 @@ public class CardSquareService {
         for (CardInstance ins : instances) {
             CardVo vo = new CardVo();
             BeanUtils.copyProperties(ins, vo);
-            String ownerName = userMapper.getUserById(ins.getOwner()).getName();
+            String ownerName = userMapper.getUserById(ins.getOwner()).getCname();
             vo.setOwnerName(ownerName);
             CardTemplate template = cardTemplateMapper.readTemplate(ins.getTemplateId());
             BeanUtils.copyProperties(template, vo);
