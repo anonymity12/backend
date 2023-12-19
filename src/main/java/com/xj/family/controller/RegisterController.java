@@ -8,6 +8,7 @@ import com.xj.family.bean.dto.RegisterDTO;
 import com.xj.family.bean.RespBean;
 import com.xj.family.bean.User;
 import com.xj.family.service.RegisterService;
+import com.xj.family.service.GoldService;
 import com.xj.family.service.UserService;
 import com.xj.family.config.Constants;
 import net.sourceforge.pinyin4j.PinyinHelper;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Date;
+
+import static com.xj.family.config.Constants.INIT_ALLOC_GOLD_AMOUNT;
 /**
  * 2023-01-21 23:05:20
  **/
@@ -33,6 +36,8 @@ public class RegisterController {
     RegisterService registerService;
     @Autowired
     UserService userService;
+    @Autowired
+    GoldService goldService;
 
     @PostMapping(value = "/api/register")
     public RespBean register(@RequestBody RegisterDTO registerDTO) {
@@ -71,6 +76,7 @@ public class RegisterController {
         }
         int userId = registerReturnCode; // if goes here, then no error happen, then registerReturnCode is just the userId we added! congrats!
         userService.setDefaultLifeStartAndEnd(userId, registerDTO.getBirthday());
+        goldService.allocateNewGoldForUser(userId, INIT_ALLOC_GOLD_AMOUNT);
         return RespBean.ok("注册成功");
     }
 

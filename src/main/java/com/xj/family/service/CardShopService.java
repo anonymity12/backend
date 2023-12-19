@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.xj.family.util.BusinessConstants.LOTTERY_MINI_GOLD_REQUIREMENT;
+import static com.xj.family.config.Constants.LOTTERY_MINI_GOLD_REQUIREMENT;
 
 @Service
 public class CardShopService {

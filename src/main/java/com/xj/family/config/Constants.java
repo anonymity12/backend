@@ -10,4 +10,5 @@ public class Constants {
     public static final int ADD_SIXLOG_REWARD = 5;
     public static final int FINISH_TASK_REWARD = 2;
     public static final int INIT_ALLOC_GOLD_AMOUNT = 100;
+    public static int LOTTERY_MINI_GOLD_REQUIREMENT = 100;
 }
