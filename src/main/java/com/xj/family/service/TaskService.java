@@ -24,6 +24,8 @@ public class TaskService {
     FlyItemMapper flyItemMapper;
     @Autowired
     CardInstanceMapper cardInstanceMapper;
+    @Autowired
+    GoldMapper goldMapper;
 
     public List<Task> getAllTask() {
         int ownerId = LoginInterceptor.threadLocalUserId.get();
@@ -51,15 +53,14 @@ public class TaskService {
         }
     }
 
-    // when user finish a task:
-    // 1. he/she will upgrade his/her main card
-    // 2. he/she will mark the task is done
     public RespBean doneTask(TaskDto dto) {
         int ownerId = LoginInterceptor.threadLocalUserId.get();
-        // 1. upgrade card
+        // 1. user got gold when he/she finish task
+        goldMapper.addGoldForUser(userId, FINISH_TASK_REWARD);
+        // 2. upgrade his/her main card
         int cardInstanceId = cardInstanceMapper.getUserMainCard(ownerId).getId();
         int ret = cardInstanceMapper.upgradeCard(cardInstanceId);
-        // 2. mark task is done
+        // 3. mark task is done
         ret += taskMapper.doneTask(dto);
         if (ret == 2) {
             return RespBean.ok("完成任务啦😄"); // two update will make ret==2
