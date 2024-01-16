@@ -18,3 +18,4 @@ public class TrainService {
         List<TrainInfoVo> vos = trainMapper.listTrainInfo();
         return vos;
     }
+}
