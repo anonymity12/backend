@@ -15,3 +15,9 @@ INSERT INTO `xj`.`trainstationinfo` (`id`, `name`, `desc`, `status`, `img`)
 VALUES (NULL, '渑池', '位于三门峡市内，位于河南省西北部，北濒黄河与山西省的垣曲、夏县、平陆隔河相望，是人类远祖起源地和举世闻名的仰韶文化发现地', 0, NULL);
 INSERT INTO `xj`.`trainstationinfo` (`id`, `name`, `desc`, `status`, `img`)
 VALUES (NULL, '三门峡', '古称陕州,相传大禹治水，使神斧将高山劈成“人门”、“神门”、“鬼门”三道峡谷，河道中由鬼石和神石将河道分成三流，如同有三座门', 0, NULL);
+
+INSERT INTO `xj`.`trainstationinfo` (`id`, `name`, `desc`, `status`, `img`)
+VALUES (NULL, '灵宝市', '灵宝市由灵宝、阌乡两县合并而成。自汉元鼎3年（公元前114年）建县，常住人口为656571人', 0, NULL);
+
+INSERT INTO `xj`.`trainstationinfo` (`id`, `name`, `desc`, `status`, `img`)
+VALUES (NULL, '孟塬', '孟塬站位于中国陕西省渭南市华阴市孟塬镇，为陇海铁路、同蒲铁路的接轨站，东距连云港站960公里，西距兰州站799公里，北距太原站525公里', 0, NULL);
