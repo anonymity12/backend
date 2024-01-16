@@ -2,8 +2,7 @@ package com.xj.family.controller;
 
 import com.xj.family.bean.RespBean;
 import com.xj.family.bean.vo.TrainInfoVo;
-import com.xj.family.interceptor.LoginInterceptor;
-import com.xj.family.service.CardService;
+import com.xj.family.service.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
