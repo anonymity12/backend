@@ -28,7 +28,9 @@ public class ButterFlySecurityConfig implements WebMvcConfigurer {
         //添加拦截器
         registry.addInterceptor(loginInterceptor()).addPathPatterns("/api/**")
                 //放行路径，可以添加多个
-                .excludePathPatterns("/api/login", 
+                .excludePathPatterns(
+                    "/api/train/**",
+                    "/api/login", 
                                     //  "/api/sixlog/covers", // now(2023-01-23 20:24:39) elementui upload set this url in action field, 
                                                         //so no header can be add, so we cannot intercept this request
                                      "/api/img/**", 
