@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xj.family.mapper.SleepMapper">
+    <select id="listSleepInfo" resultType="com.xj.family.bean.vo.SleepInfoVo">
+        select * from sleeprecord where owner = #{owner};
+    </select>
+    <!-- todo: 24/01/20 12:33; we need some limit(and filter: distinct) for this selection -->
+    <select id="listSleepRecordsOfAllUsersRecently" resultType="com.xj.family.bean.vo.SleepInfoVo">
+        select * from sleeprecord;
+    </select>
+    <insert id="saveSleepRecord" parameterType="com.xj.family.bean.vo.SleepInfoVo" useGeneratedKeys="true" keyProperty="id">
+        insert into sleeprecord(`owner`, `sleepDateTime`)
+        values
+        (#{owner}, now())
+    </insert>
+</mapper>
