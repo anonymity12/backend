@@ -9,11 +9,13 @@ import com.xj.family.interceptor.LoginInterceptor;
 import com.xj.family.mapper.CardInstanceMapper;
 import com.xj.family.mapper.FlyItemMapper;
 import com.xj.family.mapper.TaskMapper;
-import com.xj.family.mapper.UserMapper;
+import com.xj.family.mapper.GoldMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.xj.family.config.Constants.FINISH_TASK_REWARD;
 
 @Service
 public class TaskService {
@@ -56,7 +58,7 @@ public class TaskService {
     public RespBean doneTask(TaskDto dto) {
         int ownerId = LoginInterceptor.threadLocalUserId.get();
         // 1. user got gold when he/she finish task
-        goldMapper.addGoldForUser(userId, FINISH_TASK_REWARD);
+        goldMapper.addGoldForUser(ownerId, FINISH_TASK_REWARD);
         // 2. upgrade his/her main card
         int cardInstanceId = cardInstanceMapper.getUserMainCard(ownerId).getId();
         int ret = cardInstanceMapper.upgradeCard(cardInstanceId);
