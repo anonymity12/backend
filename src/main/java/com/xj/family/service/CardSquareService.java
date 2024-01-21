@@ -26,7 +26,7 @@ public class CardSquareService {
     UserMapper userMapper;
 
     public List<CardVo> getAllSquareCards() {
-        List<CardInstance> instances = cardInstanceMapper.getAllSellableCards();
+        List<CardInstance> instances = cardInstanceMapper.getAllUserMainCards();
         List<CardVo> vos = new ArrayList<>();
         for (CardInstance ins : instances) {
             CardVo vo = new CardVo();

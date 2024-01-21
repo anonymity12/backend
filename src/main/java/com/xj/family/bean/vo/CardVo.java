@@ -38,6 +38,7 @@ public class CardVo {
     }
 
     public void calcFinalPrice() {
+        // for example: 250 * (1.05^57) = 4033 ; everything is fine
         this.finalPrice = (int) (basePrice * Math.pow(1.05, this.hardWorkRate));
     }
 

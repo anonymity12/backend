@@ -53,8 +53,8 @@
     <update id="markCardUnsellable">
         update card_instance set status=0 where id=#{cardInstanceId};
     </update>
-    <select id="getAllSellableCards" resultType="com.xj.family.bean.CardInstance">
-        select * from card_instance where status=2;
+    <select id="getAllUserMainCards" resultType="com.xj.family.bean.CardInstance">
+        select * from card_instance where status=1;
     </select>
 
 </mapper>
