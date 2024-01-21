@@ -24,6 +24,7 @@ public class SleepService {
     }
 
     public int recordOnce(int owner) {
+        System.out.println("SERVICE:sleep:record sleep time for user" + owner);
         sleepMapper.saveSleepRecord(owner);
         return 1;
     }
