@@ -1,0 +1,42 @@
+create table if not exists jiapu (
+	id int(11) auto_increment primary key,
+	parent_id int(11) not null,
+	name varchar(255),
+	intro varchar(255),
+	birthday date
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+class JiaPuPerson {
+	int id;
+	int parentId;
+	String name;
+	String intro;
+	Date birthday;
+	List<JiaPuPerson> children;
+}
+
+// automic json 
+List<JiaPuPerson> shapeJson() {
+	entities = selectAllPeople()
+	List<JiaPuPerson> level1Person = entities.stream().
+		.filter(entity -> entity.getFather == 0)
+		.map(entity -> {
+			entity.setChildren(internalGetChildren(entity, entities));
+			return entity;
+		}).
+		// .sorted() // sorted by age, or by birthday(which is not change each year)
+		.collect(Collectors.toList());
+	return level1Person;
+}
+
+List<JiaPuPerson> internalGetChildren(JiaPuPerson root, List<JiaPuPerson> all) {
+	List<JiaPuPerson> children = all.stream()
+		.filter(entity -> entity.getParentId().equals(root.getId()))
+		.map(entity -> {
+			entity.setChildren(internalGetChildren(entity, all));
+			return entity;
+		})
+		// .sorted()....
+		.collect(Collectors.toList());
+	return children;
+}
