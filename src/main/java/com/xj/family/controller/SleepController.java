@@ -42,10 +42,10 @@ public class SleepController {
     @PostMapping("/recordOnce")
     public RespBean recordOnce(@RequestBody Map<String, String> body) {
         int owner = LoginInterceptor.threadLocalUserId.get();
-        String dateTimeString = body.get("dateTime"); //         output: 1/20/2024, 1:03:36 PM
+        String dateTimeString = body.get("dateTime"); //         output: 1/20/2024, 1:03:36 PM  1/23/2024, 11:03:23 PM  sleep:  2/1/2024, 9:41:08 PM
 
-        System.out.println("jsDateTime: " + dateTimeString); // output:  2024/1/21 00:37:54
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/M/d hh:mm:ss");
+        System.out.println("jsDateTime: " + dateTimeString);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy, h:mm:ss a"); // not such format: yyyy/M/d hh:mm:ss
         LocalDateTime localDateTime = LocalDateTime.parse(dateTimeString, formatter);
         Date javaDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         System.out.println("sleepInfoVo: " + javaDate);
