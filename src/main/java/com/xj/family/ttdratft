@@ -6,6 +6,13 @@ create table if not exists jiapu (
 	birthday date
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+|id | parent_id | name   | intro       | birthday|
+|---|-----------|--------|-------------|---------|
+ 1    0          郑桓公    周国诸侯王之一   1000-01-01
+ 2     1         郑氏宗亲   历史的尘埃      1001-12-31
+ 3    2          郑文科     清朝人			1831-01-01
+
+ 
 class JiaPuPerson {
 	int id;
 	int parentId;
