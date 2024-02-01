@@ -16,7 +16,7 @@ class JiaPuPerson {
 }
 
 // automic json 
-List<JiaPuPerson> shapeJson() {
+List<JiaPuPerson> provideJiaPuJson() {
 	entities = selectAllPeople()
 	List<JiaPuPerson> level1Person = entities.stream().
 		.filter(entity -> entity.getFather == 0)
