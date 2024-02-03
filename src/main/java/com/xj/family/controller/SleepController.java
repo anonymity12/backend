@@ -45,7 +45,7 @@ public class SleepController {
         String dateTimeString = body.get("dateTime"); //         output: 1/20/2024, 1:03:36 PM  1/23/2024, 11:03:23 PM  sleep:  2/1/2024, 9:41:08 PM
 
         System.out.println("jsDateTime: " + dateTimeString);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy, h:mm:ss a"); // not such format: yyyy/M/d hh:mm:ss
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy, hh:mm:ss a"); // not such format: yyyy/M/d hh:mm:ss
         LocalDateTime localDateTime = LocalDateTime.parse(dateTimeString, formatter);
         Date javaDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         System.out.println("sleepInfoVo: " + javaDate);
