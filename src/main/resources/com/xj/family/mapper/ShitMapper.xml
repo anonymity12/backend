@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xj.family.mapper.ShitMapper">
+    <select id="listShitInfo" resultType="com.xj.family.bean.vo.ShitInfoVo">
+        select * from shitrecord where owner = #{owner};
+    </select>
+    <!-- todo: 24/01/20 12:33; we need some limit(and filter: distinct) for this selection -->
+    <select id="listShitRecordsOfAllUsersRecently" resultType="com.xj.family.bean.vo.ShitInfoVo">
+        select * from shitrecord;
+    </select>
+    <insert id="saveShitRecord" parameterType="com.xj.family.bean.vo.ShitInfoVo" useGeneratedKeys="true" keyProperty="id">
+        insert into shitrecord(`owner`, `shitDateTime`)
+        values
+        (#{owner}, now())
+    </insert>
+</mapper>
