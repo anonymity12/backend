@@ -15,5 +15,5 @@ print "kill process finish, ready to exec [nohup mvn spring-boot:run] in backgro
 print "cleaned out the nohup.out file"
 echo > nohup.out 
 nohup mvn spring-boot:run &
-print "backend work script done"
+print "backend work script done, and we start see the output by tail command"
 tail -f nohup.out
