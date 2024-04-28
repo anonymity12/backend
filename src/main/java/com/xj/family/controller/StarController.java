@@ -39,7 +39,7 @@ public class StarController {
     public RespBean recordOnce(@RequestBody Map<String, String> body) {
         int owner = LoginInterceptor.threadLocalUserId.get();
         String dateTimeString = body.get("starDateTimeString"); //         output: 1/20/2024, 1:03:36 PM  1/23/2024, 11:03:23 PM  star:  2/1/2024, 9:41:08 PM
-        String starDescriptionString = body.get("starDescriptionString")
+        String starDescriptionString = body.get("starDescriptionString");
 
         System.out.println("tt>>> jsDateTime: " + dateTimeString);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy, hh:mm:ss a"); // not such format: yyyy/M/d hh:mm:ss
