@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xj.family.mapper.StarMapper">
+    <select id="listStarInfo" resultType="com.xj.family.bean.vo.StarInfoVo">
+        select * from starrecord where owner = #{owner};
+    </select>
+    <!-- todo: 24/01/20 12:33; we need some limit(and filter: distinct) for this selection -->
+    <select id="listStarRecordsOfAllUsersRecently" resultType="com.xj.family.bean.vo.StarInfoVo">
+        select * from starrecord;
+    </select>
+    <insert id="saveStarRecord" parameterType="com.xj.family.bean.vo.StarInfoVo" useGeneratedKeys="true" keyProperty="id">
+        insert into starrecord(`owner`, `starDateTime`, `starDescription`)
+        values
+        (#{owner}, now(), #{starDescription})
+    </insert>
+</mapper>
