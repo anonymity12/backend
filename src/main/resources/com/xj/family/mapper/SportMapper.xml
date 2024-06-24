@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xj.family.mapper.SportMapper">
+    <select id="listSportInfo" resultType="com.xj.family.bean.vo.SportInfoVo">
+        select * from sportrecord where owner = #{owner};
+    </select>
+    <!-- todo: 24/01/20 12:33; we need some limit(and filter: distinct) for this selection -->
+    <select id="listSportRecordsOfAllUsersRecently" resultType="com.xj.family.bean.vo.SportInfoVo">
+        select * from sportrecord;
+    </select>
+    <select id="getAllUserForSportList" resultType="com.xj.family.bean.vo.UserAndHisSportScoreInfoVo">
+        select u.id as userId, u.userface as userface, count(s.id) as score 
+        from user u
+        left join sportrecord s on u.id=s.owner
+        group by u.id
+        order by score desc;
+    </select>
+    <insert id="saveSportRecord" parameterType="com.xj.family.bean.vo.SportInfoVo" useGeneratedKeys="true" keyProperty="id">
+        insert into sportrecord(`owner`, `sportDateTime`, `sportContent`)
+        values
+        (#{owner}, now(), #{sportContent})
+    </insert>
+</mapper>

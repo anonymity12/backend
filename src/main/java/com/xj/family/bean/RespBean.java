@@ -17,6 +17,10 @@ public class RespBean {
         return new RespBean(200, msg, obj);
     }
 
+    public static RespBean invalidToken(String msg) {
+        return new RespBean(401, msg, null);
+    }
+
     public static RespBean error(String msg) {
         return new RespBean(500, msg, null);
     }

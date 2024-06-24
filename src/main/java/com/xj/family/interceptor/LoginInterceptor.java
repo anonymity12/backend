@@ -47,7 +47,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         String token = request.getHeader("token");
         if (StringUtils.isEmpty(token)) {
-            setReturn(response,400,"用户未登录，请先登录");
+            setReturn(response, "user not login, plz login first");
             return false;
         }
 
@@ -64,7 +64,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         // 2023-04-17 23:09:01 fix error: when no such token, Integer.valueOf(null) will throws:java.lang.NumberFormatException
         String userIdString = redisTemplate.opsForValue().get(token);
         if (userIdString == null) {
-            setReturn(response,25014250,"用户token已过期，或者无效token");
+            setReturn(response, "token is invalid or out-of-date");
             return false;
         }
         int userId = Integer.parseInt(userIdString);
@@ -82,17 +82,18 @@ public class LoginInterceptor implements HandlerInterceptor {
     }
 
     //返回json格式错误信息
-    private static void setReturn(HttpServletResponse response, Integer code, String msg) throws IOException {
-        System.out.print("error: not login! encapsulating return msg......");
+    private static void setReturn(HttpServletResponse response, String msg) throws IOException {
+        System.out.print("loginInterceptor find error in token, and msg is: " + msg);
         HttpServletResponse httpResponse = (HttpServletResponse) response;
+        httpResponse.setStatus(401);
         httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
         httpResponse.setHeader("Access-Control-Allow-Origin", HttpContextUtil.getOrigin());
         //UTF-8编码
         httpResponse.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=utf-8");
         ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(RespBean.error(msg));
+        String json = objectMapper.writeValueAsString(RespBean.invalidToken(msg));
         httpResponse.getWriter().print(json);
-        System.out.println("encapsulated done for frontend");
+        System.out.println("done send json to frontend, json: " + json);
     }
 }
