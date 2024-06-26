@@ -2,6 +2,7 @@ package com.xj.family.controller;
 
 import com.xj.family.bean.RespBean;
 import com.xj.family.bean.vo.StarInfoVo;
+import com.xj.family.bean.vo.UserAndTheirStarCount;
 import com.xj.family.service.StarService;
 import com.xj.family.interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,10 @@ public class StarController {
         System.out.println("tt>>> user submit starInfoVo: " + vo);
         starService.recordOnce(vo);
         return RespBean.ok("OK");
+    }
+    @GetMapping("/getStarRaceBayData")
+    public RespBean getStarRaceBayData() {
+        List<UserAndTheirStarCount> infoVos = starService.getStarRaceBayData();
+        return RespBean.ok("OK", infoVos);
     }
 }

@@ -15,4 +15,11 @@
         values
         (#{owner}, now(), #{starDescription})
     </insert>
+    <select id="getStarRaceBayData" resultType="com.xj.family.bean.vo.UserAndTheirStarCount">
+        select u.id as userId, u.userface as userface, u.cname as username, count(s.id) as cnt 
+        from user u
+        left join starrecord s on u.id=s.owner
+        group by u.id
+        order by cnt desc;
+    </select>
 </mapper>
