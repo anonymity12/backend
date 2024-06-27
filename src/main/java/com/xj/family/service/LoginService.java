@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2022  12 25  <br> author tt <br>
+ 2024 06 27 22:33
  */
 
 package com.xj.family.service;
@@ -39,6 +40,7 @@ public class LoginService {
             return RespBean.error("密码不能为空");
         }
         String username = loginDTO.getLoginName();
+        username = com.xj.family.utils.StringUtils.convertToPinyin(username);
         User user  = userMapper.getUserByName(username);
 
         //比较密码

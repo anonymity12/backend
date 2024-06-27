@@ -18,7 +18,7 @@ import java.util.UUID;
 
 /**
  * @Author: zrt
- * @Date: 2023/1/21
+ * @Date: 2023/1/21; 2024/6/27
  * @Description: 注册
  **/
 @Service
@@ -28,6 +28,7 @@ public class RegisterService {
     public static final int ERR_NAME_REPEAT = -3;
     public static final int ERR_UNKNOWN = -4;
     public static final int ERR_DB_INSERT = -5;
+    public static final int ERR_NAME_TOO_SHORT = -6;
     @Autowired
     private UserMapper userMapper;
 
@@ -37,6 +38,9 @@ public class RegisterService {
         }
         if (StringUtils.isEmpty(user.getPassword())){
             return ERR_PASSWORD_EMPTY;
+        }
+        if (user.getName().length() < 5) {
+            return ERR_NAME_TOO_SHORT;
         }
         User me = userMapper.getUserByName(user.getName());
         if (me != null) {
