@@ -24,6 +24,7 @@ import java.sql.Date;
 import static com.xj.family.config.Constants.INIT_ALLOC_GOLD_AMOUNT;
 /**
  * 2023-01-21 23:05:20
+ * todo 2024 0627 邀请码验证机制；我在代码里写死，loginDTO必须传来：202406
  **/
 @CrossOrigin
 @RestController()
