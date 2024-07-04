@@ -32,7 +32,10 @@ public class StarService {
 
     public List<UserAndTheirStarCount> getStarRaceBayData() {
         List<UserAndTheirStarCount> vos = starMapper.getStarRaceBayData();
-        vos = vos.subList(0, 10);
+        return vos;
+    }
+    public List<UserAndTheirStarCount> getStarWeeklyData() {
+        List<UserAndTheirStarCount> vos = starMapper.getStarWeeklyData();
         return vos;
     }
 }

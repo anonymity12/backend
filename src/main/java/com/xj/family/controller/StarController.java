@@ -59,4 +59,9 @@ public class StarController {
         List<UserAndTheirStarCount> infoVos = starService.getStarRaceBayData();
         return RespBean.ok("OK", infoVos);
     }
+    @GetMapping("/getStarWeeklyData")
+    public RespBean getStarWeeklyData() {
+        List<UserAndTheirStarCount> infoVos = starService.getStarWeeklyData();
+        return RespBean.ok("OK", infoVos);
+    }
 }
