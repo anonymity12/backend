@@ -106,4 +106,7 @@ public class UserController {
             return RespBean.error("获取我的数据统计Failed");
         }
     }
+    // for sport page, one user get other users' info, like userface
+    // /api/user/getOtherUserInfo/16
+    // todo 0628
 }
