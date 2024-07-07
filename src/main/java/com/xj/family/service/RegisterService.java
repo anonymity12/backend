@@ -29,6 +29,7 @@ public class RegisterService {
     public static final int ERR_UNKNOWN = -4;
     public static final int ERR_DB_INSERT = -5;
     public static final int ERR_NAME_TOO_SHORT = -6;
+    public static final int ERR_INVALID_INVITE_CODE = -999;
     @Autowired
     private UserMapper userMapper;
 

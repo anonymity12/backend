@@ -6,10 +6,11 @@ public class RegisterDTO {
     private String name;
     private String password;
     private Date birthday;
+    private String inviteCode;
 
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -17,7 +18,7 @@ public class RegisterDTO {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -25,13 +26,20 @@ public class RegisterDTO {
     }
 
     public Date getBirthday() {
-        return birthday;
+        return this.birthday;
     }
+
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
+    public String getInviteCode() {
+        return this.inviteCode;
+    }
 
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
+    }
 
     @Override
     public String toString() {
@@ -39,8 +47,8 @@ public class RegisterDTO {
             " name='" + getName() + "'" +
             ", password='" + getPassword() + "'" +
             ", birthday='" + getBirthday() + "'" +
+            ", inviteCode='" + getInviteCode() + "'" +
             "}";
     }
-
 
 }
