@@ -32,6 +32,7 @@ public class LoginController {
      */
     @PostMapping(value = "/api/login")
     public RespBean login(@RequestBody LoginDTO loginDTO) {
+        System.out.println("tt>>0707 user is login: " + loginDTO)
         return loginService.login(loginDTO);
     }
 }
