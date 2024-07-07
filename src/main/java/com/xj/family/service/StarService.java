@@ -3,7 +3,8 @@ package com.xj.family.service;
 import com.xj.family.bean.vo.StarInfoVo;
 import com.xj.family.bean.vo.UserAndTheirStarCount;
 import com.xj.family.mapper.StarMapper;
-import org.springframework.beans.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ import java.util.List;
 public class StarService {
     @Autowired
     StarMapper starMapper;
+    private static final Logger log = LoggerFactory.getLogger(StarService.class);
+
 
     public List<StarInfoVo> getAllMyStarRecords(int owner) {
         List<StarInfoVo> vos = starMapper.listStarInfo(owner);
@@ -25,7 +28,7 @@ public class StarService {
     }
 
     public int recordOnce(StarInfoVo vo) {
-        System.out.println("SERVICE:star:record star info:" + vo);
+        log.info("SERVICE:star:record star info:" + vo);
         starMapper.saveStarRecord(vo);
         return 1;
     }
