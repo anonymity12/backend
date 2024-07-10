@@ -25,4 +25,7 @@
         intro=#{intro}, password=#{password}
         where id=#{id}
     </update>
+    <select id="getRecentlyActiveTenUsersIds" resultType="java.lang.Integer">
+        select distinct owner from starrecord order by starDateTime limit 10;
+    </select>
 </mapper>

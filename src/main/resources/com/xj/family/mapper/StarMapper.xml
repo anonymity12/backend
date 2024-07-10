@@ -10,6 +10,9 @@
     <select id="listStarRecordsOfAllUsersRecently" resultType="com.xj.family.bean.vo.StarInfoVo">
         select * from starrecord;
     </select>
+    <select id="listRecentStarsForUser" resultType="com.xj.family.bean.vo.StarInfoVo">
+        select * from starrecord where owner = #{userId} order by starDateTime desc limit #{recentCnt};
+    </select>
     <insert id="saveStarRecord" parameterType="com.xj.family.bean.vo.StarInfoVo" useGeneratedKeys="true" keyProperty="id">
         insert into starrecord(`owner`, `starDateTime`, `starDescription`)
         values

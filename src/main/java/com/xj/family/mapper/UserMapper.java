@@ -13,4 +13,5 @@ public interface UserMapper {
     LifeIndicator getUserLifeIndicator(int userId);
     Integer addNewUser(User user);
     int updateUserProfile(ProfileDto profileDto);
+    List<Integer> getRecentlyActiveTenUsersIds();
 }

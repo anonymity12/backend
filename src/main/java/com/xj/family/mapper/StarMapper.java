@@ -3,12 +3,12 @@ package com.xj.family.mapper;
 import com.xj.family.bean.vo.StarInfoVo;
 import com.xj.family.bean.vo.UserAndTheirStarCount;
 
-
 import java.util.List;
 
 public interface StarMapper {
     List<StarInfoVo> listStarInfo(int owner);
     List<StarInfoVo> listStarRecordsOfAllUsersRecently();
+    List<StarInfoVo> listRecentStarsForUser(int userId, int recentCnt);
     int saveStarRecord(StarInfoVo vo);
     List<UserAndTheirStarCount> getStarRaceBayData();
     List<UserAndTheirStarCount> getStarWeeklyData();
