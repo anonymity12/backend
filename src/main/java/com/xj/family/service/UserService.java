@@ -6,6 +6,7 @@ import com.xj.family.bean.dto.ProfileDto;
 import com.xj.family.bean.dto.ValidParentDto;
 import com.xj.family.bean.vo.LifeIndicatorVo;
 import com.xj.family.bean.vo.RankInfoVo;
+import com.xj.family.bean.vo.UserAndHisSportScoreInfoVo;
 import com.xj.family.config.Constants;
 import com.xj.family.interceptor.LoginInterceptor;
 import com.xj.family.mapper.RankMapper;
@@ -48,6 +49,7 @@ public class UserService {
 
     public LifeIndicatorVo getUserLifeIndicatorVo(int userId) {
         LifeIndicator indi = userMapper.getUserLifeIndicator(userId);
+        // todo 0716: use log.info() 
         System.out.println(">>>>" + indi);
         int dayPassed = indi.getDayPassed();
         int dayAll = indi.getDayAll();
@@ -124,5 +126,9 @@ public class UserService {
     public RankInfoVo getUser3KindFliesCnt() {
         int userId = LoginInterceptor.threadLocalUserId.get();
         return rankMapper.getUser3KindFliesCnt(userId);
+    }
+
+    public UserAndHisSportScoreInfoVo getOtherUserInfo(Integer userId) {
+        return userMapper.getOtherUserInfo(userId);
     }
 }

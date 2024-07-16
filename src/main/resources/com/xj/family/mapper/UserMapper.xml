@@ -25,7 +25,11 @@
         intro=#{intro}, password=#{password}
         where id=#{id}
     </update>
+    <!-- we should change name to recentActivlyUser -->
     <select id="getRecentlyActiveTenUsersIds" resultType="java.lang.Integer">
-        select distinct owner from starrecord order by starDateTime limit 10;
+        select owner from starrecord group by owner order by max(starDateTime) desc limit 20;
+    </select>
+    <select id="getOtherUserInfo" resultType="com.xj.family.bean.vo.UserAndHisSportScoreInfoVo">
+        select id, cname as username, userface from user where id = #{userId} limit 1;
     </select>
 </mapper>

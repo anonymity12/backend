@@ -7,6 +7,7 @@ import com.xj.family.bean.vo.LifeIndicatorVo;
 import com.xj.family.bean.FamilyTreeEntity;
 import com.xj.family.bean.dto.ValidParentDto;
 import com.xj.family.bean.vo.RankInfoVo;
+import com.xj.family.bean.vo.UserAndHisSportScoreInfoVo;
 import com.xj.family.config.Constants;
 import com.xj.family.interceptor.LoginInterceptor;
 import com.xj.family.service.UserService;
@@ -109,4 +110,9 @@ public class UserController {
     // for sport page, one user get other users' info, like userface
     // /api/user/getOtherUserInfo/16
     // todo 0628
+    @GetMapping("/api/user/getOtherUserInfo/{userId}")
+    public RespBean getOtherUserInfo(@PathVariable("userId") Integer userId) {
+        UserAndHisSportScoreInfoVo vo = userService.getOtherUserInfo(userId);
+        return RespBean.ok("获取运动对手的信息", vo);
+    }
 }

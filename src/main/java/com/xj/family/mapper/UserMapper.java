@@ -3,6 +3,7 @@ package com.xj.family.mapper;
 import com.xj.family.bean.LifeIndicator;
 import com.xj.family.bean.User;
 import com.xj.family.bean.dto.ProfileDto;
+import com.xj.family.bean.vo.UserAndHisSportScoreInfoVo;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface UserMapper {
     Integer addNewUser(User user);
     int updateUserProfile(ProfileDto profileDto);
     List<Integer> getRecentlyActiveTenUsersIds();
+    UserAndHisSportScoreInfoVo getOtherUserInfo(Integer userId);
 }

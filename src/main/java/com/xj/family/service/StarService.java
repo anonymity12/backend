@@ -24,7 +24,6 @@ public class StarService {
     UserMapper userMapper;
     private static final Logger log = LoggerFactory.getLogger(StarService.class);
 
-
     public List<StarInfoVo> getAllMyStarRecords(int owner) {
         List<StarInfoVo> vos = starMapper.listStarInfo(owner);
         return vos;
@@ -49,10 +48,14 @@ public class StarService {
     }
     public List<StarRoadVo> getStarRoad() {
         List<Integer> userIds = userMapper.getRecentlyActiveTenUsersIds();
+        log.info(">>"+userIds);
         List<StarRoadVo> starRoadVos = new ArrayList<>();
         for (int userId: userIds) {
+            log.info(">>>>"+userId);
             StarRoadVo starRoadVo = new StarRoadVo();
             User user = userMapper.getUserById(userId);
+            log.info(""+user);
+            if (user == null) continue;
             List<StarInfoVo> stars = starMapper.listRecentStarsForUser(userId, STAR_RECENT_CNT_DEF);
             starRoadVo.setUsername(user.getCname());
             starRoadVo.setUserId(user.getId());
