@@ -28,6 +28,11 @@ public class StarService {
         List<StarInfoVo> vos = starMapper.listStarInfo(owner);
         return vos;
     }
+    public List<StarInfoVo> getMyThisWeekStarRecords(int owner) {
+        List<StarInfoVo> vos = starMapper.listStarInfoOnlyThisWeek(owner);
+        return vos;
+    }
+
     public List<StarInfoVo> getStarRecordsOfAllUsersRecently() {
         List<StarInfoVo> vos = starMapper.listStarRecordsOfAllUsersRecently();
         return vos;

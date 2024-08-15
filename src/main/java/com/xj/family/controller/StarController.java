@@ -36,6 +36,12 @@ public class StarController {
         List<StarInfoVo> infoVos = starService.getAllMyStarRecords(owner);
         return RespBean.ok("OK", infoVos);
     }
+    @GetMapping("/getMyThisWeekStarRecords")
+    public RespBean getMyThisWeekStarRecords() {
+        int owner = LoginInterceptor.threadLocalUserId.get();
+        List<StarInfoVo> infoVos = starService.getMyThisWeekStarRecords(owner);
+        return RespBean.ok("OK", infoVos);
+    }
     @GetMapping("/getStarRecordsOfAllUsersRecently")
     public RespBean getStarRecordsOfAllUsersRecently() {
         List<StarInfoVo> infoVos = starService.getStarRecordsOfAllUsersRecently();

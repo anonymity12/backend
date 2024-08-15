@@ -6,6 +6,9 @@
     <select id="listStarInfo" resultType="com.xj.family.bean.vo.StarInfoVo">
         select * from starrecord where owner = #{owner};
     </select>
+    <select id="listStarInfoOnlyThisWeek" resultType="com.xj.family.bean.vo.StarInfoVo">
+        select * from starrecord where yearweek(starDateTime,1)=yearweek(curdate(),1) and owner = #{owner};
+    </select>
     <!-- todo: 24/01/20 12:33; we need some limit(and filter: distinct) for this selection -->
     <select id="listStarRecordsOfAllUsersRecently" resultType="com.xj.family.bean.vo.StarInfoVo">
         select * from starrecord;

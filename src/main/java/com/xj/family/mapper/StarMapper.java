@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface StarMapper {
     List<StarInfoVo> listStarInfo(int owner);
+    List<StarInfoVo> listStarInfoOnlyThisWeek(int owner);
     List<StarInfoVo> listStarRecordsOfAllUsersRecently();
     List<StarInfoVo> listRecentStarsForUser(int userId, int recentCnt);
     int saveStarRecord(StarInfoVo vo);
