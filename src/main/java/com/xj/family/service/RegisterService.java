@@ -29,6 +29,7 @@ public class RegisterService {
     public static final int ERR_UNKNOWN = -4;
     public static final int ERR_DB_INSERT = -5;
     public static final int ERR_NAME_TOO_SHORT = -6;
+    public static final int ERR_BIRTHDAY_INVALID = -7;
     public static final int ERR_INVALID_INVITE_CODE = -999;
     @Autowired
     private UserMapper userMapper;
@@ -42,6 +43,9 @@ public class RegisterService {
         }
         if (user.getName().length() < 5) {
             return ERR_NAME_TOO_SHORT;
+        }
+        if (user.getBirthday() == null) {
+            return ERR_BIRTHDAY_INVALID;
         }
         User me = userMapper.getUserByName(user.getName());
         if (me != null) {
