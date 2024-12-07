@@ -16,9 +16,5 @@ I code for family
 
 ## spring start
 
-✖ mvn spring-boot:run -Dspring-boot.run.arguments=--spring-boot.run.ports=9001
-✖ mvn spring-boot:run -Drun.ports=9001
-✖ mvn spring-boot:run -Dserver.port=9001
-
 mvn package -DskipTests;
 java -jar xx.jar --server.port=9001

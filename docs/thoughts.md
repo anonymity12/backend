@@ -1,4 +1,14 @@
 
+
+2024 1207:
+i think i need to know hibernate, a kind of jpa, for job interview.
+but id better not to know it immediately
+cause correct priority will make life better
+i have been wrong priority of my life for a long time...
+i should execute base on first thing first principle
+not random hang in my daily time...
+
+
 2024 1120:
 有时候，一个有爱好的人，往往找不到自己合适的，处于社会的位置，因为他的爱好很小众吧。
 大部分人 正确的选择，就是选择一份工作，只是工作而已，谈不上热爱自己的工作，只是说，这是一份糊口的生计
