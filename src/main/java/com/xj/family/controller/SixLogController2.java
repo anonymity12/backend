@@ -2,8 +2,7 @@ package com.xj.family.controller;
 
 import com.xj.family.service.GoldService;
 import com.xj.family.service.SixLogService2;
-import com.xj.family.bean.SixLog2;
-import com.xj.family.bean.vo.SixLogVo;
+import com.xj.family.bean.vo.SixLogVo2;
 import com.xj.family.bean.RespBean;
 import com.xj.family.config.Constants;
 import com.xj.family.utils.StringUtils;
@@ -38,7 +37,7 @@ public class SixLogController2 {
     GoldService goldService;
 
     @PostMapping("/add")
-    public RespBean addNewSixLog(@RequestBody SixLog2 log) {
+    public RespBean addNewSixLog(@RequestBody SixLogVo2 log) {
         int userId = LoginInterceptor.threadLocalUserId.get();
         int ret = sixLogService2.addNewSixLog(log, userId);
         goldService.addGoldForUser(userId, ADD_SIXLOG_REWARD);
@@ -47,16 +46,17 @@ public class SixLogController2 {
         else 
             return RespBean.error("写入浮生六记失败了");
     }
-
-// ------------------- old code below -------------------
-/*
     @GetMapping("/{size}/{page}")
-    public List<SixLogVo> getLogByPage(@PathVariable("size")
+    public List<SixLogVo2> getLogByPage(@PathVariable("size")
                                     int size,
                                     @PathVariable("page")
                                     int page) {
-        return sixLogService.getLogByPage(size, page);
+        return sixLogService2.getLogByPage(size, page);
     }
+
+// ------------------- old code below -------------------
+/*
+
     @GetMapping("/{id}")
     public SixLog getLogById(@PathVariable("id") Long id) {
         return sixLogService.getLogById(id);

@@ -2,10 +2,10 @@ package com.xj.family.service;
 
 import com.xj.family.mapper.SixLogMapper2;
 import com.xj.family.mapper.UserMapper;
-import com.xj.family.bean.SixLog2; 
-import com.xj.family.bean.vo.SixLogVo;
+import com.xj.family.bean.vo.SixLogVo2;
 
 import com.xj.family.util.RedisKeyUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.core.RedisOperations;
@@ -14,6 +14,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.ArrayList;
 
 
 @Service 
@@ -26,9 +27,23 @@ public class SixLogService2 {
     private StringRedisTemplate redisTemplate;
 
 
-    public int addNewSixLog(SixLog2 log2, int userId) {
+    public int addNewSixLog(SixLogVo2 log2, int userId) {
         log2.setOwnerId(userId);
         return sixLogMapper2.addNewSixLog(log2);
+    }
+    public List<SixLogVo2> getLogByPage(int size, int page) {
+        int offset = size * (page - 1);
+        List<SixLogVo2> logs = sixLogMapper2.getLogByPage(offset, size);
+        for (SixLogVo2 log: logs) {
+            Long tmpLikeCounts = findSixLogLikeCount(log.getId());
+            long likeCounts = tmpLikeCounts == null? 0: tmpLikeCounts;
+            log.setLikeCounts(likeCounts);
+        }
+        return logs;
+    }
+    private Long findSixLogLikeCount(int sixLogId) {
+        String entityLikeKey = RedisKeyUtil.getSixLogKey(sixLogId);
+        return redisTemplate.opsForList().size(entityLikeKey);
     }
 
     // ------------- old code below ------------------
@@ -61,9 +76,6 @@ public class SixLogService2 {
         String postKey = RedisKeyUtil.getSixLogKey(sixLogId);
         redisTemplate.opsForList().rightPush(postKey, ""+userId);
     }
-    public Long findSixLogLikeCount(int sixLogId) {
-        String entityLikeKey = RedisKeyUtil.getSixLogKey(sixLogId);
-        return redisTemplate.opsForList().size(entityLikeKey);
-    }
+
     */
 }

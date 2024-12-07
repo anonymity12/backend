@@ -2,23 +2,37 @@ family backend
 
 ## how to test these api endpoint
 
-to 
+mvn package -DskipTests;
+java -jar /home/tt/code/CodeForFamily/backend/target/family-0.0.1-SNAPSHOT.jar --server.port=9001 
+
+one line:➜ 
+mvn package -DskipTests; java -jar /home/tt/code/CodeForFamily/backend/target/family-0.0.1-SNAPSHOT.jar --server.port=9001 
 
 https://hoppscotch.io/
+
+add this in HeaderList
+
+key:val
+
+like below:
+
+token:68e84490
+
+
 
 ## api endpoints for butterfly 
 
 ### get someone flies
 
-http://101.43.166.211:8081/flies/yy/getAll
+http://myIp:8081/flies/yy/getAll
 
 ### post new fly: add new item
 
-http://101.43.166.211:8081/flies/yy/newItem
+http://myIp:8081/flies/yy/newItem
 
 ### get user info
 
-http://101.43.166.211:8081/users/yy/getInfo
+http://myIp:8081/users/yy/getInfo
 
 
 ## sixlog
@@ -38,12 +52,12 @@ http://101.43.166.211:8081/users/yy/getInfo
 
 like a sixlog: 
 POST
-http://101.43.166.211:8081/api/sixlog/likeSixLog?sixLogId=255
+http://myIp:8081/api/sixlog/likeSixLog?sixLogId=255
 OK
 
 get sixlog with like count:
 GET
-http://101.43.166.211:8081/api/sixlog/5/1
+http://myIp:8081/api/sixlog/5/1
 OK
 
 
@@ -83,7 +97,7 @@ return:
     },
     {
         "userId": 16,
-        "userface": "http://101.43.166.211:8081/api/img/kw1gqejpeg",
+        "userface": "http://myIp:8081/api/img/kw1gqejpeg",
         "cname": "天天",
         "growFlyCnt": 10,
         "diedFlyCnt": 3,
@@ -96,4 +110,4 @@ return:
 
 ## commit heatmap
 
-http://101.43.166.211:8081/api/heatmap/getMyCommitHeatMap
+http://myIp:8081/api/heatmap/getMyCommitHeatMap
