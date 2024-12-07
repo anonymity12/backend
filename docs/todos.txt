@@ -48,3 +48,12 @@
 2024 0509 
 
 - [x] 关闭例行事务，或者开启一个新 任务面板界面；
+
+
+2024 1207 
+
+- [ ] group query for sixlog(2)
+      but 1207 i change direction, i need to update to sixlog2 first
+      then update the user table(to add column of `group_id`)
+      the old branch is 0820StartGroupFeature
+      new branch is 1207updateSixlog2
