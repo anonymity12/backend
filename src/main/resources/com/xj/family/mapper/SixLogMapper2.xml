@@ -13,4 +13,12 @@
         ORDER BY s.`log_date` desc
         LIMIT #{offset}, #{size};
     </select>
+    <select id="getLogByTagByPage" resultType="com.xj.family.bean.vo.SixLogVo2" >
+        SELECT s.id, s.`log_content`, s.`log_cover`, s.`log_date`, s.`log_tags`, u.cname as ownerName, u.userface as ownerFaceUrl
+        FROM sixlog2 s, user u
+        WHERE s.ownerId=u.id
+        AND s.`log_tags` LIKE CONCAT('%', #{tag}, '%')
+        ORDER BY s.`log_date` desc
+        LIMIT #{offset}, #{size};
+    </select>
 </mapper>

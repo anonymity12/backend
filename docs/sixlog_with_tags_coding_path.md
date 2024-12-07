@@ -5,11 +5,11 @@ tags: "t1, t2,t3"
 
 ---
 
-添加 log  ok
+code ok: 添加 log   
 
 ---
 
-依据 tagA 查询所有包含 此 tagA 的 records
+code ok: 依据 tagA 查询所有包含 此 tagA 的 records
 select * from sixlog2 where tag like '%tagA%' limit 5 offset 1;
 
 

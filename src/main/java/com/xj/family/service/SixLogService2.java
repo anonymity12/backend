@@ -41,6 +41,16 @@ public class SixLogService2 {
         }
         return logs;
     }
+    public List<SixLogVo2> getLogByTagByPage(String tag, int size, int page) {
+        int offset = size * (page - 1);
+        List<SixLogVo2> logs = sixLogMapper2.getLogByTagByPage(tag, offset, size);
+        for (SixLogVo2 log: logs) {
+            Long tmpLikeCounts = findSixLogLikeCount(log.getId());
+            long likeCounts = tmpLikeCounts == null? 0: tmpLikeCounts;
+            log.setLikeCounts(likeCounts);
+        }
+        return logs;
+    }
     private Long findSixLogLikeCount(int sixLogId) {
         String entityLikeKey = RedisKeyUtil.getSixLogKey(sixLogId);
         return redisTemplate.opsForList().size(entityLikeKey);

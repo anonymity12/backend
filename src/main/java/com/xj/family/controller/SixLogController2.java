@@ -46,12 +46,16 @@ public class SixLogController2 {
         else 
             return RespBean.error("写入浮生六记失败了");
     }
-    @GetMapping("/{size}/{page}")
-    public List<SixLogVo2> getLogByPage(@PathVariable("size")
-                                    int size,
-                                    @PathVariable("page")
-                                    int page) {
+    @GetMapping("/all/{size}/{page}")
+    public List<SixLogVo2> getLogByPage(@PathVariable("size")int size,
+                                    @PathVariable("page")int page) {
         return sixLogService2.getLogByPage(size, page);
+    }
+    @GetMapping("/tag/{logTag}/{size}/{page}")
+    public List<SixLogVo2> getLogByTagByPage(@PathVariable("size") int size,
+                                    @PathVariable("page")int page,
+                                    @PathVariable("logTag")String logTag) {
+        return sixLogService2.getLogByTagByPage(logTag, size, page);
     }
 
 // ------------------- old code below -------------------
