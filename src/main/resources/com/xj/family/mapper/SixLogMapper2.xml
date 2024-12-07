@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xj.family.mapper.SixLogMapper2">
     <insert id="addNewSixLog" parameterType="com.xj.family.bean.vo.SixLogVo2" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO sixlog2 SET log_tag=#{logTag}, log_content=#{logContent},log_cover=#{logCover}, ownerId=#{ownerId}
+        INSERT INTO sixlog2 SET log_tags=#{logTags}, log_content=#{logContent},log_cover=#{logCover}, ownerId=#{ownerId}
     </insert>
     <select id="getLogByPage" resultType="com.xj.family.bean.vo.SixLogVo2" >
         SELECT s.id, s.`log_content`, s.`log_cover`, s.`log_date`, s.`log_tags`, u.cname as ownerName, u.userface as ownerFaceUrl
