@@ -7,6 +7,8 @@ tags: "t1, t2,t3"
 
 code ok: 添加 log   
 
+code ok, test ok 12-15  09:40 getAllLog2 ok
+
 ---
 
 code ok: 依据 tagA 查询所有包含 此 tagA 的 records
@@ -14,6 +16,8 @@ select * from sixlog2 where tag like '%tagA%' limit 5 offset 1;
 
 
 ---
+
+2024 1207 19:17 后端 今日 到此结束，基础功能 已经ok，现在 要紧的 是 前端 要开始支持
 
 随机 tags 10 
 

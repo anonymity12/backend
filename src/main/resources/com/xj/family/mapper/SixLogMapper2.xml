@@ -21,4 +21,7 @@
         ORDER BY s.`log_date` desc
         LIMIT #{offset}, #{size};
     </select>
+    <select id="getTotalAmount" resultType="int">
+        select count('love') from sixlog2;
+    </select>
 </mapper>

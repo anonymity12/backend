@@ -29,6 +29,9 @@ public class SixLogService2 {
 
     public int addNewSixLog(SixLogVo2 log2, int userId) {
         log2.setOwnerId(userId);
+        if(log2.getLogTags()==null || log2.getLogTags()=="") {
+            log2.setLogTags("无题");
+        }
         return sixLogMapper2.addNewSixLog(log2);
     }
     public List<SixLogVo2> getLogByPage(int size, int page) {
@@ -55,6 +58,9 @@ public class SixLogService2 {
         String entityLikeKey = RedisKeyUtil.getSixLogKey(sixLogId);
         return redisTemplate.opsForList().size(entityLikeKey);
     }
+    public int getTotalAmount() {
+        return sixLogMapper2.getTotalAmount();
+    }
 
     // ------------- old code below ------------------
     /*
@@ -74,9 +80,6 @@ public class SixLogService2 {
         return sixLogMapper.getLogById(id);
     }
 
-    public int getTotalAmount() {
-        return sixLogMapper.getTotalAmount();
-    }
     public List<SixLog> getLogOfMineWithPageAndSize(int size, int page, int userId) {
         // System.out.println("SixLogService: getLogOfMineWithPageAndSize: for user: " + username);
         return null; // sixLogMapper impl 

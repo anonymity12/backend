@@ -47,7 +47,7 @@ public class SixLogController2 {
             return RespBean.error("写入浮生六记失败了");
     }
     @GetMapping("/all/{size}/{page}")
-    public List<SixLogVo2> getLogByPage(@PathVariable("size")int size,
+    public List<SixLogVo2> getAllLogByPage(@PathVariable("size")int size,
                                     @PathVariable("page")int page) {
         return sixLogService2.getLogByPage(size, page);
     }
@@ -56,6 +56,14 @@ public class SixLogController2 {
                                     @PathVariable("page")int page,
                                     @PathVariable("logTag")String logTag) {
         return sixLogService2.getLogByTagByPage(logTag, size, page);
+    }
+    @GetMapping("/getTotalAmount")
+    public RespBean getTotalAmount() {
+        int ret = sixLogService2.getTotalAmount();
+        if (ret != -1) 
+            return RespBean.ok("this is the totalAmount in obj", Integer.valueOf(ret));
+        else 
+            return RespBean.error("failed to get sixlog total amount");
     }
 
 // ------------------- old code below -------------------
