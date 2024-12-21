@@ -36,4 +36,11 @@ public class GoldController {
         goldService.subtractGoldForUser(owner, decreaseThisAmountCoins);
         return RespBean.ok("descrease user coins ok");
     }
+    @PostMapping("/increase") 
+    public RespBean increaseMyGold(@RequestBody Map<String, Integer> body) {
+        int owner = LoginInterceptor.threadLocalUserId.get();
+        Integer increaseThisAmountCoins = body.get("goldAmount");
+        goldService.addGoldForUser(owner, increaseThisAmountCoins);
+        return RespBean.ok("increase user coins ok");
+    }
 }
