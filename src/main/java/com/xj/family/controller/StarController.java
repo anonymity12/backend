@@ -4,6 +4,7 @@ import com.xj.family.bean.RespBean;
 import com.xj.family.bean.vo.StarInfoVo;
 import com.xj.family.bean.vo.StarRoadVo;
 import com.xj.family.bean.vo.UserAndTheirStarCount;
+import com.xj.family.service.GoldService;
 import com.xj.family.service.StarService;
 import com.xj.family.interceptor.LoginInterceptor;
 import org.slf4j.Logger;
@@ -19,6 +20,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+
+import static com.xj.family.config.Constants.ADD_STAR_REWARD;
+
 /*
 StarController at 2024/4/23 17:07
 2024 0710 22:36 add star road support
@@ -30,6 +34,9 @@ public class StarController {
     private static final Logger log = LoggerFactory.getLogger(StarController.class);
     @Autowired
     StarService starService;
+    @Autowired
+    GoldService goldService;
+
     @GetMapping("/getAllMyStarRecords")
     public RespBean getAllMyStarRecords() {
         int owner = LoginInterceptor.threadLocalUserId.get();
@@ -59,7 +66,6 @@ public class StarController {
         int owner = LoginInterceptor.threadLocalUserId.get();
         String dateTimeString = body.get("starDateTimeString"); //         output: 1/20/2024, 1:03:36 PM  1/23/2024, 11:03:23 PM  star:  2/1/2024, 9:41:08 PM
         String starDescriptionString = body.get("starDescriptionString");
-        log.debug("tt>>> jsDateTime: " + dateTimeString);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy, hh:mm:ss a"); // not such format: yyyy/M/d hh:mm:ss
         LocalDateTime localDateTime = LocalDateTime.parse(dateTimeString, formatter);
         Date javaDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
@@ -67,8 +73,9 @@ public class StarController {
         vo.setOwner(owner);
         vo.setStarDateTime(javaDate);
         vo.setStarDescription(starDescriptionString);
-        log.info("tt>>> user submit starInfoVo: " + vo);
         starService.recordOnce(vo);
+        log.debug("tt>>> update gold when record star for user: "+owner);
+        goldService.addGoldForUser(owner, ADD_STAR_REWARD);
         return RespBean.ok("OK");
     }
     @GetMapping("/getStarRaceBayData")
