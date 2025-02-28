@@ -40,6 +40,6 @@ public class ButterFlySecurityConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/api/img/**").addResourceLocations("file:" + "/home/tt/code/CodeForFamily/backend/img_upload/"); // you must add final slash/ , 2023-01-04 14:36:58
+        registry.addResourceHandler("/api/img/**").addResourceLocations("file:" + "/root/gwwAppImgs/img_upload/"); // you must add final slash/ , 2023-01-04 14:36:58
     }
 }
